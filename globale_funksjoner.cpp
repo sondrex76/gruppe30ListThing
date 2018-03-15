@@ -1,0 +1,1 @@
+#include "globale_funksjoner.h"
