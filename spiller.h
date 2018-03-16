@@ -10,6 +10,7 @@ private:
 	char* adresse;	// Peker til adresse
 public:
 	Spiller();
+	void skrivSpiller(); // Skriver spillerens navn og adresse
 };
 
 #endif

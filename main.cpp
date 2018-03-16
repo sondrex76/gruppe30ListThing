@@ -2,7 +2,7 @@
 #include "ListTool2B.h"
 #include "spillere.h"
 #include "idrettene.h"
-#include "globale_funksjoner.h"
+#include "main_functions.h"
 #include "spillere.h"
 
 using namespace std;

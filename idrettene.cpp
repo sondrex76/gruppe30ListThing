@@ -2,5 +2,5 @@
 
 // KOnstruktor
 Idrettene::Idrettene() {
-
+	idrett = new List(Sorted);
 }
