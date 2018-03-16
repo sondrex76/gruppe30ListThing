@@ -1,9 +1,8 @@
 #include <iostream>
 #include "ListTool2B.h"
 #include "spillere.h"
-#include "idrrettene.h"
-#include "robust_io.h"
-#include "funksjoner.h"
+#include "idrettene.h"
+#include "globale_funksjoner.h"
 
 using namespace std;
 
