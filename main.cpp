@@ -35,8 +35,6 @@ int main() {
 		}
 	} while (kommando != 'Q');
 
-
-	int x; cin >> x;
 	return 0;
 }
 
