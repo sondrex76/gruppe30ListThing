@@ -8,7 +8,7 @@ private:
 	int antSpillere;	// Antall spillere på laget
 	int spillerID[50];	// Det unike nummeret til hver spiller
 public:
-
+	Lag();
 };
 
 #endif

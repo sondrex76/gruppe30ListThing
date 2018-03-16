@@ -9,7 +9,7 @@ private:
 	char* navn;		// Peker til navn
 	char* adresse;	// Peker til adresse
 public:
-
+	Spiller();
 };
 
 #endif

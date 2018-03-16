@@ -9,7 +9,7 @@ private:
 	List* spiller;		// Liste av spiller objekter
 	int sisteNummer;	// Siste nummer brukt, megden spillere(fra 1-sisteNummer)
 public:
-
+	Spillere();			// Konstruktor
 };
 
 

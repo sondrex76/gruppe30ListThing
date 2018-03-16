@@ -7,7 +7,7 @@ class Idrettene {
 private:
 	List* idrett;
 public:
-
+	Idrettene();
 };
 
 #endif

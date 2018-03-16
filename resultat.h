@@ -10,7 +10,7 @@ private:
 	int borteSkorer[50];	// Liste over de som skoret på bortelaget
 	int hjemmeSkorer[50];	// Liste over de som skoret på hjemmelaget
 public:
-
+	Resultat();
 };
 
 #endif
