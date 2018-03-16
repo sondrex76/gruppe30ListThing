@@ -1,5 +1,15 @@
-#if !defined(__LAG_H)
-#define  __LAG_H
+#if !defined(__DIV_AVD_H)
+#define  __DIV_AVD_H
 
+#include "ListTool2B.h"
+#include "lag.h"
+
+// Er en divisjon/avdeling av en sport
+// Sortert etter navn av divisjon/avderling
+class DivAvd : TextElement {
+	int antLag;		// Antall lag i divisjon
+	Lag lag[30];	// Lagene i divisjonen
+	
+};
 
 #endif
