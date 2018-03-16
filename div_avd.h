@@ -9,7 +9,7 @@
 class DivAvd : TextElement {
 	int antLag;		// Antall lag i divisjon
 	Lag lag[30];	// Lagene i divisjonen
-	
+	// Mangler to dimensjonal matrise av Resultat objekter for terminlisten av resultater
 };
 
 #endif

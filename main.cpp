@@ -22,15 +22,15 @@ int main() {
 		switch (kommando)
 		{
 		case 'S': skrivSpiller(); break;
-		case 'I':; break;
-		case 'N':; break;
-		case 'F':; break;
-		case 'L':; break;
-		case 'K':; break;
-		case 'T':; break;
-		case 'R':; break;
-		case 'D':; break;
-		case 'E':; break;
+		case 'I': skrivIdrett(); break;
+		case 'N':lagNy(); break;
+		case 'F':fjern(); break;
+		case 'L':skrivTerminListe(); break;
+		case 'K':skrivKampene(); break;
+		case 'T':skrivTabell(); break;
+		case 'R':lesResultat(); break;
+		case 'D':skrivLag(); break;
+		case 'E':redigerSpiller(); break;
 		default: skrivMeny();
 		}
 	} while (kommando != 'Q');
