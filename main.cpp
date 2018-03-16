@@ -3,8 +3,13 @@
 #include "spillere.h"
 #include "idrettene.h"
 #include "globale_funksjoner.h"
+#include "spillere.h"
 
 using namespace std;
+
+// Globale variabler
+Spillere spillere;		// Objekt som inneholder alle spillerne(spiller-objekter), og det siste unike nummeret som har blitt utdelt
+Idrettene idrettene;	// Objekt som inneholder alle idretter
 
 void skrivMeny();
 
