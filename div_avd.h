@@ -17,6 +17,7 @@ private:
 public:
 	DivAvd(char*);
 	DivAvd(char*, std::ifstream&);
+	void display();
 	void lesFraFil();
 	void skrivTilFil();
 };

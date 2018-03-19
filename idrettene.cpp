@@ -35,6 +35,39 @@ void Idrettene::opprett()
 	
 }
 
+						//returner nummeret til idretten i lista. evt 0
+int Idrettene::faaNr(char* nvn)
+{
+	int nr = 0;
+	if (idrettListe->inList(nvn))
+	{
+		for (int i = 1; i <= idrettListe->noOfElements(); i++)
+		{
+
+			Idrett* temp = (Idrett*)idrettListe->removeNo(i);
+
+			if (temp->likSom(nvn))
+			{
+				nr = i;
+			}
+			idrettListe->add(temp);
+		}
+	}
+	return nr;
+}
+
+void Idrettene::leggTilDiv(int nr)
+{
+	Idrett* temp = (Idrett*)idrettListe->removeNo(nr);	//lager temp
+
+	char navn[STRLEN];
+	les("Skriv inn navnet på div/avd", navn, STRLEN);
+	
+		temp->leggTilDiv(navn);
+	
+	idrettListe->add(temp);
+}
+
 void Idrettene::lesFraFil() {
 	ifstream inn("IDRETTENE.DTA");
 

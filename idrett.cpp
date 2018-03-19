@@ -22,11 +22,44 @@ Idrett::Idrett(char* indrettsNavn) : TextElement(indrettsNavn) {
 	}
 }
 
+									//legger til ny divisjon om mulig
+void Idrett::leggTilDiv(char* navn)
+{
+	if (!divAvdListe->inList(navn))			//hvis den ikke er i lista
+	{
+		DivAvd* temp = new DivAvd(navn);
+
+		divAvdListe->add(temp);
+
+		display();			//for å sjekke at det virker
+	}
+	else
+	{
+		std::cout << "Dette navnet finnes alt.\n";
+	}
+}
+
+							//liten bool for å sjekke om navnene er like
+bool Idrett::likSom(char* navn)
+{
+	return (!strcmp(navn, text));
+}
+
+			   //liten bool for å sjekke om div med visst navn finnes alt
+bool Idrett::harIkkeDiv(char* navn)
+{
+	return (!divAvdListe->inList(navn));
+}
+
 							//displayer objektets variabler
 void Idrett::display()
 {
 	std::cout << "Skriver ut navn: " << text << std::endl
-			  << "Tabelltype: " << tabellType << std::endl;
+			  << "Tabelltype: " << tabellType << std::endl
+			  << "Divisjoner: \n" << std::endl;
+
+
+		divAvdListe->displayList();		//displayer alle divisjoner
 }
 
 // construktor for idrett når man leser fra fil

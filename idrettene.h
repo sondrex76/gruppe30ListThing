@@ -10,6 +10,8 @@ private:
 public:
 	Idrettene();
 	void opprett();
+	int faaNr(char* nvn);				//returnerer nr i lista. evt 0
+	void leggTilDiv(int nr);			//legger til ny divisjon
 	void lesFraFil();
 	void skrivTilFil();
 };

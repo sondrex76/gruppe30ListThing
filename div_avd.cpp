@@ -5,8 +5,8 @@
 using namespace std;
 
 // Standard konstruktor
-DivAvd::DivAvd(char* avdelingsNavn) {
-
+DivAvd::DivAvd(char* avdelingsNavn) : TextElement(avdelingsNavn) {
+	antLag = 0;						//så vi kan bruke ++ senere
 }
 
 // Konstruktor når man leser fra fil
@@ -47,6 +47,11 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn) : TextElement(avdelingsNavn) 
 			}
 		}
 	}
+}
+
+void DivAvd::display()
+{
+	cout << "Navnet på divavd er " << text << std::endl;
 }
 
 void DivAvd::lesFraFil() {

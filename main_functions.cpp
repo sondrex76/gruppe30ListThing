@@ -2,8 +2,9 @@
 
 #include "main_functions.h"
 #include "globale_funksjoner.h"
-#include "idrettene.h";
-#include "spillere.h";
+#include "idrettene.h"
+#include "spillere.h"
+#include "conster.h"
 
 using namespace std;
 
@@ -38,8 +39,23 @@ void lagNy() {
 	}
 	else if (onske == 'D')
 	{
-		//lager ny divisjon
-		cout << "div";
+		//lager ny divisjon. spør om hvilken idrett.
+		char navn[STRLEN];
+		les("Skriv inn idretten du onsker ny div/avd i", navn, STRLEN);
+
+		//sjekker at idretten finnes
+		int nr = idrettene.faaNr(navn);
+		if (nr)
+		{
+			//legg til div/avd
+			idrettene.leggTilDiv(nr);
+
+		}
+		else
+		{
+			cout << "Finner ikke idretten.\n";
+		}
+
 	}
 	else cout << "Ugyldig kommando.\n";
 
