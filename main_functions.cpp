@@ -1,9 +1,14 @@
+#include <iostream>
 #include "main_functions.h"
 #include "globale_funksjoner.h"
+#include "idrettene.h";
 
+
+using namespace std;
 //
 //	Hovedfunksjoner
 //
+Idrettene idrettene;						//ekstern (?)
 
 // S A | <nr> | <navn> - skriv Alle spillere eller spiller med <nr> / <navn>
 void skrivSpiller() {
@@ -17,6 +22,26 @@ void skrivIdrett() {
 
 // N S | I  D - Ny spiller, idrett eller divisjon
 void lagNy() {
+	char onske = les(false);
+
+	if (onske == 'S')
+	{
+		//lager ny spiller. må vite idrett og lag
+		cout << "Spiller";
+
+	}
+	else if (onske == 'I')
+	{
+		//lager ny idrett
+		cout << "Idrett";
+		idrettene.opprett();
+	}
+	else if (onske == 'D')
+	{
+		//lager ny divisjon
+		cout << "div";
+	}
+	else cout << "Ugyldig kommando.\n";
 
 }
 

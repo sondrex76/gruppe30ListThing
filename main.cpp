@@ -8,8 +8,8 @@
 using namespace std;
 
 // Globale variabler
-Spillere spillere;		// Objekt som inneholder alle spillerne(spiller-objekter), og det siste unike nummeret som har blitt utdelt
-Idrettene idrettene;	// Objekt som inneholder alle idretter
+extern Spillere spillere;		// Objekt som inneholder alle spillerne(spiller-objekter), og det siste unike nummeret som har blitt utdelt
+extern Idrettene idrettene;	// Objekt som inneholder alle idretter
 
 void skrivMeny();
 

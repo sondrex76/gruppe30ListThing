@@ -2,12 +2,14 @@
 #define  __IDRETTENE_H
 
 #include "ListTool2B.h"
-
+#include "enumer.h"
 class Idrettene {
 private:
-	List* idrett;
+	List* idrettListe;
+	
 public:
 	Idrettene();
+	void opprett();
 };
 
 #endif
