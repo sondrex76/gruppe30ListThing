@@ -3,12 +3,9 @@
 #include "globale_funksjoner.h"
 #include "idrettene.h";
 
-
 using namespace std;
-//
-//	Hovedfunksjoner
-//
-Idrettene idrettene;						//ekstern (?)
+
+extern Idrettene idrettene;						//ekstern (?)
 
 // S A | <nr> | <navn> - skriv Alle spillere eller spiller med <nr> / <navn>
 void skrivSpiller() {
