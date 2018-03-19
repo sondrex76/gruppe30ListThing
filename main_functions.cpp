@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 
 #include "main_functions.h"
 #include "globale_funksjoner.h"
