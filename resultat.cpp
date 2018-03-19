@@ -10,7 +10,7 @@
 using namespace std;
 
 Resultat::Resultat(ifstream & inn, char d[9]) {
-	cout << d << endl; // DEBUG
+	// cout << d << endl; // DEBUG
 
 	strcpy(dato, d); // kopierer d(ato) over til dato verdien
 
@@ -42,5 +42,5 @@ Resultat::Resultat(ifstream & inn, char d[9]) {
 
 	inn.ignore();
 
-	cout << "Hjemme: " << Hjemmemaal << "\nBorte: " << bortemaal << "\nNormal: " << normalTid << endl; // DEBUG
+	// cout << "Hjemme: " << Hjemmemaal << "\nBorte: " << bortemaal << "\nNormal: " << normalTid << endl; // DEBUG
 }
