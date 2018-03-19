@@ -1,6 +1,8 @@
 #if !defined(__RESULTAT_H)
 #define  __RESULTAT_H
 
+#include <fstream>
+
 class Resultat {
 private:
 	char dato[9];			// Datoen til resultatet(ååååmmdd)
@@ -10,7 +12,7 @@ private:
 	int* hjemmeSkorer[50];	// Liste over de som skoret på hjemmelaget
 	int* borteSkorer[50];	// Liste over de som skoret på bortelaget
 public:
-	Resultat();
+	Resultat(std::ifstream&, char[9]);
 };
 
 #endif

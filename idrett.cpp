@@ -27,20 +27,20 @@ Idrett::Idrett(char* indrettsNavn, std::ifstream& inn) : TextElement(indrettsNav
 	else if (numRepetasjoner == 1) tabellType = TreEnNull;
 	else tabellType = TreToEnNull;
 
-	std::cout << "Tabell type: " << tabellType << std::endl; // DEBUG
+	// std::cout << "Tabell type: " << tabellType << std::endl; // DEBUG
 
 	inn >> tempAvdNavn; // Henter nummeret av avdelinger
 	inn.ignore();
 	numRepetasjoner = atoi(tempAvdNavn);
 
-	std::cout << "Nummer av divisjoner: " << numRepetasjoner << std::endl; // DEBUG
+	// std::cout << "Nummer av divisjoner: " << numRepetasjoner << std::endl; // DEBUG
 
 	// Hver kjøring av loopen henter en ny avdeling
 	for (int i = 1; i <= numRepetasjoner; i++)
 	{
 		inn.getline(tempAvdNavn, STRLEN);
 
-		std::cout << "Divisjonsnavn: " << tempAvdNavn << std::endl;
+		// std::cout << "Divisjonsnavn: " << tempAvdNavn << std::endl; // DEBUG
 
 		DivAvd* tempDiv = new DivAvd(tempAvdNavn, inn);
 		divAvd->add(tempDiv); // legger til avdeling

@@ -27,14 +27,14 @@ Lag::Lag(std::ifstream& inn) {
 	inn >> antSpillere;						// Henter antall spillere
 	inn.ignore();
 
-	std::cout << "Navn: " << navn << "\nAdresse: " << adresse << "\nantSpillere: " << antSpillere << std::endl;
+	//std::cout << "Navn: " << navn << "\nAdresse: " << adresse << "\nantSpillere: " << antSpillere << std::endl; // DEBUG
 
 	for (int i = 0; i < antSpillere; i++)
 	{
 		spillerID[i] = new int;
 		inn >> *(spillerID[i]); // endrer verdien til spillerID[i]
-		std::cout << *spillerID[i] << ", ";
+		// std::cout << *spillerID[i] << ", "; // DEBUG
 	}
-	std::cout << std::endl;
+	// std::cout << std::endl; // DEBUG
 	inn.ignore();
 }

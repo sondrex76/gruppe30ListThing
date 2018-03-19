@@ -15,7 +15,7 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn) : TextElement(avdelingsNavn) 
 	inn.ignore();
 	inn.ignore();
 
-	cout << antLag << endl; // Henter nummeret av lag
+	// cout << antLag << endl; // DEBUG
 
 	// Leser inn alle lag
 	for (int i = 0; i < antLag; i++)
@@ -23,12 +23,30 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn) : TextElement(avdelingsNavn) 
 		lag[i] = new Lag(inn);
 		inn.ignore();
 
-		//cout << lag[i] << endl;
+		// cout << lag[i] << endl; // DEBUG
 	}
 
+	char tempVerdi[9]; // lagrer dato
+
 	// Leser inn alle resultater
+	for (int i = 0; i < antLag; i++)
+	{
+		for (int n = 0; n < antLag; n++)
+		{
+			inn >> tempVerdi; // Henter den første verdien
+			//cout << tempVerdi << endl; // DEBUG
 
-
+			if (strcmp(tempVerdi, "0") != 0) // Hvis dette opsettet eksisterer
+			{
+				resultater[i][n] = new Resultat(inn, tempVerdi);
+			}
+			else
+			{
+				resultater[i][n] = nullptr;
+				inn.ignore();
+			}
+		}
+	}
 }
 
 void DivAvd::lesFraFil() {
