@@ -4,10 +4,12 @@
 #include "main_functions.h"
 #include "globale_funksjoner.h"
 #include "idrettene.h";
+#include "spillere.h";
 
 using namespace std;
 
-extern Idrettene idrettene;						//ekstern (?)
+extern Idrettene idrettene;
+extern Spillere spillere;
 
 // S A | <nr> | <navn> - skriv Alle spillere eller spiller med <nr> / <navn>
 void skrivSpiller() {
@@ -21,7 +23,7 @@ void skrivIdrett() {
 
 // N S | I  D - Ny spiller, idrett eller divisjon
 void lagNy() {
-	char onske = les(false);
+	char onske = les(true);
 
 	if (onske == 'S')
 	{
@@ -79,10 +81,13 @@ void redigerSpiller() {
 
 }
 
-void skrivTilFil() {
-
+// Leser data fra fil
+void lesFraFil() {
+	idrettene.lesFraFil();
+	spillere.lesFraFil();
 }
 
-void lesFraFil() {
+// Skriver data til fil
+void skrivTilFil() {
 
 }

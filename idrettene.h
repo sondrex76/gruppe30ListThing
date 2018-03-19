@@ -10,6 +10,8 @@ private:
 public:
 	Idrettene();
 	void opprett();
+	void lesFraFil();
+	void skrivTilFil();
 };
 
 #endif

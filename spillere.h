@@ -10,6 +10,8 @@ private:
 	int sisteNummer;	// Siste nummer brukt, megden spillere(fra 1-sisteNummer)
 public:
 	Spillere();			// Konstruktor
+	void lesFraFil();
+	void skrivTilFil();
 };
 
 

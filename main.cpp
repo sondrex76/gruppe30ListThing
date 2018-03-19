@@ -1,8 +1,10 @@
 #include <iostream>
+
 #include "ListTool2B.h"
 #include "spillere.h"
 #include "idrettene.h"
 #include "main_functions.h"
+#include "globale_funksjoner.h"
 #include "spillere.h"
 
 using namespace std;
@@ -16,15 +18,12 @@ void skrivMeny();
 int main() {
 	char kommando;
 
-	// leser data fra fil
-	lesFraFil();
-	skrivMeny();
+	lesFraFil();	// Leser data fra fil
+	skrivMeny();	// Skriver menyen
 
 	do
 	{
-		cout << "Skriv inn kommando: ";
-		cin >> kommando;
-		kommando = toupper(kommando);
+		kommando = les(false);
 
 		switch (kommando)
 		{

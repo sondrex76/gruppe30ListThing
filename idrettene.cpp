@@ -18,3 +18,11 @@ void Idrettene::opprett()
 	//idrett->add(1);
 
 }
+
+void Idrettene::lesFraFil() {
+
+}
+
+void Idrettene::skrivTilFil() {
+
+}
