@@ -1,5 +1,5 @@
 #include <fstream>
-#include <iostream> // DEBUG
+// #include <iostream> // DEBUG
 #include "spiller.h"
 #include "conster.h"
 
@@ -18,12 +18,11 @@ Spiller::Spiller(int value, ifstream& inn) : NumElement(value) {
 	navn = new char[strlen(tempChar)];		// Setter navnets lengde
 	navn = tempChar;						// Definerer navn
 	
-
 	char temp[STRLEN];
 	inn.getline(temp, STRLEN);
 
 	adresse = new char[strlen(temp)];	// Setter adressens lengde
 	adresse = temp;						// Definerer adresse
 
-	cout << "Navn: " << navn << "\nAdresse: " << adresse << endl; // DEBUG
+	// cout << "Navn: " << navn << "\nAdresse: " << adresse << endl; // DEBUG
 }
