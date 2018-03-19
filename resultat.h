@@ -4,11 +4,11 @@
 class Resultat {
 private:
 	char dato[9];			// Datoen til resultatet(ååååmmdd)
-	int bortemaal;			// Bortemål
 	int Hjemmemaal;			// Hjemmemål
+	int bortemaal;			// Bortemål
 	bool normalTid;			// Bool som beskriver om kampen endte på normal eller overtid
-	int borteSkorer[50];	// Liste over de som skoret på bortelaget
-	int hjemmeSkorer[50];	// Liste over de som skoret på hjemmelaget
+	int* hjemmeSkorer[50];	// Liste over de som skoret på hjemmelaget
+	int* borteSkorer[50];	// Liste over de som skoret på bortelaget
 public:
 	Resultat();
 };
