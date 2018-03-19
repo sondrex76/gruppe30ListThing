@@ -16,6 +16,8 @@ void skrivMeny();
 int main() {
 	char kommando;
 
+	// leser data fra fil
+	lesFraFil();
 	skrivMeny();
 
 	do
@@ -39,6 +41,9 @@ int main() {
 		default: skrivMeny();
 		}
 	} while (kommando != 'Q');
+
+	// Skriver endringer til fil
+	skrivTilFil();
 
 	return 0;
 }

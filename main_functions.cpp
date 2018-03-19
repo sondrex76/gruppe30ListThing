@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+
 #include "main_functions.h"
 #include "globale_funksjoner.h"
 #include "idrettene.h";
@@ -74,5 +76,13 @@ void skrivLag() {
 
 // (E)Endre spillere på et lag(legg til/fjern)
 void redigerSpiller() {
+
+}
+
+void skrivTilFil() {
+
+}
+
+void lesFraFil() {
 
 }

@@ -3,7 +3,8 @@
 #include "conster.h"
 #include "idrett.h"
 #include "globale_funksjoner.h"
-// KOnstruktor
+
+// Konstruktor
 Idrettene::Idrettene() {
 	idrettListe = new List(Sorted);
 }

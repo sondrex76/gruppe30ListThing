@@ -12,5 +12,7 @@ void skrivTabell();			// (T)Skriv tabell(er) for en hel idrett eller en divisjon
 void lesResultat();			// (R)Les resultatliste fra fil
 void skrivLag();			// (D)Data om alle spillerne i et lag
 void redigerSpiller();		// (E)Endre spillere på et lag(legg til/fjern)
+void skrivTilFil();			// Skriv til fil, aktiveres når programmet avsluttes
+void lesFraFil();			// Leser fra fil, aktiveres på starten av programmet
 
 #endif
