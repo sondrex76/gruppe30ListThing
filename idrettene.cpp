@@ -14,12 +14,25 @@ Idrettene::Idrettene() {
 
 void Idrettene::opprett()
 {
-	
-	char navn[STRLEN]; 
-	les("Skriv inn idrettens navn", navn, STRLEN);
-	//Idrett temp;
-	//idrett->add(1);
+					
+	char navn[STRLEN];								//navnetemp
 
+	les("Skriv inn idrettens navn", navn, STRLEN);
+
+	if (!idrettListe->inList(navn))					//hvis nytt navn
+	{
+								//lag peker til idrettobjekt og legg til
+		cout << "Lager ny idrett.\n";
+		Idrett* temp = new Idrett(navn);
+		idrettListe->add(temp);
+
+		idrettListe->displayList();			//for å sjekke at det virker
+	}
+	else
+	{
+		cout << "Denne idretten finnes allerede.\n";
+	}
+	
 }
 
 void Idrettene::lesFraFil() {
