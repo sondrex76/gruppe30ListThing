@@ -19,7 +19,7 @@ int main() {
 	char kommando;
 
 	// lesFraFil er ikke ferdig enda og går i en uendelig loop for øyeblikket, skal fikse den senere, har ikke hatt frokost enda
-	//lesFraFil();	// Leser data fra fil
+	lesFraFil();	// Leser data fra fil
 	skrivMeny();	// Skriver menyen
 
 	do

@@ -1,5 +1,5 @@
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include "idrettene.h"
 #include "conster.h"
 #include "idrett.h"
@@ -32,9 +32,14 @@ void Idrettene::lesFraFil() {
 	inn >> numSport;
 	inn.ignore();
 
+	//cout << numSport << endl; // DEBUG
+
 	// Hver loop henter en idrett
-	while (!inn.eof()) // leser fra fil så lenge den ikke slutter
+	for (int i = 0; i < numSport; i++) // leser fra fil så lenge den ikke slutter
 	{
+		//cout << i << endl; // DEBUG
+		//cout << tempNavn << endl; // DEBUG
+
 		inn.getline(tempNavn, STRLEN);
 
 		tempIdrett = new Idrett(tempNavn, inn);

@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iostream> // DEBUG
 #include "div_avd.h"
 
 using namespace std;
@@ -14,11 +15,15 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn) : TextElement(avdelingsNavn) 
 	inn.ignore();
 	inn.ignore();
 
+	cout << antLag << endl; // Henter nummeret av lag
+
 	// Leser inn alle lag
 	for (int i = 0; i < antLag; i++)
 	{
 		lag[i] = new Lag(inn);
 		inn.ignore();
+
+		//cout << lag[i] << endl;
 	}
 
 	// Leser inn alle resultater
