@@ -3,6 +3,7 @@
 #include "spillere.h"
 #include "spiller.h"
 #include "ListTool2B.h"
+#include "globale_funksjoner.h"
 
 using namespace std;
 
@@ -15,6 +16,20 @@ void Spillere::lagSpiller()
 {
 	Spiller* temp = new Spiller(sisteNummer++);
 	spillerListe->add(temp);
+}
+
+void Spillere::fjernSpiller(int nr)
+{
+	cout << "Vil du virkelig slette denne spilleren? (Y/N)";
+	char valg = les(false);
+
+	if (toupper(valg) == 'Y')
+	{
+		spillerListe->removeNo(nr);
+		sisteNummer--;
+		cout << "Sletter...\n";
+	}
+	else cout << "Sletter ikke.\n";
 }
 
 void Spillere::skrivSpiller(char* navn, bool alle)
@@ -68,6 +83,11 @@ void Spillere::skrivSpiller(char* navn, bool alle)
 	}
 }
 
+
+int Spillere::faaSiste()
+{
+	return sisteNummer;
+}
 
 // Leser alle spillere fra fil(Navn og adresse)
 void Spillere::lesFraFil() {

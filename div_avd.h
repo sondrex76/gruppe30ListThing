@@ -17,6 +17,7 @@ private:
 public:
 	DivAvd(char*);
 	DivAvd(char*, std::ifstream&);
+	char* hentNavn();						//returnerer 'navn'
 	void display();
 	void lesFraFil();
 	void skrivTilFil(std::ofstream&);

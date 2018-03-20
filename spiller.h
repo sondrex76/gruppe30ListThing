@@ -12,8 +12,8 @@ private:
 public:
 	Spiller(int);
 	Spiller(int value, std::ifstream&);
-	void display();				// Skriver spillerens navn og adresse
-	char* hentNavn();
+	void display();					// Skriver spillerens navn og adresse
+	char* hentNavn();				//returnerer 'navn'
 	void skrivTilFil(std::ofstream&);
 };
 

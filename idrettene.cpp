@@ -75,6 +75,65 @@ void Idrettene::leggTilDiv(int nr)
 	if (!isQ(navn)) idrettListe->add(temp); // kjører koden hvis brukeren ikke skrev inn Q
 }
 
+void Idrettene::fjernIdrett(char* navn)
+{
+	
+	if (idrettListe->inList(navn))
+	{
+		for (int i = 1; i <= idrettListe->noOfElements(); i++)
+		{
+			//temp som sjekker om de matcher
+			Idrett* temp = (Idrett*)idrettListe->removeNo(i);
+
+			if (!strcmp(temp->hentNavn(), navn))				//er de like?
+			{
+				//dobbeltsjekker at man vil slette
+				cout << "Er du sikker pa at du vil slette? Y/N";
+				if (les(false) != 'Y')
+				{
+					cout << "Sletter ikke.\n";
+					idrettListe->add(temp);
+				}
+				else cout << "Sletter...\n";
+			}
+			else
+			{
+				idrettListe->add(temp);			//legges tilbake i lista
+			}
+		}
+	}
+	else cout << "Denne idretten finnes ikke.\n";
+}
+
+void Idrettene::fjernDiv(char* navn)
+{
+	if (idrettListe->inList(navn))
+	{
+		bool fant = false;
+		for (int i = 1; i <= idrettListe->noOfElements(); i++)
+		{
+			//temp som sjekker om de matcher
+			Idrett* temp = (Idrett*)idrettListe->removeNo(i);
+
+			if (!strcmp(temp->hentNavn(), navn))		
+			{
+				fant = true;
+				temp->slettDiv();
+			}
+
+			idrettListe->add(temp);
+			
+		}
+		if (!fant) cout << "Fant ikke divisjonen.\n";
+	}
+	else cout << "Finner ikke idrett.\n";
+}
+
+//sjekker om lista ikke er tom
+bool Idrettene::ikkeTom()
+{
+	return idrettListe->noOfElements();
+}
 
 void Idrettene::skrivUt(char* navn, bool alle)
 {

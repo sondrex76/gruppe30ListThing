@@ -10,7 +10,9 @@ private:
 	int sisteNummer;	// Siste nummer brukt, megden spillere(fra 1-sisteNummer)
 public:
 	Spillere();			// Konstruktor
-	void skrivSpiller(char* navn, bool alle);
+	void skrivSpiller(char* navn, bool alle);		//skriver ut
+	int faaSiste();							//returnerer 'sisteNummer'
+	void fjernSpiller(int nr);
 	void lagSpiller();
 	void lesFraFil();
 	void skrivTilFil();

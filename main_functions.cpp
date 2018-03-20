@@ -84,7 +84,42 @@ void lagNy() {
 
 // F S | I | D - Fjern spiller, idrett eller divisjon
 void fjern() {
+	char valg = les(true);
 
+	if (valg == 'S')
+	{
+		//fjerner spiller
+		if (spillere.faaSiste())
+		{
+		int nr = les("Skriv inn spillerens nummer", 0, spillere.faaSiste() - 1);
+			spillere.fjernSpiller(nr+1);
+		}
+		else cout << "Det finnes ingen spillere.\n";
+	}
+	else if (valg == 'I')
+	{
+		//fjerner idrett
+		if (idrettene.ikkeTom())
+		{
+			char navn[STRLEN];
+			les("Skriv inn navn pa idrett du vil fjerne", navn, STRLEN);
+			idrettene.fjernIdrett(navn);
+		}
+		else cout << "Det finnes ingen idretter.\n";
+	}
+	else if (valg == 'D')
+	{
+		//fjerner divisjon. må vite idrett
+		if (idrettene.ikkeTom())
+		{
+			char navn[STRLEN];
+			les("Skriv inn navn pa divisjonens idrett", navn, STRLEN);
+			idrettene.fjernDiv(navn);
+		}
+		else cout <<"Det finnes ingen idretter, ergo ingen divisjoner.\n";
+
+	}
+	else cout << "Ugyldig kommando";
 }
 
 // L Skriv terminliste for en gitt divisjon til skjerm eller fil

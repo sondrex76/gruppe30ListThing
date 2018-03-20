@@ -49,6 +49,11 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn) : TextElement(avdelingsNavn) 
 	}
 }
 
+char* DivAvd::hentNavn()
+{
+	return text;			//returnerer navn
+}
+
 void DivAvd::display()
 {
 	cout << text << std::endl;

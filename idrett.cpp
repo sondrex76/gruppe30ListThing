@@ -79,12 +79,54 @@ bool Idrett::leggTilDiv(char* navn)
 	}
 }
 
+//sletter en divisjon
+void Idrett::slettDiv()
+{
+	if (divAvdListe->noOfElements())		//hvis ikke tom
+	{
+	char navn[STRLEN];
+	les("Skriv inn navn pa idrett du vil fjerne", navn, STRLEN);
+
+	if (divAvdListe->inList(navn))				//hvis navn finnes
+	{
+		//looper igjennom alle divisjonene
+		for (int i = 1; i <= divAvdListe->noOfElements(); i++)
+		{
+			//temp som sjekker om de matcher
+			DivAvd* temp = (DivAvd*)divAvdListe->removeNo(i);
+
+			if (strcmp(temp->hentNavn(), navn))		//hvis ulik navn
+			{
+				divAvdListe->add(temp);
+			}
+			else
+			{
+				//ellers ber vi om vi skal slette
+				std::cout << "Vil du virkelig slette divisjonen? Y/N ";
+				if (les(false) != 'Y')
+				{
+					std::cout << "Sletter...\n";
+					divAvdListe->add(temp);
+				}
+				else std::cout << "Sletter ikke.\n";
+			}
+		  }
+		}
+		else std::cout << "Finner ikke divisjon.\n";
+	}
+	else std::cout << "Det er ingen divisjoner i denne idretten.\n";
+}
+
 							//liten bool for å sjekke om navnene er like
 bool Idrett::likSom(char* navn)
 {
 	return (!strcmp(navn, text));
 }
 
+bool Idrett::harDiv(char* navn)
+{
+	return divAvdListe->inList(navn);
+}
 			   //liten bool for å sjekke om div med visst navn finnes alt
 bool Idrett::harIkkeDiv(char* navn)
 {

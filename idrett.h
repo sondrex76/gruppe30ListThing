@@ -14,11 +14,13 @@ public:
 	Idrett(char*);					// Standard konstruktor
 	Idrett(char*, std::ifstream&);	// Konstruktor som leser data fra fil
 	bool leggTilDiv(char* navn);
-	bool harIkkeDiv(char* navn);	
-	bool likSom(char* navn);
+	void slettDiv();
+	bool harIkkeDiv(char* navn);		//returnerer om div ikke finnes
+	bool likSom(char* navn);			//returnerer om navnene er like
+	bool harDiv(char* navn);			//returnerer om har en viss div
 	void display();
 	void skrivTilFil(std::ofstream&);
-	char* hentNavn();
+	char* hentNavn();					//returnerer navn
 };
 
 #endif
