@@ -17,6 +17,21 @@ void Spillere::lagSpiller()
 	spillerListe->add(temp);
 }
 
+void Spillere::skrivSpiller(int nr)
+{
+	if (sisteNummer >= nr)
+	{
+	Spiller* temp = (Spiller*)spillerListe->removeNo(nr);
+	temp->display();
+	spillerListe->add(temp);
+	}
+	else
+	{
+		cout << "Spiller med dette nummeret finnes ei.\n";
+	}
+
+}
+
 
 // Leser alle spillere fra fil(Navn og adresse)
 void Spillere::lesFraFil() {

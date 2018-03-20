@@ -100,6 +100,7 @@ void Idrett::display()
 
 
 		divAvdListe->displayList();		//displayer alle divisjoner
+		std::cout << std::endl;
 }
 
 void Idrett::skrivTilFil(std::ofstream& ut) {

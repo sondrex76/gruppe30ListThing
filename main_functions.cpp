@@ -13,11 +13,32 @@ extern Spillere spillere;
 
 // S A | <nr> | <navn> - skriv Alle spillere eller spiller med <nr> / <navn>
 void skrivSpiller() {
-
+	char valg[STRLEN];
+	les("", valg, STRLEN);
+	
+	if (atoi(valg))
+	{
+		spillere.skrivSpiller(atoi(valg));
+	}
+	else
+	{
+		
+	}
 }
 
 // I A <navn> - skriv Alle idrettene eller idretten <nav
 void skrivIdrett() {
+	//sjekker om man vil ha alle eller navn
+	char input[STRLEN];
+	les("", input, STRLEN);
+
+	bool alle = false;
+
+	if (!strcmp(input, "a") || !strcmp(input, "A"))
+	{
+		alle = true;
+	}
+	idrettene.skrivUt(input, alle);
 
 }
 
@@ -49,12 +70,11 @@ void lagNy() {
 			if (nr)
 			{
 					idrettene.leggTilDiv(nr);		// Legg til div/avd
-					cout << "TEST\n";
 			}
 			else if (!isQ(navn))
 			{
-				cout << "Finner ikke idretten.\n";
-				cout << "Skriv inn gyldig idrett eller avbryt med å skrive Q\n";
+				cout << "Finner ikke idretten. "
+				<< "Skriv inn gyldig idrett eller avbryt med a skrive Q\n";
 			}
 		} while (nr == 0 && !isQ(navn));
 	}

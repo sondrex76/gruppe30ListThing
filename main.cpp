@@ -24,6 +24,7 @@ int main() {
 
 	do
 	{
+		cout << "Skriv kommando: ";
 		kommando = les(false);
 
 		switch (kommando)
@@ -61,6 +62,6 @@ void skrivMeny()
 		 <<"\tT - skriv tabeller for en hel idrett eller div/avd til skjerm/fil\n"
 		 <<"\tR - lese inn resultatliste fra fil\n"
 		 <<"\tD - skriver alle spillernes data pa et lag\n"
-		 <<"\tE - endre eller redigere spillerne på et lag\n"
+		 <<"\tE - endre eller redigere spillerne pa et lag\n"
 		 <<"\tQ - avslutt program\n\n"; 
 }

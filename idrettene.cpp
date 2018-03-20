@@ -25,7 +25,7 @@ void Idrettene::opprett()
 		erIListen = idrettListe->inList(navn);
 
 		if (erIListen)
-			cout << "Idretten eksisterer allerede!\nSkriv inn Q for å avslutte loopen\n";
+		cout << "Idretten eksisterer allerede!\nSkriv inn Q for a avslutte loopen\n";
 	} while (erIListen && !isQ(navn));
 	
 	// Lag peker til idrettobjekt og legg til
@@ -43,21 +43,21 @@ void Idrettene::opprett()
 int Idrettene::faaNr(char* nvn)
 {
 	int nr = 0;
-	if (idrettListe->inList(nvn))
+	if (idrettListe->inList(nvn))				//hvis i lista
 	{
 		for (int i = 1; i <= idrettListe->noOfElements(); i++)
 		{
-
+			//temp som sjekker om de matcher
 			Idrett* temp = (Idrett*)idrettListe->removeNo(i);
 
-			if (temp->likSom(nvn))
+			if (temp->likSom(nvn))				//er de like?
 			{
 				nr = i;
 			}
-			idrettListe->add(temp);
+			idrettListe->add(temp);			//legges tilbake i lista
 		}
 	}
-	return nr;
+	return nr;		//returnerer 0 om ikke funnet. eller nummer i lista
 }
 
 void Idrettene::leggTilDiv(int nr)
@@ -67,12 +67,45 @@ void Idrettene::leggTilDiv(int nr)
 	char navn[STRLEN];
 
 	do {
-		les("Skriv inn navnet på div/avd", navn, STRLEN);
+		les("Skriv inn navnet pa div/avd", navn, STRLEN);
 
 		// Loop kjører til brukeren har gidd gyldig resultat eller avbrutt med å skrive "Q"
 	} while (!temp->leggTilDiv(navn) && !isQ(navn));
 
 	if (!isQ(navn)) idrettListe->add(temp); // kjører koden hvis brukeren ikke skrev inn Q
+}
+
+
+void Idrettene::skrivUt(char* navn, bool alle)
+{
+	
+	if (alle)		//viser hele lista
+	{
+		idrettListe->displayList();
+	}
+	else
+	{
+		if(idrettListe->inList(navn))		//ser om navnet finnes
+		{ 
+			//om det finnes blir det displayet
+			for (int i = 0; i < idrettListe->noOfElements(); i++)
+			{
+				Idrett* temp = (Idrett*)idrettListe->removeNo(i); //temp
+
+				if (strcmp(temp->hentNavn(), navn))		//hvis match
+				{
+					temp->display();
+					
+				}
+
+				idrettListe->add(temp);			//legger tilbake i lista
+			}
+		}
+		else
+		{
+			cout << "Fant ikke idretten.\n";
+		}
+	}
 }
 
 void Idrettene::lesFraFil() {

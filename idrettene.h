@@ -12,6 +12,7 @@ public:
 	void opprett();
 	int faaNr(char* nvn);				//returnerer nr i lista. evt 0
 	void leggTilDiv(int nr);			//legger til ny divisjon
+	void skrivUt(char* navn, bool alle);
 	void lesFraFil();
 	void skrivTilFil();
 };

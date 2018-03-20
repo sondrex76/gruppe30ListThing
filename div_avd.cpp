@@ -51,7 +51,7 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn) : TextElement(avdelingsNavn) 
 
 void DivAvd::display()
 {
-	cout << "Navnet på divavd er " << text << std::endl;
+	cout << text << std::endl;
 }
 
 void DivAvd::lesFraFil() {
