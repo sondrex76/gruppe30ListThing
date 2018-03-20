@@ -19,21 +19,22 @@ void Idrettene::opprett()
 	char navn[STRLEN];						// Navnetemp
 	bool erIListen;							// Midlertidig verdi for å lagre om idretten allerede eksisterer
 
-
 	do {
 		les("Skriv inn idrettens navn", navn, STRLEN); // Henter idrettens navn
 
 		erIListen = idrettListe->inList(navn);
 
 		if (erIListen)
-			cout << "Idretten eksisterer allerede!\n";
-	} while (erIListen && strcmp(navn, "Q") != 0);
+			cout << "Idretten eksisterer allerede!\nSkriv inn Q for å avslutte loopen\n";
+	} while (erIListen && !isQ(navn));
 	
 	// Lag peker til idrettobjekt og legg til
-	cout << "Lager ny idrett.\n";
-	Idrett* temp = new Idrett(navn);
-	idrettListe->add(temp);
-
+	if (!isQ(navn)) // kjører koden hvis navn ikke er lik 'Q'(eller 'q')
+	{
+		cout << "Lager ny idrett.\n";
+		Idrett* temp = new Idrett(navn);
+		idrettListe->add(temp);
+	}
 	// idrettListe->displayList();			// DEBUG
 	
 }
@@ -69,9 +70,9 @@ void Idrettene::leggTilDiv(int nr)
 		les("Skriv inn navnet på div/avd", navn, STRLEN);
 
 		// Loop kjører til brukeren har gidd gyldig resultat eller avbrutt med å skrive "Q"
-	} while (!temp->leggTilDiv(navn) && strcmp(navn, "Q") != 0);
+	} while (!temp->leggTilDiv(navn) && !isQ(navn));
 
-	idrettListe->add(temp);
+	if (!isQ(navn)) idrettListe->add(temp); // kjører koden hvis brukeren ikke skrev inn Q
 }
 
 void Idrettene::lesFraFil() {

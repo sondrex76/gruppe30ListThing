@@ -10,18 +10,20 @@ using namespace std;
 
 // Standard konstruktor
 Spiller::Spiller(int value) : NumElement(value){
-
 										//spør om navn og adresse
+	// Henter navn
 	char nvn[STRLEN];
 	les("Skriv inn spillernavn", nvn, STRLEN);
 	navn = new char[strlen(nvn)+1];
 	strcpy(navn, nvn);
 
+	// Henter adresse
 	char adr[STRLEN];
 	les("Skriv inn adresse", adr, STRLEN);
 	adresse = new char[strlen(adr) + 1];
 	strcpy(adresse, adr);
-	display();
+
+	cout << "Spiller nummer: " << number << endl;	// Skriver ut spillerens unike nummer
 }
 
 // Konstruktor brukt når man leser fra fil
@@ -41,6 +43,7 @@ Spiller::Spiller(int value, ifstream& inn) : NumElement(value) {
 	// cout << "Navn: " << navn << "\nAdresse: " << adresse << endl; // DEBUG
 }
 
+// DEBUG, burde bli brukt i faktisk kode senere
 void Spiller::display()
 {
 	cout << "Spillernr: " << number << endl

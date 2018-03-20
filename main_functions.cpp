@@ -32,26 +32,31 @@ void lagNy() {
 	}
 	else if (onske == 'I')
 	{
-		idrettene.opprett();						//lager ny idrett
+		idrettene.opprett();						// Lager ny idrett
 	}
 	else if (onske == 'D')
 	{
 		//lager ny divisjon. spør om hvilken idrett.
 		char navn[STRLEN];
-		les("Skriv inn idretten du onsker ny div/avd i", navn, STRLEN);
 
 		//sjekker at idretten finnes
-		int nr = idrettene.faaNr(navn);
+		int nr;
 
-		if (nr)
-		{
-			idrettene.leggTilDiv(nr);		//legg til div/avd
-		}
-		else
-		{
-			cout << "Finner ikke idretten.\n";
-		}
+		do {
+			les("Skriv inn idretten du onsker ny div/avd i", navn, STRLEN);
+			nr = idrettene.faaNr(navn);
 
+			if (nr)
+			{
+					idrettene.leggTilDiv(nr);		// Legg til div/avd
+					cout << "TEST\n";
+			}
+			else if (!isQ(navn))
+			{
+				cout << "Finner ikke idretten.\n";
+				cout << "Skriv inn gyldig idrett eller avbryt med å skrive Q\n";
+			}
+		} while (nr == 0 && !isQ(navn));
 	}
 	else cout << "Ugyldig kommando.\n";
 

@@ -43,3 +43,15 @@ void les(char* info, char* txt, int MAXLEN)
 		cin.getline(txt, MAXLEN);	// Henter en linje fra brukeren og kopierer den over til txt
 	} while (strlen(txt) == 0);	// Forsikrer at brukeren ikke bare skrev inn enter
 }
+
+// Returnerer en bool basert på om den sendte char arrayen er q eller Q, eller noe annet
+bool isQ(char* navn) {
+	if (strlen(navn) == 1)
+	{
+		char ch = toupper(navn[0]);
+
+		return ch == 'Q';
+	}
+	else return false;
+
+}
