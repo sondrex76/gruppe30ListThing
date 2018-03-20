@@ -42,5 +42,24 @@ void Spillere::lesFraFil() {
 }
 
 void Spillere::skrivTilFil() {
+	ofstream ut("SPILLERE.DTA");
 
+	int spillere = spillerListe->noOfElements(); // Henter nummeret av spillere
+	ut << spillere << endl << endl; // Skriver inn nummeret av spillere
+
+	Spiller* tempSpiller = nullptr;
+
+	// Skriver inn alle spillerne(navn og adresse)
+	for (int i = 1; i <= spillere; i++)
+	{
+		// Heter Spiller i(i listen, ikke den med den iden
+		tempSpiller = (Spiller*)spillerListe->removeNo(i);
+
+		tempSpiller->skrivTilFil(ut);
+
+		// Legger spilleren tilbake i listen
+		spillerListe->add(tempSpiller);
+	}
+
+	ut.close();
 }

@@ -17,6 +17,8 @@ public:
 	bool harIkkeDiv(char* navn);	
 	bool likSom(char* navn);
 	void display();
+	void skrivTilFil(std::ofstream&);
+	char* hentNavn();
 };
 
 #endif

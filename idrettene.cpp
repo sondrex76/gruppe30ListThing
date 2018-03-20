@@ -16,23 +16,25 @@ Idrettene::Idrettene() {
 void Idrettene::opprett()
 {
 					
-	char navn[STRLEN];								// Navnetemp
+	char navn[STRLEN];						// Navnetemp
+	bool erIListen;							// Midlertidig verdi for å lagre om idretten allerede eksisterer
 
-	les("Skriv inn idrettens navn", navn, STRLEN);
 
-	if (!idrettListe->inList(navn))					// Hvis nytt navn
-	{
-								// Lag peker til idrettobjekt og legg til
-		cout << "Lager ny idrett.\n";
-		Idrett* temp = new Idrett(navn);
-		idrettListe->add(temp);
+	do {
+		les("Skriv inn idrettens navn", navn, STRLEN); // Henter idrettens navn
 
-		// idrettListe->displayList();			// DEBUG
-	}
-	else
-	{
-		cout << "Denne idretten finnes allerede.\n";
-	}
+		erIListen = idrettListe->inList(navn);
+
+		if (erIListen)
+			cout << "Idretten eksisterer allerede!\n";
+	} while (erIListen && strcmp(navn, "Q") != 0);
+	
+	// Lag peker til idrettobjekt og legg til
+	cout << "Lager ny idrett.\n";
+	Idrett* temp = new Idrett(navn);
+	idrettListe->add(temp);
+
+	// idrettListe->displayList();			// DEBUG
 	
 }
 
@@ -62,6 +64,7 @@ void Idrettene::leggTilDiv(int nr)
 	Idrett* temp = (Idrett*)idrettListe->removeNo(nr);	//lager temp
 
 	char navn[STRLEN];
+
 	do {
 		les("Skriv inn navnet på div/avd", navn, STRLEN);
 
@@ -88,14 +91,38 @@ void Idrettene::lesFraFil() {
 	{
 		//cout << i << endl; // DEBUG
 		//cout << tempNavn << endl; // DEBUG
-
+		// Henter sports navn
 		inn.getline(tempNavn, STRLEN);
 
 		tempIdrett = new Idrett(tempNavn, inn);
 		idrettListe->add(tempIdrett);				// Legger til idretten
 	}
+
+	inn.close();
 }
 
 void Idrettene::skrivTilFil() {
+	ofstream ut("IDRETTENE.DTA");
+	
+	// Antall sporter
+	int sporter;
+	sporter = idrettListe->noOfElements();
+	ut << sporter << endl; // skriver sporter til fil
 
+	Idrett* tempIdrett = nullptr;
+
+	for (int i = 1; i <= sporter; i++)
+	{
+		// Henter sport nummer i
+		tempIdrett = (Idrett*)idrettListe->removeNo(i);
+
+		ut << tempIdrett->hentNavn() << endl;
+		tempIdrett->skrivTilFil(ut);
+
+		// Legger sport nr i tilbake i listen
+		idrettListe->add(tempIdrett);
+	}
+
+
+	ut.close();
 }

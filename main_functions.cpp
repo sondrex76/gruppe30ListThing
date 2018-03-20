@@ -100,5 +100,6 @@ void lesFraFil() {
 
 // Skriver data til fil
 void skrivTilFil() {
-
+	idrettene.skrivTilFil();
+	spillere.skrivTilFil();
 }

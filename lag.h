@@ -12,6 +12,7 @@ private:
 public:
 	Lag();
 	Lag(std::ifstream&);
+	void skrivTilFil(std::ofstream&);
 };
 
 #endif

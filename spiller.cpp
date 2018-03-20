@@ -30,13 +30,13 @@ Spiller::Spiller(int value, ifstream& inn) : NumElement(value) {
 	inn.getline(tempChar, STRLEN);			// Henter navn
 
 	navn = new char[strlen(tempChar)];		// Setter navnets lengde
-	navn = tempChar;						// Definerer navn
-	
+	strcpy(navn, tempChar);					// Definerer navn
+
 	char temp[STRLEN];
 	inn.getline(temp, STRLEN);
 
 	adresse = new char[strlen(temp)];	// Setter adressens lengde
-	adresse = temp;						// Definerer adresse
+	strcpy(adresse, temp);				// Definerer adresse
 
 	// cout << "Navn: " << navn << "\nAdresse: " << adresse << endl; // DEBUG
 }
@@ -46,4 +46,10 @@ void Spiller::display()
 	cout << "Spillernr: " << number << endl
 		 << "Navn: " << navn << endl
 		 << "Adresse: " << adresse << endl;
+}
+
+void Spiller::skrivTilFil(ofstream& ut) {
+	ut << navn << endl;	// Skriver ut navn
+	ut << adresse << endl;	// Skriver ut adresse
+	ut << endl;		// Går over til neste linje
 }

@@ -27,10 +27,10 @@ Idrett::Idrett(char* indrettsNavn, std::ifstream& inn) : TextElement(indrettsNav
 	divAvdListe = new List(Sorted);	// Setter divAvd listetype til Sorted
 
 	char tempAvdNavn[STRLEN];
-	int numRepetasjoner;
+	int numRepetasjoner; // verdi som lagrer inter hentet ut av filen
 
 	// Henter numerisk verdo for typen
-	inn >> numRepetasjoner;
+	inn >> numRepetasjoner; 
 	inn.ignore();
 
 	// Oversetter til den faktiske typen
@@ -57,6 +57,9 @@ Idrett::Idrett(char* indrettsNavn, std::ifstream& inn) : TextElement(indrettsNav
 	}
 }
 
+char* Idrett::hentNavn() {
+	return text; // returnerer navn
+}
 									//legger til ny divisjon om mulig
 bool Idrett::leggTilDiv(char* navn)
 {
@@ -97,4 +100,25 @@ void Idrett::display()
 
 
 		divAvdListe->displayList();		//displayer alle divisjoner
+}
+
+void Idrett::skrivTilFil(std::ofstream& ut) {
+	ut << tabellType << std::endl; // Kommer muligens ikke til å skrive riktig verdi
+
+	// henter nummer av divisjoner
+	int numDiv = divAvdListe->noOfElements();
+	ut << numDiv << std::endl;
+
+	DivAvd* tempDiv = nullptr;
+
+	for (int i = 1; i <= numDiv; i++)
+	{
+		// Henter avdeling i
+		tempDiv = (DivAvd*)divAvdListe->removeNo(i);
+
+		tempDiv->skrivTilFil(ut);
+
+		// Legger tilbake avdeling i
+		divAvdListe->add(tempDiv);
+	}
 }

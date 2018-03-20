@@ -58,6 +58,27 @@ void DivAvd::lesFraFil() {
 
 }
 
-void DivAvd::skrivTilFil() {
+void DivAvd::skrivTilFil(ofstream& ut) {
+	ut << text << endl; // skriver inn divisjonsnavn
+	ut << antLag << endl << endl;
 
+	for (int i = 0; i < antLag; i++)
+	{
+		lag[i]->skrivTilFil(ut);
+	}
+
+	// resultater
+	for (int i = 0; i < antLag; i++)
+	{
+		for (int n = 0; n < antLag; n++)
+		{
+			if (i != n) // To lag skal mot hverandre
+			{
+				resultater[i][n]->skrivTilFil(ut);
+			}
+			else ut << 0 << endl; // Hvis lagene som skal mot hverandre er det samme
+		}
+
+		ut << endl;
+	}
 }

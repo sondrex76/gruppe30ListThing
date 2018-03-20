@@ -15,14 +15,14 @@ Resultat::Resultat(ifstream & inn, char d[9]) {
 	strcpy(dato, d); // kopierer d(ato) over til dato verdien
 
 	// Leser første linje
-	inn >> Hjemmemaal;
+	inn >> hjemmemaal;
 	inn >> bortemaal;
 	inn >> normalTid;
 	inn.ignore();
 
 	int tempInt;
 	
-	for (int i = 0; i < Hjemmemaal; i++)
+	for (int i = 0; i < hjemmemaal; i++)
 	{
 		inn >> tempInt;
 
@@ -43,4 +43,25 @@ Resultat::Resultat(ifstream & inn, char d[9]) {
 	inn.ignore();
 
 	// cout << "Hjemme: " << Hjemmemaal << "\nBorte: " << bortemaal << "\nNormal: " << normalTid << endl; // DEBUG
+}
+
+void Resultat::skrivTilFil(ofstream& ut) {
+	// Skriver dato, antall hjemme og bortemål og om kampen brukte overtid eller ikke
+	ut << dato << " " << hjemmemaal << " " << bortemaal << " " << normalTid << endl;
+
+	for (int i = 0; i < hjemmemaal; i++) {
+		if (hjemmeSkorer[i] != nullptr)
+			ut << *hjemmeSkorer[i] << " ";
+		else break;
+	}
+
+	ut << endl;
+
+	for (int i = 0; i < bortemaal; i++) {
+		if (borteSkorer[i] != nullptr)
+			ut << *borteSkorer[i] << " ";
+		else break;
+	}
+
+	ut << endl;
 }

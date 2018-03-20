@@ -19,7 +19,7 @@ public:
 	DivAvd(char*, std::ifstream&);
 	void display();
 	void lesFraFil();
-	void skrivTilFil();
+	void skrivTilFil(std::ofstream&);
 };
 
 #endif

@@ -7,13 +7,15 @@
 #include "lag.h"
 #include "conster.h"
 
+using namespace std;
+
 // Standard konstruktor
 Lag::Lag() {
 
 }
 
 // Konstruktor for å lese fra fil
-Lag::Lag(std::ifstream& inn) {
+Lag::Lag(ifstream& inn) {
 	char tempChar[MAXSPILLERE * 3];
 
 	inn.getline(tempChar, STRLEN);			// Henter navn av lag
@@ -27,14 +29,29 @@ Lag::Lag(std::ifstream& inn) {
 	inn >> antSpillere;						// Henter antall spillere
 	inn.ignore();
 
-	//std::cout << "Navn: " << navn << "\nAdresse: " << adresse << "\nantSpillere: " << antSpillere << std::endl; // DEBUG
+	// cout << "Navn: " << navn << "\nAdresse: " << adresse << "\nantSpillere: " << antSpillere << std::endl; // DEBUG
 
 	for (int i = 0; i < antSpillere; i++)
 	{
 		spillerID[i] = new int;
 		inn >> *(spillerID[i]); // endrer verdien til spillerID[i]
-		// std::cout << *spillerID[i] << ", "; // DEBUG
+		// cout << *spillerID[i] << ", "; // DEBUG
 	}
-	// std::cout << std::endl; // DEBUG
+	// cout << std::endl; // DEBUG
 	inn.ignore();
+}
+
+// Skriver lagets data til fil
+void Lag::skrivTilFil(ofstream& ut) {
+	ut << navn << endl;		// Navn
+	ut << adresse << endl;		// Adresse
+	ut << antSpillere << endl;	// Antall spillere
+
+	for (int i = 0; i < antSpillere; i++)
+	{
+		ut << *spillerID[i]; // Skriver ut unik ID til alle spillere
+		if (i != antSpillere - 1) ut << " ";	// Legger til et space hvis det ikke er den siste verdien
+	}
+
+	ut << endl << endl;					// Linjeskift
 }
