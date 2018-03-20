@@ -44,6 +44,12 @@ Spiller::Spiller(int value, ifstream& inn) : NumElement(value) {
 }
 
 // DEBUG, burde bli brukt i faktisk kode senere
+
+char* Spiller::hentNavn()
+{
+	return navn;
+}
+
 void Spiller::display()
 {
 	cout << "Spillernr: " << number << endl

@@ -13,6 +13,7 @@ public:
 	Spiller(int);
 	Spiller(int value, std::ifstream&);
 	void display();				// Skriver spillerens navn og adresse
+	char* hentNavn();
 	void skrivTilFil(std::ofstream&);
 };
 

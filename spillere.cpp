@@ -17,19 +17,55 @@ void Spillere::lagSpiller()
 	spillerListe->add(temp);
 }
 
-void Spillere::skrivSpiller(int nr)
+void Spillere::skrivSpiller(char* navn, bool alle)
 {
-	if (sisteNummer >= nr)
+	if (alle)
 	{
-	Spiller* temp = (Spiller*)spillerListe->removeNo(nr);
-	temp->display();
-	spillerListe->add(temp);
+		if (spillerListe->noOfElements())
+		{
+			spillerListe->displayList();
+			cout << endl;
+		}
+		
+		else cout << "Det finnes ingen spillere.\n";
+	}
+	else
+	{ 
+	if (atoi(navn))
+	{
+		int nr = atoi(navn);
+		if (sisteNummer >= nr)
+		{
+			Spiller* temp = (Spiller*)spillerListe->removeNo(nr);
+			temp->display();
+			spillerListe->add(temp);
+		}
+		else
+		{
+			cout << "Spiller med dette nummeret finnes ei.\n";
+		}
 	}
 	else
 	{
-		cout << "Spiller med dette nummeret finnes ei.\n";
-	}
+		bool fant = false;
+		for (int i = 1; i <= spillerListe->noOfElements(); i++)
+		{
 
+			Spiller* temp = (Spiller*)spillerListe->removeNo(i);
+			if (!strcmp(temp->hentNavn(), navn))
+			{
+				fant = true;
+				temp->display();
+			}
+
+			spillerListe->add(temp);
+		}
+		if (!fant)
+		{
+			cout << "Fant ikke spiller med dette navnet.\n";
+		}
+	}
+	}
 }
 
 

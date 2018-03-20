@@ -14,16 +14,16 @@ extern Spillere spillere;
 // S A | <nr> | <navn> - skriv Alle spillere eller spiller med <nr> / <navn>
 void skrivSpiller() {
 	char valg[STRLEN];
+	bool alle = false;
 	les("", valg, STRLEN);
 	
-	if (atoi(valg))
+	if (!strcmp(valg, "A") || !strcmp(valg, "a"))		//hvis alle
 	{
-		spillere.skrivSpiller(atoi(valg));
+		alle = true;
 	}
-	else
-	{
-		
-	}
+	
+		spillere.skrivSpiller(valg, alle);			//skriver spiller
+
 }
 
 // I A <navn> - skriv Alle idrettene eller idretten <nav

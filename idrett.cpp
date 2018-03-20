@@ -95,12 +95,21 @@ bool Idrett::harIkkeDiv(char* navn)
 void Idrett::display()
 {
 	std::cout << "Skriver ut navn: " << text << std::endl
-			  << "Tabelltype: " << tabellType << std::endl
-			  << "Divisjoner: \n" << std::endl;
+		<< "Tabelltype: " << tabellType << std::endl;
 
-
+	if (divAvdListe->noOfElements())
+	{
+		std::cout << "Divisjoner: \n" << std::endl;
 		divAvdListe->displayList();		//displayer alle divisjoner
 		std::cout << std::endl;
+	}
+	else
+	{
+		std::cout << "Ingen divisjoner tilgjengelig.\n";
+	}
+
+
+		
 }
 
 void Idrett::skrivTilFil(std::ofstream& ut) {

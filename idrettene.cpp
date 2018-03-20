@@ -81,25 +81,33 @@ void Idrettene::skrivUt(char* navn, bool alle)
 	
 	if (alle)		//viser hele lista
 	{
-		idrettListe->displayList();
+		if (idrettListe->noOfElements())			//sjekker at ikke tom
+		{
+			idrettListe->displayList();
+			cout << endl;
+		}
+		else cout << "Det finnes ingen idretter.\n";
 	}
 	else
 	{
+		
 		if(idrettListe->inList(navn))		//ser om navnet finnes
 		{ 
+			
 			//om det finnes blir det displayet
-			for (int i = 0; i < idrettListe->noOfElements(); i++)
+			for (int i = 1; i <= idrettListe->noOfElements(); i++)
 			{
 				Idrett* temp = (Idrett*)idrettListe->removeNo(i); //temp
-
-				if (strcmp(temp->hentNavn(), navn))		//hvis match
+				
+				if (!strcmp(temp->hentNavn(), navn))		//hvis match
 				{
-					temp->display();
 					
+					temp->display();
 				}
 
 				idrettListe->add(temp);			//legger tilbake i lista
 			}
+		
 		}
 		else
 		{
