@@ -12,7 +12,7 @@ private:
 public:
 	Spiller(int);
 	Spiller(int value, std::ifstream&);
-	void skrivSpiller(); // Skriver spillerens navn og adresse
+	void display();				// Skriver spillerens navn og adresse
 };
 
 #endif

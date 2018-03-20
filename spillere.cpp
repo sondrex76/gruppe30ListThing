@@ -8,8 +8,15 @@ using namespace std;
 
 // Konstruktor for Spillere
 Spillere::Spillere() {
-	spiller = new List(Sorted); // setter spiller listen som sorted
+	spillerListe = new List(Sorted); // setter spiller listen som sorted
 }
+
+void Spillere::lagSpiller()
+{
+	Spiller* temp = new Spiller(sisteNummer++);
+	spillerListe->add(temp);
+}
+
 
 // Leser alle spillere fra fil(Navn og adresse)
 void Spillere::lesFraFil() {
@@ -28,7 +35,7 @@ void Spillere::lesFraFil() {
 
 		inn.ignore();	// Ignorerer en linje i filen
 
-		spiller->add(tempSpiller); // Legger til ny spiller til spillere
+		spillerListe->add(tempSpiller); // Legger til ny spiller til spillere
 	}
 
 	inn.close();

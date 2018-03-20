@@ -28,14 +28,11 @@ void lagNy() {
 	if (onske == 'S')
 	{
 		//lager ny spiller. må vite idrett og lag
-		cout << "Spiller";
-
+		spillere.lagSpiller();
 	}
 	else if (onske == 'I')
 	{
-		//lager ny idrett
-		cout << "Idrett";
-		idrettene.opprett();
+		idrettene.opprett();						//lager ny idrett
 	}
 	else if (onske == 'D')
 	{
@@ -45,11 +42,10 @@ void lagNy() {
 
 		//sjekker at idretten finnes
 		int nr = idrettene.faaNr(navn);
+
 		if (nr)
 		{
-			//legg til div/avd
-			idrettene.leggTilDiv(nr);
-
+			idrettene.leggTilDiv(nr);		//legg til div/avd
 		}
 		else
 		{
