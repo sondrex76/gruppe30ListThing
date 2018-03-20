@@ -12,21 +12,22 @@ Idrettene::Idrettene() {
 	idrettListe = new List(Sorted);
 }
 
+// Opretter ny idrett
 void Idrettene::opprett()
 {
 					
-	char navn[STRLEN];								//navnetemp
+	char navn[STRLEN];								// Navnetemp
 
 	les("Skriv inn idrettens navn", navn, STRLEN);
 
-	if (!idrettListe->inList(navn))					//hvis nytt navn
+	if (!idrettListe->inList(navn))					// Hvis nytt navn
 	{
-								//lag peker til idrettobjekt og legg til
+								// Lag peker til idrettobjekt og legg til
 		cout << "Lager ny idrett.\n";
 		Idrett* temp = new Idrett(navn);
 		idrettListe->add(temp);
 
-		idrettListe->displayList();			//for å sjekke at det virker
+		// idrettListe->displayList();			// DEBUG
 	}
 	else
 	{
@@ -61,10 +62,12 @@ void Idrettene::leggTilDiv(int nr)
 	Idrett* temp = (Idrett*)idrettListe->removeNo(nr);	//lager temp
 
 	char navn[STRLEN];
-	les("Skriv inn navnet på div/avd", navn, STRLEN);
-	
-		temp->leggTilDiv(navn);
-	
+	do {
+		les("Skriv inn navnet på div/avd", navn, STRLEN);
+
+		// Loop kjører til brukeren har gidd gyldig resultat eller avbrutt med å skrive "Q"
+	} while (!temp->leggTilDiv(navn) && strcmp(navn, "Q") != 0);
+
 	idrettListe->add(temp);
 }
 
