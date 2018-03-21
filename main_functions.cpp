@@ -149,6 +149,15 @@ void skrivLag() {
 
 // (E)Endre spillere på et lag(legg til/fjern)
 void redigerSpiller() {
+	//skriv inn idrett, div og lag
+	char navn[STRLEN];
+	les("Skriv inn navn pa idrett", navn, STRLEN);
+	if (idrettene.harIdrett(navn))
+	{
+		idrettene.laglag(navn);
+	}
+	else cout << "Finner ikke denne idretten.\n";
+	//hvis idrett eksisterer
 
 }
 

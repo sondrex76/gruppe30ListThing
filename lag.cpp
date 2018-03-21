@@ -11,7 +11,7 @@ using namespace std;
 
 // Standard konstruktor
 Lag::Lag() {
-
+	cout << "Lager lag!!\n";
 }
 
 // Konstruktor for å lese fra fil

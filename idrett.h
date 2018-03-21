@@ -18,6 +18,7 @@ public:
 	bool harIkkeDiv(char* navn);		//returnerer om div ikke finnes
 	bool likSom(char* navn);			//returnerer om navnene er like
 	bool harDiv(char* navn);			//returnerer om har en viss div
+	void laglag(char* navn);
 	void display();
 	void skrivTilFil(std::ofstream&);
 	char* hentNavn();					//returnerer navn

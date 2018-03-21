@@ -54,6 +54,11 @@ char* DivAvd::hentNavn()
 	return text;			//returnerer navn
 }
 
+void DivAvd::lagLag()
+{
+	lag[antLag++] = new Lag;
+}
+
 void DivAvd::display()
 {
 	cout << text << std::endl;

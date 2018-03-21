@@ -13,6 +13,8 @@ public:
 	Lag();
 	Lag(std::ifstream&);
 	void skrivTilFil(std::ofstream&);
+
+	void display();
 };
 
 #endif

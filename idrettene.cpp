@@ -129,6 +129,28 @@ void Idrettene::fjernDiv(char* navn)
 	else cout << "Finner ikke idrett.\n";
 }
 
+bool Idrettene::harIdrett(char* navn)
+{
+	return idrettListe->inList(navn);
+}
+
+void Idrettene::laglag(char* navn)
+{
+	for (int i = 1; i <= idrettListe->noOfElements(); i++)
+	{
+		Idrett* temp = (Idrett*)idrettListe->removeNo(i); //temp
+
+		if (!strcmp(temp->hentNavn(), navn))		//hvis match
+		{
+			char nvn[STRLEN];
+			les("Skriv inn divisjonsnavn", nvn, STRLEN);
+			temp->laglag(nvn);
+		}
+
+		idrettListe->add(temp);			//legger tilbake i lista
+	}
+}
+
 //sjekker om lista ikke er tom
 bool Idrettene::ikkeTom()
 {

@@ -133,6 +133,29 @@ bool Idrett::harIkkeDiv(char* navn)
 	return (!divAvdListe->inList(navn));
 }
 
+void Idrett::laglag(char* navn)
+{
+	if (divAvdListe->inList(navn))
+	{
+		for (int i = 1; i <= divAvdListe->noOfElements(); i++)
+		{
+			//temp som sjekker om de matcher
+			DivAvd* temp = (DivAvd*)divAvdListe->removeNo(i);
+			
+			if (!strcmp(temp->hentNavn(), navn))		//hvis ulik navn
+			{
+				temp->lagLag();
+			}
+			divAvdListe->add(temp);
+		}
+	}
+	else if (!divAvdListe->noOfElements())
+	{
+		std::cout << "Ingen divisjoner.\n";
+	}
+	else std::cout << "Fant ikke divisjonen.\n";
+}
+
 							//displayer objektets variabler
 void Idrett::display()
 {

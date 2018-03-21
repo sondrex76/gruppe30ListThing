@@ -14,6 +14,8 @@ public:
 	void leggTilDiv(int nr);			//legger til ny divisjon
 	void fjernIdrett(char* navn);		
 	void fjernDiv(char* navn);
+	bool harIdrett(char* navn);
+	void laglag(char* navn);
 	bool ikkeTom();						//returnerer om lista er tom
 	void skrivUt(char* navn, bool alle);
 	void lesFraFil();

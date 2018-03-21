@@ -18,6 +18,8 @@ public:
 	DivAvd(char*);
 	DivAvd(char*, std::ifstream&);
 	char* hentNavn();						//returnerer 'navn'
+	void lagLag();
+	void leggTilSpiller();
 	void display();
 	void lesFraFil();
 	void skrivTilFil(std::ofstream&);
