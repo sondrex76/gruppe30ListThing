@@ -25,8 +25,7 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn, bool start) : TextElement(avd
 		}
 	}
 	else { // leser inn fra en ny_div fil
-		inn >> antLag; // Henter antall lag
-		inn.ignore();
+		// cout << antLag << endl; // DEBUG
 
 		// Leser inn alle lag
 		for (int i = 0; i < antLag; i++)

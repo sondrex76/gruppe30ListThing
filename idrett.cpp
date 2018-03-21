@@ -69,7 +69,6 @@ bool Idrett::leggTilDiv(std::ifstream& inn, char* navn)
 
 		// Leser lagnavn, lagadresser og lagmedlemmer til temp
 
-
 		divAvdListe->add(temp);
 
 		return true;

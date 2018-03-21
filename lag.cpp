@@ -19,7 +19,7 @@ Lag::Lag() {
 }
 
 // Konstruktor for å lese fra fil
-Lag::Lag(ifstream& inn, bool start) {
+Lag::Lag(ifstream& inn, bool start) {	// Start ser om det er på starten av programmet eller om det leses inn en ny divisjon
 	char tempChar[MAXSPILLERE * 3];
 
 	inn.getline(tempChar, STRLEN);			// Henter navn av lag
@@ -47,18 +47,19 @@ Lag::Lag(ifstream& inn, bool start) {
 		// cout << std::endl; // DEBUG
 		inn.ignore();
 	}
-	else {
+	else {	// Leser ny divisjon
 		for (int i = 0; i < antSpillere; i++)
 		{
 			spillerID[i] = new int;
 			inn >> *(spillerID[i]); // endrer verdien til spillerID[i]
+
+			inn.ignore();
 
 			// Kode som sjekker om spillerID[i] allerede eksisterer
 			// om spillerID[i] allerede eksisterer, gjør ingenting.
 			// om spillerID[i] ikke allerede eksisterer, legg til spilleren med både navn og adresse
 			if (!spillere.eksisterer(*(spillerID[i])))
 			{
-				inn.ignore();
 				spillere.lesSpillerFraFil(*(spillerID[i]), inn);
 			}
 		}

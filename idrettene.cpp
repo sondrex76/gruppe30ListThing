@@ -68,12 +68,11 @@ void Idrettene::leggTilDiv(int nr)
 
 	// Finn filnavn eller skriv inn Q
 
-	cout << "Skriv inn navn på fil(inkludert ending)\n";
+	cout << "Skriv inn Q for å avbryte\n";
 
 	do {
-		les("Skriv inn Q for å avbryte", navn, STRLEN);
-		//ifstream temp(navn);
-
+		les("Skriv inn navn på fil(inkludert ending)", navn, STRLEN);
+		
 		// Sjekker om filen eksisterer
 	} while (!ifstream(navn) && !isQ(navn));
 
