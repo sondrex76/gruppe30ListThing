@@ -34,11 +34,11 @@ void skrivSpiller() {
 void skrivIdrett() {
 	//sjekker om man vil ha alle eller navn
 	char input[STRLEN];
-	les("", input, STRLEN);
+	les("", input, STRLEN, false);
 
 	bool alle = false;
 
-	if (!strcmp(input, "a") || !strcmp(input, "A"))
+	if (isQ(input, 'A'))
 	{
 		alle = true;
 	}

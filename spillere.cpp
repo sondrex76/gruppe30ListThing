@@ -14,7 +14,7 @@ Spillere::Spillere() {
 
 void Spillere::lagSpiller()
 {
-	Spiller* temp = new Spiller(sisteNummer++);
+	Spiller* temp = new Spiller(++sisteNummer);
 	spillerListe->add(temp);
 }
 

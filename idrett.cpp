@@ -165,16 +165,13 @@ void Idrett::display()
 	if (divAvdListe->noOfElements())
 	{
 		std::cout << "Divisjoner: \n" << std::endl;
-		divAvdListe->displayList();		//displayer alle divisjoner
+		divAvdListe->displayList();		// displayer alle divisjoner
 		std::cout << std::endl;
 	}
 	else
 	{
 		std::cout << "Ingen divisjoner tilgjengelig.\n";
 	}
-
-
-		
 }
 
 void Idrett::skrivTilFil(std::ofstream& ut) {

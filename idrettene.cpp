@@ -158,8 +158,7 @@ bool Idrettene::ikkeTom()
 }
 
 void Idrettene::skrivUt(char* navn, bool alle)
-{
-	
+{	
 	if (alle)		//viser hele lista
 	{
 		if (idrettListe->noOfElements())			//sjekker at ikke tom

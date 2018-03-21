@@ -3,6 +3,7 @@
 
 #include "ListTool2B.h"
 #include "enumer.h"
+
 class Idrettene {
 private:
 	List* idrettListe;
