@@ -61,9 +61,10 @@ bool isQ(char* navn, char Q) {
 	{
 		for (int i = 0; i < strlen(navn); i++)
 		{
-			if (toupper(navn[i]) == Q) return true;
+			if (toupper(navn[i]) != ' ' && toupper(navn[i]) != Q) return false;
 
-			if (toupper(navn[i]) != ' ') return false;
+			// Sjekker om navn[i] == Q og om det er siste element i arrayen
+			if (toupper(navn[i]) == Q && i == strlen(navn) - 1) return true;
 		}
 		return false;
 	}
