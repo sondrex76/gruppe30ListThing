@@ -12,24 +12,14 @@ Spillere::Spillere() {
 	spillerListe = new List(Sorted); // setter spiller listen som sorted
 }
 
-void Spillere::lagSpiller()
+int Spillere::faaSiste()
 {
-	Spiller* temp = new Spiller(++sisteNummer);
-	spillerListe->add(temp);
+	return sisteNummer;
 }
 
-void Spillere::fjernSpiller(int nr)
-{
-	cout << "Vil du virkelig slette denne spilleren? (Y/N)";
-	char valg = les(false);
-
-	if (toupper(valg) == 'Y')
-	{
-		spillerListe->removeNo(nr);
-		sisteNummer--;
-		cout << "Sletter...\n";
-	}
-	else cout << "Sletter ikke.\n";
+// Funksjon som sjekker om spiller med id int eksisterer
+bool Spillere::eksisterer(int spillerID) {
+	return spillerListe->inList(spillerID);
 }
 
 void Spillere::skrivSpiller(char* navn, bool alle)
@@ -68,7 +58,7 @@ void Spillere::skrivSpiller(char* navn, bool alle)
 			{
 
 				Spiller* temp = (Spiller*)spillerListe->removeNo(i);
-				
+
 				if (erDel(temp->hentNavn(), navn))
 				{
 					fant = true;
@@ -85,10 +75,29 @@ void Spillere::skrivSpiller(char* navn, bool alle)
 	}
 }
 
-
-int Spillere::faaSiste()
+void Spillere::fjernSpiller(int nr)
 {
-	return sisteNummer;
+	cout << "Vil du virkelig slette denne spilleren? (Y/N)";
+	char valg = les(false);
+
+	if (toupper(valg) == 'Y')
+	{
+		spillerListe->removeNo(nr);
+		sisteNummer--;
+		cout << "Sletter...\n";
+	}
+	else cout << "Sletter ikke.\n";
+}
+
+void Spillere::lagSpiller()
+{
+	Spiller* temp = new Spiller(++sisteNummer);
+	spillerListe->add(temp);
+}
+
+void Spillere::lesSpillerFraFil(int v, ifstream& inn) {
+	Spiller* temp = new Spiller(v, inn); // legger til spiller v med data lest fra inn
+	spillerListe->add(temp);
 }
 
 // Leser alle spillere fra fil(Navn og adresse)

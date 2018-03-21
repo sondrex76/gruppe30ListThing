@@ -50,9 +50,9 @@ void skrivIdrett() {
 void lagNy() {
 	char onske = les(true);
 
-	if (onske == 'S')
+	
+	if (onske == 'S') // Lager ny spiller. må vite idrett og lag
 	{
-		//lager ny spiller. må vite idrett og lag
 		spillere.lagSpiller();
 	}
 	else if (onske == 'I')
@@ -73,12 +73,11 @@ void lagNy() {
 
 			if (nr)
 			{
-					idrettene.leggTilDiv(nr);		// Legg til div/avd
+				idrettene.leggTilDiv(nr);		// Legg til div/avd
 			}
 			else if (!isQ(navn))
 			{
-				cout << "Finner ikke idretten. "
-				<< "Skriv inn gyldig idrett eller avbryt med a skrive Q\n";
+				cout << "Finner ikke idretten.\n";
 			}
 		} while (nr == 0 && !isQ(navn));
 	}

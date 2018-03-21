@@ -66,13 +66,33 @@ void Idrettene::leggTilDiv(int nr)
 
 	char navn[STRLEN];
 
+	// Finn filnavn eller skriv inn Q
+
+	cout << "Skriv inn navn på fil(inkludert ending)\n";
+
 	do {
-		les("Skriv inn navnet pa div/avd", navn, STRLEN);
+		les("Skriv inn Q for å avbryte", navn, STRLEN);
+		//ifstream temp(navn);
 
-		// Loop kjører til brukeren har gidd gyldig resultat eller avbrutt med å skrive "Q"
-	} while (!temp->leggTilDiv(navn) && !isQ(navn));
+		// Sjekker om filen eksisterer
+	} while (!ifstream(navn) && !isQ(navn));
 
-	if (!isQ(navn)) idrettListe->add(temp); // kjører koden hvis brukeren ikke skrev inn Q
+
+	// Hvis koden ikke skal avbrytes
+	if (!isQ(navn))
+	{
+		ifstream nyDiv(navn); // lager ny ifstream for filen
+
+		// Loop kjører til q er skrevet, eller ett nytt avdelingsnavn er skrevet
+		do {
+			les("Skriv inn navnet på div/avd", navn, STRLEN);
+		} while (!temp->leggTilDiv(nyDiv, navn) && !isQ(navn));
+
+		nyDiv.close(); // Lukker filen
+	}
+
+
+	idrettListe->add(temp); // kjører koden hvis brukeren ikke skrev inn Q
 }
 
 void Idrettene::fjernIdrett(char* navn)
@@ -158,7 +178,8 @@ bool Idrettene::ikkeTom()
 }
 
 void Idrettene::skrivUt(char* navn, bool alle)
-{	
+{
+	
 	if (alle)		//viser hele lista
 	{
 		if (idrettListe->noOfElements())			//sjekker at ikke tom

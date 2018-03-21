@@ -4,26 +4,36 @@
 
 using namespace std;
 
-// Standard konstruktor
-DivAvd::DivAvd(char* avdelingsNavn) : TextElement(avdelingsNavn) {
-	antLag = 0;						//så vi kan bruke ++ senere
-}
-
 // Konstruktor når man leser fra fil
-DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn) : TextElement(avdelingsNavn) {
+DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn, bool start) : TextElement(avdelingsNavn) {
 	inn >> antLag; // Henter antall lag
 	inn.ignore();
 	inn.ignore();
 
-	// cout << antLag << endl; // DEBUG
-
-	// Leser inn alle lag
-	for (int i = 0; i < antLag; i++)
+	if (start) // starten av programmet
 	{
-		lag[i] = new Lag(inn);
+
+		// cout << antLag << endl; // DEBUG
+
+		// Leser inn alle lag
+		for (int i = 0; i < antLag; i++)
+		{
+			lag[i] = new Lag(inn, start);
+			inn.ignore();
+
+			// cout << lag[i] << endl; // DEBUG
+		}
+	}
+	else { // leser inn fra en ny_div fil
+		inn >> antLag; // Henter antall lag
 		inn.ignore();
 
-		// cout << lag[i] << endl; // DEBUG
+		// Leser inn alle lag
+		for (int i = 0; i < antLag; i++)
+		{
+			lag[i] = new Lag(inn, start);
+			inn.ignore();
+		}
 	}
 
 	char tempVerdi[9]; // lagrer dato
@@ -34,7 +44,7 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn) : TextElement(avdelingsNavn) 
 		for (int n = 0; n < antLag; n++)
 		{
 			inn >> tempVerdi; // Henter den første verdien
-			//cout << tempVerdi << endl; // DEBUG
+							  //cout << tempVerdi << endl; // DEBUG
 
 			if (strcmp(tempVerdi, "0") != 0) // Hvis dette opsettet eksisterer
 			{
@@ -62,10 +72,6 @@ void DivAvd::lagLag()
 void DivAvd::display()
 {
 	cout << text << std::endl;
-}
-
-void DivAvd::lesFraFil() {
-
 }
 
 void DivAvd::skrivTilFil(ofstream& ut) {

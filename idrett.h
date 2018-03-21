@@ -13,7 +13,7 @@ private:
 public:
 	Idrett(char*);					// Standard konstruktor
 	Idrett(char*, std::ifstream&);	// Konstruktor som leser data fra fil
-	bool leggTilDiv(char* navn);
+	bool leggTilDiv(std::ifstream&, char* navn);	// Legger til ny div fra fil
 	void slettDiv();
 	bool harIkkeDiv(char* navn);		//returnerer om div ikke finnes
 	bool likSom(char* navn);			//returnerer om navnene er like

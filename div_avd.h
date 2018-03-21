@@ -15,13 +15,11 @@ private:
 	Lag* lag[30];							// Lagene i divisjonen
 	Resultat* resultater[MAXLAG][MAXLAG];	// Matrise med pekere til resultater
 public:
-	DivAvd(char*);
-	DivAvd(char*, std::ifstream&);
+	DivAvd(char*, std::ifstream&, bool);
 	char* hentNavn();						//returnerer 'navn'
 	void lagLag();
 	void leggTilSpiller();
 	void display();
-	void lesFraFil();
 	void skrivTilFil(std::ofstream&);
 };
 

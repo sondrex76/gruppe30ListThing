@@ -6,8 +6,12 @@
 #include <iostream>
 #include "lag.h"
 #include "conster.h"
+#include "spillere.h"
 
 using namespace std;
+
+// Spillere slik at når man leser avdeling fra fil kan man legge til spillere
+extern Spillere spillere;
 
 // Standard konstruktor
 Lag::Lag() {
@@ -15,7 +19,7 @@ Lag::Lag() {
 }
 
 // Konstruktor for å lese fra fil
-Lag::Lag(ifstream& inn) {
+Lag::Lag(ifstream& inn, bool start) {
 	char tempChar[MAXSPILLERE * 3];
 
 	inn.getline(tempChar, STRLEN);			// Henter navn av lag
@@ -29,16 +33,36 @@ Lag::Lag(ifstream& inn) {
 	inn >> antSpillere;						// Henter antall spillere
 	inn.ignore();
 
-	// cout << "Navn: " << navn << "\nAdresse: " << adresse << "\nantSpillere: " << antSpillere << std::endl; // DEBUG
-
-	for (int i = 0; i < antSpillere; i++)
+	// Kjører på starten, leser aldri inn navn og adresse av spillere
+	if (start)
 	{
-		spillerID[i] = new int;
-		inn >> *(spillerID[i]); // endrer verdien til spillerID[i]
-		// cout << *spillerID[i] << ", "; // DEBUG
+		// cout << "Navn: " << navn << "\nAdresse: " << adresse << "\nantSpillere: " << antSpillere << std::endl; // DEBUG
+
+		for (int i = 0; i < antSpillere; i++)
+		{
+			spillerID[i] = new int;
+			inn >> *(spillerID[i]); // endrer verdien til spillerID[i]
+			// cout << *spillerID[i] << ", "; // DEBUG
+		}
+		// cout << std::endl; // DEBUG
+		inn.ignore();
 	}
-	// cout << std::endl; // DEBUG
-	inn.ignore();
+	else {
+		for (int i = 0; i < antSpillere; i++)
+		{
+			spillerID[i] = new int;
+			inn >> *(spillerID[i]); // endrer verdien til spillerID[i]
+
+			// Kode som sjekker om spillerID[i] allerede eksisterer
+			// om spillerID[i] allerede eksisterer, gjør ingenting.
+			// om spillerID[i] ikke allerede eksisterer, legg til spilleren med både navn og adresse
+			if (!spillere.eksisterer(*(spillerID[i])))
+			{
+				inn.ignore();
+				spillere.lesSpillerFraFil(*(spillerID[i]), inn);
+			}
+		}
+	}
 }
 
 // Skriver lagets data til fil

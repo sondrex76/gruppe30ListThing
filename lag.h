@@ -11,7 +11,7 @@ private:
 	int* spillerID[50];	// Det unike nummeret til hver spiller
 public:
 	Lag();
-	Lag(std::ifstream&);
+	Lag(std::ifstream&, bool);
 	void skrivTilFil(std::ofstream&);
 
 	void display();

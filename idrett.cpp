@@ -52,7 +52,7 @@ Idrett::Idrett(char* indrettsNavn, std::ifstream& inn) : TextElement(indrettsNav
 
 		//std::cout << "Divisjonsnavn: " << tempAvdNavn << std::endl; // DEBUG
 
-		DivAvd* tempDiv = new DivAvd(tempAvdNavn, inn);
+		DivAvd* tempDiv = new DivAvd(tempAvdNavn, inn, true);
 		divAvdListe->add(tempDiv); // legger til avdeling
 	}
 }
@@ -61,20 +61,22 @@ char* Idrett::hentNavn() {
 	return text; // returnerer navn
 }
 									//legger til ny divisjon om mulig
-bool Idrett::leggTilDiv(char* navn)
+bool Idrett::leggTilDiv(std::ifstream& inn, char* navn)
 {
-	if (!divAvdListe->inList(navn))			//hvis den ikke er i lista
+	if (!divAvdListe->inList(navn))			// Hvis den ikke er i listen
 	{
-		DivAvd* temp = new DivAvd(navn);
+		DivAvd* temp = new DivAvd(navn, inn, false);
+
+		// Leser lagnavn, lagadresser og lagmedlemmer til temp
+
 
 		divAvdListe->add(temp);
 
-		//display();			//for å sjekke at det virker
 		return true;
 	}
 	else
 	{
-		std::cout << "Dette navnet finnes alt.\n";
+		std::cout << "\tDette navnet finnes alt.\n";
 		return false;
 	}
 }

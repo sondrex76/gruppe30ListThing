@@ -1,6 +1,7 @@
 #if !defined(__SPILLERE_H)
 #define  __SPILLERE_H
 
+#include <fstream>
 #include "ListTool2B.h"
 
 // Klasse som holder alle spilelre og siste nummer, samt spiller relaterte funksjoner
@@ -10,12 +11,14 @@ private:
 	int sisteNummer;	// Siste nummer brukt, megden spillere(fra 1-sisteNummer)
 public:
 	Spillere();			// Konstruktor
-	void skrivSpiller(char* navn, bool alle);		//skriver ut
 	int faaSiste();							//returnerer 'sisteNummer'
+	bool eksisterer(int);		// Funksjon som sjekker om spiller med id int eksisterer
+	void skrivSpiller(char* navn, bool alle);		//skriver ut
 	void fjernSpiller(int nr);
 	void lagSpiller();
-	void lesFraFil();
-	void skrivTilFil();
+	void lesSpillerFraFil(int, std::ifstream&);
+	void lesFraFil();			// Leser spiller data fra fil
+	void skrivTilFil();			// Skriver spiller data til fil
 };
 
 
