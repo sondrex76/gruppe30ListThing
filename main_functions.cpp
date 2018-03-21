@@ -15,15 +15,19 @@ extern Spillere spillere;
 void skrivSpiller() {
 	char valg[STRLEN];
 	bool alle = false;
-	les("", valg, STRLEN);
 	
-	if (!strcmp(valg, "A") || !strcmp(valg, "a"))		//hvis alle
-	{
-		alle = true;
-	}
-	
-		spillere.skrivSpiller(valg, alle);			//skriver spiller
+	cout << "A = Alle | <nummer> = skriv ut nummer | <navn> = skriv ut <navn>\n";
 
+	// Leser inn resultat
+	les("", valg, STRLEN, false);
+	cout << endl;
+
+	// Sjekker om alle skal skrives ut
+	if (isQ(valg, 'A'))		// Hvis alle
+		alle = true;
+	
+	spillere.skrivSpiller(valg, alle);			// Skriver spiller
+		
 }
 
 // I A <navn> - skriv Alle idrettene eller idretten <nav

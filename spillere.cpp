@@ -41,45 +41,47 @@ void Spillere::skrivSpiller(char* navn, bool alle)
 			spillerListe->displayList();
 			cout << endl;
 		}
-		
 		else cout << "Det finnes ingen spillere.\n";
 	}
 	else
-	{ 
-	if (atoi(navn))
 	{
-		int nr = atoi(navn);
-		if (sisteNummer >= nr)
+		if (atoi(navn)) // Sjekker om verdien er et nummer
 		{
-			Spiller* temp = (Spiller*)spillerListe->removeNo(nr);
-			temp->display();
-			spillerListe->add(temp);
-		}
-		else
-		{
-			cout << "Spiller med dette nummeret finnes ei.\n";
-		}
-	}
-	else
-	{
-		bool fant = false;
-		for (int i = 1; i <= spillerListe->noOfElements(); i++)
-		{
+			int nr = atoi(navn);
 
-			Spiller* temp = (Spiller*)spillerListe->removeNo(i);
-			if (!strcmp(temp->hentNavn(), navn))
+			if (sisteNummer >= nr)
 			{
-				fant = true;
+				Spiller* temp = (Spiller*)spillerListe->removeNo(nr);
 				temp->display();
+				spillerListe->add(temp);
 			}
-
-			spillerListe->add(temp);
+			else
+			{
+				cout << "Spiller med dette nummeret finnes ei.\n";
+			}
 		}
-		if (!fant)
+		else // På dette punktet er navn en tekst, navnet i dette tilfellet
 		{
-			cout << "Fant ikke spiller med dette navnet.\n";
+			bool fant = false;
+
+			for (int i = 1; i <= spillerListe->noOfElements(); i++)
+			{
+
+				Spiller* temp = (Spiller*)spillerListe->removeNo(i);
+				
+				if (erDel(temp->hentNavn(), navn))
+				{
+					fant = true;
+					temp->display();
+				}
+
+				spillerListe->add(temp);
+			}
+			if (!fant)
+			{
+				cout << "Fant ikke spiller med dette navnet.\n";
+			}
 		}
-	}
 	}
 }
 
