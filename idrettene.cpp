@@ -179,7 +179,7 @@ bool Idrettene::ikkeTom()
 void Idrettene::skrivUt(char* navn, bool alle)
 {
 
-	if (alle)		//viser hele lista
+	if (alle)	// Skriver ut alle idretter, nummer av divisjoner og tabelltype
 	{
 		if (idrettListe->noOfElements())			//sjekker at ikke tom
 		{
@@ -190,31 +190,24 @@ void Idrettene::skrivUt(char* navn, bool alle)
 		}
 		else cout << "Det finnes ingen idretter.\n";
 	}
-	else
+	else		// Skriver ut idretten <navn>s nummer av divisjoner, tabelltype og divisjonsnavn i tilleg til antall lag i hver divisjon, navnene og adressene til disse lagene og antall spillere i hvert lag
 	{
 		removeSpaces(navn);					// Fjerner eventuelle spacer fra starten
-		if (idrettListe->inList(navn))		//ser om navnet finnes
+		
+				// Displayer elementet om det eksisterer og skriver ut en beskje om det ikke eksisterer
+		if (idrettListe->displayElement(navn))
 		{
+			// Henter idrett <navn>
+			Idrett* temp = (Idrett*)idrettListe->remove(navn); 
 
-			//om det finnes blir det displayet
-			for (int i = 1; i <= idrettListe->noOfElements(); i++)
-			{
-				Idrett* temp = (Idrett*)idrettListe->removeNo(i); //temp
+			// Skriver ut I <navn> spesifik info
+			temp->displayResten();
 
-				if (!strcmp(temp->hentNavn(), navn))		//hvis match
-				{
-
-					temp->display();
-				}
-
-				idrettListe->add(temp);			//legger tilbake i lista
-			}
-
+			// Legger adressen tilbake i listen
+			idrettListe->add(temp);
 		}
-		else
-		{
-			cout << "Fant ikke idretten.\n";
-		}
+		else	// Skriver ut reseten av den nødvendige infoen
+			cout << "idretten " << navn << " ble ikke funnet!\n";
 	}
 }
 

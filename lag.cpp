@@ -66,6 +66,13 @@ Lag::Lag(ifstream& inn, bool start) {	// Start ser om det er på starten av progr
 	}
 }
 
+// Skriver ut navn, adresse og antall spillere
+void Lag::display() {
+	cout << "Navn: " << navn << endl;
+	cout << "Adresse: " << adresse << endl;
+	cout << "Antall spillere: " << antSpillere << endl;
+}
+
 // Skriver lagets data til fil
 void Lag::skrivTilFil(ofstream& ut) {
 	ut << navn << endl;		// Navn

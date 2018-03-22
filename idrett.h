@@ -19,7 +19,8 @@ public:
 	bool likSom(char* navn);			//returnerer om navnene er like
 	bool harDiv(char* navn);			//returnerer om har en viss div
 	void laglag(char* navn);
-	void display();
+	void display();						// Displayer I A spesifik info
+	void displayResten();				// Displayer I <navn> spesifik info
 	void skrivTilFil(std::ofstream&);
 	char* hentNavn();					//returnerer navn
 };

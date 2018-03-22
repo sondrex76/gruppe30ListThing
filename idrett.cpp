@@ -158,7 +158,7 @@ void Idrett::laglag(char* navn)
 	else std::cout << "Fant ikke divisjonen.\n";
 }
 
-							//displayer objektets variabler
+// Skriver ut objektets verdier(eksklusivt verdier som trengs i I A)
 void Idrett::display()
 {
 	std::cout << "Navn: " << text << std::endl
@@ -166,15 +166,16 @@ void Idrett::display()
 
 	if (divAvdListe->noOfElements())
 	{
-		// std::cout << "Divisjoner:" << std::endl;
-		// divAvdListe->displayList();		// displayer alle divisjoner
 		std::cout << "Divisjoner: " << divAvdListe->noOfElements() << std::endl;
 		std::cout << std::endl;
 	}
 	else
-	{
 		std::cout << "Ingen divisjoner tilgjengelig.\n";
-	}
+}
+
+// Displayer data som skal skrives i I <navn>
+void Idrett::displayResten() {
+	divAvdListe->displayList();		// displayer alle divisjoner
 }
 
 void Idrett::skrivTilFil(std::ofstream& ut) {

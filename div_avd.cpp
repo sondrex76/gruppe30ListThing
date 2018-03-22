@@ -68,9 +68,18 @@ void DivAvd::lagLag()
 	lag[antLag++] = new Lag;
 }
 
+// Skriver ut data fra I <navn>
 void DivAvd::display()
 {
-	cout << text << std::endl;
+	cout << text << endl;
+	cout << "Nummer av lag: " << antLag << endl;
+
+	// Skriver ut alle lags navn, adresse og antall spillere
+	for (int i = 0; i < antLag; i++)
+	{
+		lag[i]->display();
+		cout << endl;
+	}
 }
 
 void DivAvd::skrivTilFil(ofstream& ut) {
