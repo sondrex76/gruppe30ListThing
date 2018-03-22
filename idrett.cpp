@@ -161,13 +161,14 @@ void Idrett::laglag(char* navn)
 							//displayer objektets variabler
 void Idrett::display()
 {
-	std::cout << "Skriver ut navn: " << text << std::endl
+	std::cout << "Navn: " << text << std::endl
 		<< "Tabelltype: " << tabellType << std::endl;
 
 	if (divAvdListe->noOfElements())
 	{
-		std::cout << "Divisjoner:" << std::endl;
-		divAvdListe->displayList();		// displayer alle divisjoner
+		// std::cout << "Divisjoner:" << std::endl;
+		// divAvdListe->displayList();		// displayer alle divisjoner
+		std::cout << "Divisjoner: " << divAvdListe->noOfElements() << std::endl;
 		std::cout << std::endl;
 	}
 	else

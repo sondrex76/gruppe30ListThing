@@ -184,6 +184,8 @@ void Idrettene::skrivUt(char* navn, bool alle)
 		if (idrettListe->noOfElements())			//sjekker at ikke tom
 		{
 			idrettListe->displayList();
+
+
 			cout << endl;
 		}
 		else cout << "Det finnes ingen idretter.\n";
