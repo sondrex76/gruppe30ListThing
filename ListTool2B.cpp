@@ -659,7 +659,8 @@ void List::displayList()  {
     for (int i = 1; i <= elementsInList; i++, current = current->next)
         current->listElement->display();        //  Display element.
   }                                             //  Display number of elements:
-
- cout << "\n\tNumber of elements in the list:  " << elementsInList;
+ // Fjernet fordi denen informasjonen er unødvendig i vårt program
+ // Alt annet er skrevet på norsk, så å skrive ut denne dataen på engelsk gir lite mening
+ //cout << "\n\tNumber of elements in the list:  " << elementsInList;
 }
 

@@ -216,6 +216,7 @@ void Idrettene::skrivUt(char* navn, bool alle)
 	}
 }
 
+// Leser fra fil
 void Idrettene::lesFraFil() {
 	ifstream inn("IDRETTENE.DTA");
 
@@ -226,15 +227,15 @@ void Idrettene::lesFraFil() {
 	inn >> numSport;
 	inn.ignore();
 
-	//cout << numSport << endl; // DEBUG
+	// cout << numSport << endl; // DEBUG
 
 	// Hver loop henter en idrett
 	for (int i = 0; i < numSport; i++) // leser fra fil så lenge den ikke slutter
 	{
 		//cout << i << endl; // DEBUG
-		//cout << tempNavn << endl; // DEBUG
+		// cout << tempNavn << endl; // DEBUG
 		// Henter sports navn
-		inn.getline(tempNavn, STRLEN);
+		inn.getline(tempNavn, STRLEN); // Henter sportsnavnet
 
 		tempIdrett = new Idrett(tempNavn, inn);
 		idrettListe->add(tempIdrett);				// Legger til idretten
@@ -243,6 +244,7 @@ void Idrettene::lesFraFil() {
 	inn.close();
 }
 
+// Skriver til fil i slutten av programmet
 void Idrettene::skrivTilFil() {
 	ofstream ut("IDRETTENE.DTA");
 	

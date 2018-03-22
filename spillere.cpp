@@ -22,6 +22,7 @@ bool Spillere::eksisterer(int spillerID) {
 	return spillerListe->inList(spillerID);
 }
 
+// Skriver ut alle spillere eller spillere med <navn> som del av navnet sitt basert på boolen alle
 void Spillere::skrivSpiller(char* navn, bool alle)
 {
 	if (alle)

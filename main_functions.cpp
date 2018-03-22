@@ -42,6 +42,7 @@ void skrivIdrett() {
 	{
 		alle = true;
 	}
+
 	idrettene.skrivUt(input, alle);
 
 }
