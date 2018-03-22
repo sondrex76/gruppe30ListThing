@@ -178,7 +178,7 @@ bool Idrettene::ikkeTom()
 
 void Idrettene::skrivUt(char* navn, bool alle)
 {
-	
+
 	if (alle)		//viser hele lista
 	{
 		if (idrettListe->noOfElements())			//sjekker at ikke tom
@@ -190,24 +190,24 @@ void Idrettene::skrivUt(char* navn, bool alle)
 	}
 	else
 	{
-		
-		if(idrettListe->inList(navn))		//ser om navnet finnes
-		{ 
-			
+		removeSpaces(navn);					// Fjerner eventuelle spacer fra starten
+		if (idrettListe->inList(navn))		//ser om navnet finnes
+		{
+
 			//om det finnes blir det displayet
 			for (int i = 1; i <= idrettListe->noOfElements(); i++)
 			{
 				Idrett* temp = (Idrett*)idrettListe->removeNo(i); //temp
-				
+
 				if (!strcmp(temp->hentNavn(), navn))		//hvis match
 				{
-					
+
 					temp->display();
 				}
 
 				idrettListe->add(temp);			//legger tilbake i lista
 			}
-		
+
 		}
 		else
 		{

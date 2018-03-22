@@ -10,9 +10,6 @@ using namespace std;
 //	les() funksjoner
 //
 
-
-
-
 // Returnerer en int mellom min og max
 int les(char* info, int min, int max)
 {
@@ -71,6 +68,21 @@ bool isQ(char* navn, char Q) {
 	else return false;
 }
 
+int removeSpaces(char* tekst, int verdi) {
+	// Hvis verdi er 0 blir den satt tol lengden av tekst
+	if (verdi == 0) verdi = strlen(tekst);
+
+	while (tekst[0] == ' ')
+	{
+		for (int i = 0; i < verdi - 1; i++)
+		{
+			tekst[i] = tekst[i + 1];
+		}
+		tekst[--verdi] = '\0';
+	}
+	return verdi;
+}
+
 // sjekker om sjekkErDel er en del av stringen string
 bool erDel(const char* string, const char* sjekkErDel) {
 	int len[2] = { strlen(string), strlen(sjekkErDel)};
@@ -80,15 +92,10 @@ bool erDel(const char* string, const char* sjekkErDel) {
 	strcpy(tempChar, sjekkErDel);
 
 	// Hvis første karakter er ett space
-	while (tempChar[0] == ' ')
-	{
-		for (int i = 0; i < len[1] - 1; i++)
-		{
-			tempChar[i] = tempChar[i + 1];
-		}
-		tempChar[len[1] - 1] = '\0';
-		len[1]--;	// Oppdaterer lengde av sjekkErDel
-	}
+
+
+	len[1] = removeSpaces(tempChar, len[1]);
+
 
 	if (len[0] >= len[1]) // Sjekker om string kan holde sjekkErDel
 		for (int i = 0; i + len[1] <= len[0]; i++) // sjekker om den er lik fra i
