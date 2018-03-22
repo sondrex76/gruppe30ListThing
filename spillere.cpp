@@ -76,18 +76,26 @@ void Spillere::skrivSpiller(char* navn, bool alle)
 	}
 }
 
+// Fjerner spiller nr
 void Spillere::fjernSpiller(int nr)
 {
-	cout << "Vil du virkelig slette denne spilleren? (Y/N)";
-	char valg = les(false);
+	Spiller* temp = (Spiller*)spillerListe->removeNo(nr);
+	
+	if (temp != nullptr)
+		delete temp; // Fjerner spiller nr
+	else
+		cout << "Spiller nummer " << nr << " eksisterer ikke, spilleren må ikke ha blitt registrert\nDenne beskjen burde ikke aldri komme opp!\n";
 
-	if (toupper(valg) == 'Y')
-	{
-		spillerListe->removeNo(nr);
-		sisteNummer--;
-		cout << "Sletter...\n";
-	}
-	else cout << "Sletter ikke.\n";
+	// Henter sisteNummer spilleren
+	temp = (Spiller*)spillerListe->removeNo(sisteNummer);
+	sisteNummer--; // Oppdaterer siste nummer
+
+	// Kode som oppdaterer siste verdis ID
+	
+	// Legger til oppdatert siste element med ID lik nr
+	spillerListe->add(temp);
+
+	cout << "Sletter...\n";
 }
 
 void Spillere::lagSpiller()

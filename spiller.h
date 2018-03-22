@@ -12,6 +12,8 @@ private:
 public:
 	Spiller(int);
 	Spiller(int value, std::ifstream&);
+	Spiller(int, char*, char*);		// Konstruktor når man bytter ID
+	~Spiller();						// Destruktor
 	void display();					// Skriver spillerens navn og adresse
 	char* hentNavn();				//returnerer 'navn'
 	void skrivTilFil(std::ofstream&);

@@ -43,6 +43,19 @@ Spiller::Spiller(int value, ifstream& inn) : NumElement(value) {
 	// cout << "Navn: " << navn << "\nAdresse: " << adresse << endl; // DEBUG
 }
 
+Spiller::Spiller(int value, char* n, char* a) : NumElement(value) {
+	navn = new char[strlen(n) + 1];
+	strcpy(navn, n); // kopierer n til navn
+	adresse = new char[strlen(a) + 1];
+	strcpy(navn, n); // kopierer a til adresse
+}
+
+// Destruktor, deleter navn og adresse
+Spiller::~Spiller() {
+	delete navn;
+	delete adresse;
+}
+
 // DEBUG, burde bli brukt i faktisk kode senere
 
 char* Spiller::hentNavn()

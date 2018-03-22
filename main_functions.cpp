@@ -44,7 +44,6 @@ void skrivIdrett() {
 	}
 
 	idrettene.skrivUt(input, alle);
-
 }
 
 // N S | I  D - Ny spiller, idrett eller divisjon
@@ -95,8 +94,8 @@ void fjern() {
 		//fjerner spiller
 		if (spillere.faaSiste())
 		{
-		int nr = les("Skriv inn spillerens nummer", 0, spillere.faaSiste() - 1);
-			spillere.fjernSpiller(nr+1);
+			int nr = les("Skriv inn spillerens nummer", 1, spillere.faaSiste());
+			spillere.fjernSpiller(nr);
 		}
 		else cout << "Det finnes ingen spillere.\n";
 	}
@@ -120,8 +119,7 @@ void fjern() {
 			les("Skriv inn navn pa divisjonens idrett", navn, STRLEN);
 			idrettene.fjernDiv(navn);
 		}
-		else cout <<"Det finnes ingen idretter, ergo ingen divisjoner.\n";
-
+		else cout << "Det finnes ingen idretter, ergo ingen divisjoner.\n";
 	}
 	else cout << "Ugyldig kommando";
 }
