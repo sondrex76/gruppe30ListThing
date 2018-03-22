@@ -52,7 +52,7 @@ Spiller::Spiller(int value, Spiller* temp) : NumElement(value) {
 	adresse = new char[strlen((temp->adresse)) + 1];
 	strcpy(adresse, (temp->adresse));
 	
-	cout << navn << endl << adresse << endl << "TEST\n\n";
+	// cout << navn << endl << adresse << endl << "TEST\n\n"; // DEBUG
 }
 
 // Destruktor, deleter navn og adresse

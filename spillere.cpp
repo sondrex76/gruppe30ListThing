@@ -82,7 +82,7 @@ void Spillere::fjernSpiller(int nr)
 	Spiller* temp = (Spiller*)spillerListe->removeNo(nr);
 	Spiller* temp2 = nullptr;
 	
-	temp->display(); // DEBUG
+	// temp->display(); // DEBUG
 
 	if (temp != nullptr)
 		delete temp; // Fjerner spiller nr
@@ -91,16 +91,16 @@ void Spillere::fjernSpiller(int nr)
 
 	sisteNummer--; // Oppdaterer siste nummer
 
-	cout << sisteNummer << endl; // DEBUG
+	// cout << sisteNummer << endl; // DEBUG
 
 	// Flytter alle spilleres ID over den fjernet en ned
 	for (int i = nr; i <= sisteNummer; i++)
 	{
 		// Henter spiller nummer i + 1
 		temp = (Spiller*)spillerListe->remove(i + 1);
-		cout << i + 1; // DEBUG
+		// cout << i + 1; // DEBUG
 
-		temp->display(); // DEBUG
+		// temp->display(); // DEBUG
 
 		// setter temp2 som en ny Spiller med id i, og verdiene til temp
 		temp2 = new Spiller(i, temp);
@@ -108,8 +108,6 @@ void Spillere::fjernSpiller(int nr)
 
 		spillerListe->add(temp2);
 	}
-
-	cout << "Sletter...\n";
 }
 
 void Spillere::lagSpiller()
