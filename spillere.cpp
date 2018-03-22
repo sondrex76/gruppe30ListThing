@@ -80,20 +80,34 @@ void Spillere::skrivSpiller(char* navn, bool alle)
 void Spillere::fjernSpiller(int nr)
 {
 	Spiller* temp = (Spiller*)spillerListe->removeNo(nr);
+	Spiller* temp2 = nullptr;
 	
+	temp->display(); // DEBUG
+
 	if (temp != nullptr)
 		delete temp; // Fjerner spiller nr
 	else
 		cout << "Spiller nummer " << nr << " eksisterer ikke, spilleren må ikke ha blitt registrert\nDenne beskjen burde ikke aldri komme opp!\n";
 
-	// Henter sisteNummer spilleren
-	temp = (Spiller*)spillerListe->removeNo(sisteNummer);
 	sisteNummer--; // Oppdaterer siste nummer
 
-	// Kode som oppdaterer siste verdis ID
-	
-	// Legger til oppdatert siste element med ID lik nr
-	spillerListe->add(temp);
+	cout << sisteNummer << endl; // DEBUG
+
+	// Flytter alle spilleres ID over den fjernet en ned
+	for (int i = nr; i <= sisteNummer; i++)
+	{
+		// Henter spiller nummer i + 1
+		temp = (Spiller*)spillerListe->remove(i + 1);
+		cout << i + 1; // DEBUG
+
+		temp->display(); // DEBUG
+
+		// setter temp2 som en ny Spiller med id i, og verdiene til temp
+		temp2 = new Spiller(i, temp);
+		delete temp; // fjerner temp
+
+		spillerListe->add(temp2);
+	}
 
 	cout << "Sletter...\n";
 }

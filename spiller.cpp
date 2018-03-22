@@ -14,7 +14,7 @@ Spiller::Spiller(int value) : NumElement(value){
 	// Henter navn
 	char nvn[STRLEN];
 	les("Skriv inn spillernavn", nvn, STRLEN);
-	navn = new char[strlen(nvn)+1];
+	navn = new char[strlen(nvn) + 1];
 	strcpy(navn, nvn);
 
 	// Henter adresse
@@ -31,29 +31,36 @@ Spiller::Spiller(int value, ifstream& inn) : NumElement(value) {
 	char tempChar[STRLEN];
 	inn.getline(tempChar, STRLEN);			// Henter navn
 
-	navn = new char[strlen(tempChar)];		// Setter navnets lengde
+	navn = new char[strlen(tempChar) + 1];		// Setter navnets lengde
 	strcpy(navn, tempChar);					// Definerer navn
 
 	char temp[STRLEN];
 	inn.getline(temp, STRLEN);
 
-	adresse = new char[strlen(temp)];	// Setter adressens lengde
+	adresse = new char[strlen(temp) + 1];	// Setter adressens lengde
 	strcpy(adresse, temp);				// Definerer adresse
 
 	// cout << "Navn: " << navn << "\nAdresse: " << adresse << endl; // DEBUG
 }
 
-Spiller::Spiller(int value, char* n, char* a) : NumElement(value) {
-	navn = new char[strlen(n) + 1];
-	strcpy(navn, n); // kopierer n til navn
-	adresse = new char[strlen(a) + 1];
-	strcpy(navn, n); // kopierer a til adresse
+Spiller::Spiller(int value, Spiller* temp) : NumElement(value) {
+	// Lager ny char* med lengden av navnet til temp og kopierer verdien
+	navn = new char[strlen(temp->navn) + 1];
+	strcpy(navn, (temp->navn));
+
+	// Lager ny char* med lengden av adressen til temp og kopierer verdien
+	adresse = new char[strlen((temp->adresse)) + 1];
+	strcpy(adresse, (temp->adresse));
+	
+	cout << navn << endl << adresse << endl << "TEST\n\n";
 }
 
 // Destruktor, deleter navn og adresse
 Spiller::~Spiller() {
 	delete navn;
 	delete adresse;
+	navn = nullptr;
+	adresse = nullptr;
 }
 
 // DEBUG, burde bli brukt i faktisk kode senere
