@@ -16,6 +16,7 @@ private:
 	Resultat* resultater[MAXLAG][MAXLAG];	// Matrise med pekere til resultater
 public:
 	DivAvd(char*, std::ifstream&, bool);
+	~DivAvd();								// Destruktor
 	char* hentNavn();						//returnerer 'navn'
 	void lagLag();
 	void leggTilSpiller();

@@ -12,14 +12,7 @@ Idrett::Idrett(char* indrettsNavn) : TextElement(indrettsNavn) {
 											//leser inn tall for enum
 	int nr = les("Velg tabelltype, 1=(210), 2=(310), 3=(3210)\n", 1, 3);
 
-								//fikser enum
-	switch (nr)
-	{
-	case 1: tabellType = ToEnNull; break;
-	case 2: tabellType = TreEnNull; break;
-	case 3: tabellType = TreToEnNull; break;
-	default: std::cout << "wtf happnd? enum failz? :c"; //burde ikke komme
-	}
+	tabellType = (TabellType)nr;
 }
 
 // construktor for idrett når man leser fra fil
@@ -33,10 +26,8 @@ Idrett::Idrett(char* indrettsNavn, std::ifstream& inn) : TextElement(indrettsNav
 	inn >> numRepetasjoner; 
 	inn.ignore();
 
-	// Oversetter til den faktiske typen
-	if (numRepetasjoner == 1) tabellType = ToEnNull;
-	else if (numRepetasjoner == 2) tabellType = TreEnNull;
-	else tabellType = TreToEnNull;
+	// Setter over til typen
+	tabellType = (TabellType)numRepetasjoner;
 
 	std::cout << "Tabell type: " << tabellType << std::endl; // DEBUG
 
@@ -56,6 +47,11 @@ Idrett::Idrett(char* indrettsNavn, std::ifstream& inn) : TextElement(indrettsNav
 		divAvdListe->add(tempDiv); // legger til avdeling
 		inn.ignore(); // Ignorerer en linje
 	}
+}
+
+// Sletter pekerene inni idrett(divisjonslisten)
+Idrett::~Idrett() {
+	delete divAvdListe; // Sletter divisjonslisten
 }
 
 char* Idrett::hentNavn() {
@@ -84,39 +80,34 @@ bool Idrett::leggTilDiv(std::ifstream& inn, char* navn)
 //sletter en divisjon
 void Idrett::slettDiv()
 {
-	if (divAvdListe->noOfElements())		//hvis ikke tom
+	// Sjekker om det finnes noen divisjoner
+	if (divAvdListe->noOfElements())
 	{
-	char navn[STRLEN];
-	les("Skriv inn navn pa idrett du vil fjerne", navn, STRLEN);
+		char divisjon[STRLEN];
+		std::cout << "\tSkriv Q for å avbryte\n";
 
-	if (divAvdListe->inList(navn))				//hvis navn finnes
-	{
-		//looper igjennom alle divisjonene
-		for (int i = 1; i <= divAvdListe->noOfElements(); i++)
+		do {
+			les("Skriv inn navn på divisjonen som skal slettes", divisjon, STRLEN);
+
+			// Loop fortsetter til divisjonen du skrev fins, eller du avbrøt med å skrive q
+		} while (!divAvdListe->inList(divisjon) && !isQ(divisjon));
+
+		if (!isQ(divisjon)) // Hvis du ikke har avbrutt slettingen
 		{
-			//temp som sjekker om de matcher
-			DivAvd* temp = (DivAvd*)divAvdListe->removeNo(i);
+			std::cout << "Skriv J for å bekrefte at du ønsker å slette divisjonen " << divisjon << ": ";
 
-			if (strcmp(temp->hentNavn(), navn))		//hvis ulik navn
+			// Sjekker om brukeren er sikker på at de ønsker å fjerne den valgte divisjonen
+			if (les(false) == 'J')
 			{
-				divAvdListe->add(temp);
+				// Henter divisjonen som skal fjernes
+				DivAvd* temp = (DivAvd*)divAvdListe->remove(divisjon);
+
+				// Sletter divisjonen
+				delete temp;
 			}
-			else
-			{
-				//ellers ber vi om vi skal slette
-				std::cout << "Vil du virkelig slette divisjonen? Y/N ";
-				if (les(false) != 'Y')
-				{
-					std::cout << "Sletter...\n";
-					divAvdListe->add(temp);
-				}
-				else std::cout << "Sletter ikke.\n";
-			}
-		  }
+			else std::cout << "Fjerning av divisjonen " << divisjon << " har blitt avbrutt!\n";
 		}
-		else std::cout << "Finner ikke divisjon.\n";
 	}
-	else std::cout << "Det er ingen divisjoner i denne idretten.\n";
 }
 
 							//liten bool for å sjekke om navnene er like

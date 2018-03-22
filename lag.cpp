@@ -23,11 +23,11 @@ Lag::Lag(ifstream& inn, bool start) {	// Start ser om det er på starten av progr
 	char tempChar[MAXSPILLERE * 3];
 
 	inn.getline(tempChar, STRLEN);			// Henter navn av lag
-	navn = new char[strlen(tempChar)];
+	navn = new char[strlen(tempChar) + 1];
 	strcpy(navn, tempChar);					// Oppdaterer navn
 
 	inn.getline(tempChar, STRLEN);			// Henter lagets adresse
-	adresse = new char[strlen(tempChar)];
+	adresse = new char[strlen(tempChar) + 1];
 	strcpy(adresse, tempChar);				// Oppdaterer navn
 
 	inn >> antSpillere;						// Henter antall spillere
@@ -63,6 +63,18 @@ Lag::Lag(ifstream& inn, bool start) {	// Start ser om det er på starten av progr
 				spillere.lesSpillerFraFil(*(spillerID[i]), inn);
 			}
 		}
+	}
+}
+
+// Destruktor
+Lag::~Lag() {
+	delete navn;	// Sletter navn
+	delete adresse;	// Sletter adresse
+	
+	// Sletter spiller idene av lag medlemmene
+	for (int i = 0; i < antSpillere; i++)
+	{
+		delete spillerID[i];
 	}
 }
 

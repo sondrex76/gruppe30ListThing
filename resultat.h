@@ -5,15 +5,16 @@
 
 class Resultat {
 private:
-	char dato[9];			// Datoen til resultatet(ååååmmdd)
-	int hjemmemaal;			// Hjemmemål
-	int bortemaal;			// Bortemål
-	bool normalTid;			// Bool som beskriver om kampen endte på normal eller overtid
-	int* hjemmeSkorer[50];	// Liste over de som skoret på hjemmelaget
-	int* borteSkorer[50];	// Liste over de som skoret på bortelaget
+	char dato[9];						// Datoen til resultatet(ååååmmdd)
+	int hjemmemaal;						// Hjemmemål
+	int bortemaal;						// Bortemål
+	bool normalTid;						// Bool som beskriver om kampen endte på normal eller overtid
+	int* hjemmeSkorer[50];				// Liste over de som skoret på hjemmelaget
+	int* borteSkorer[50];				// Liste over de som skoret på bortelaget
 public:
-	Resultat(std::ifstream&, char[9]);
-	void skrivTilFil(std::ofstream&);
+	Resultat(std::ifstream&, char[9]);	// Konstruktor, leser fra fil
+	~Resultat();						// Destruktor
+	void skrivTilFil(std::ofstream&);	// Skriv til fil
 };
 
 #endif

@@ -58,6 +58,21 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn, bool start) : TextElement(avd
 	}
 }
 
+// Destruktor
+DivAvd::~DivAvd() {
+	for (int i = 0; i < antLag; i++)
+	{
+		// Sletter lag i
+		if (lag[i] != nullptr) delete lag[i];
+
+		// Sletter alle resultater i
+		for (int n = 0; n < antLag; n++)
+		{
+			if (resultater[i][n] != nullptr) delete resultater[i][n];
+		}
+	}
+}
+
 char* DivAvd::hentNavn()
 {
 	return text;			//returnerer navn

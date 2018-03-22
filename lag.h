@@ -12,6 +12,7 @@ private:
 public:
 	Lag();
 	Lag(std::ifstream&, bool);
+	~Lag();				// Destruktor
 	void skrivTilFil(std::ofstream&);
 	void display();
 };

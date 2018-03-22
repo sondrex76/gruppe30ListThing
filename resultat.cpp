@@ -45,6 +45,17 @@ Resultat::Resultat(ifstream & inn, char d[9]) {
 	// cout << "Hjemme: " << Hjemmemaal << "\nBorte: " << bortemaal << "\nNormal: " << normalTid << endl; // DEBUG
 }
 
+// Destruktor
+Resultat::~Resultat() {
+	// Fjerner alle hjemmeSkorer verdier
+	for (int i = 0; i < hjemmemaal; i++)
+		delete hjemmeSkorer[i];
+	// Fjerner alle borteSkorer verdier
+	for (int i = 0; i < bortemaal; i++)
+		delete borteSkorer[i];
+	
+}
+
 void Resultat::skrivTilFil(ofstream& ut) {
 	// Skriver dato, antall hjemme og bortemål og om kampen brukte overtid eller ikke
 	ut << dato << " " << hjemmemaal << " " << bortemaal << " " << normalTid << endl;

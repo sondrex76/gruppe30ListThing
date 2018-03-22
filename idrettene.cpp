@@ -94,56 +94,42 @@ void Idrettene::leggTilDiv(int nr)
 	idrettListe->add(temp); // kjører koden hvis brukeren ikke skrev inn Q
 }
 
+// Fjerner idretten navn
 void Idrettene::fjernIdrett(char* navn)
 {
-	
 	if (idrettListe->inList(navn))
 	{
-		for (int i = 1; i <= idrettListe->noOfElements(); i++)
-		{
-			//temp som sjekker om de matcher
-			Idrett* temp = (Idrett*)idrettListe->removeNo(i);
+		// Henter idretten som skal fjernes
+		Idrett* temp = (Idrett*)idrettListe->remove(navn);
 
-			if (!strcmp(temp->hentNavn(), navn))				//er de like?
-			{
-				//dobbeltsjekker at man vil slette
-				cout << "Er du sikker pa at du vil slette? Y/N";
-				if (les(false) != 'Y')
-				{
-					cout << "Sletter ikke.\n";
-					idrettListe->add(temp);
-				}
-				else cout << "Sletter...\n";
-			}
-			else
-			{
-				idrettListe->add(temp);			//legges tilbake i lista
-			}
+		//dobbeltsjekker at man vil slette
+		cout << "Skriv Y for å bekrefte at du ønsker å slette idretten " << navn << endl;
+		
+		// Sjekekr om brukeren skrev in Y for å bekrefte sletting av idretten
+		if (les(false) != 'Y')
+		{
+			idrettListe->add(temp);
+			cout << "SLetting av idretten " << navn << " har blitt avbrutt.\n";
 		}
+		else
+			delete temp; // Sletter idretten
 	}
 	else cout << "Denne idretten finnes ikke.\n";
 }
 
+// Fjerner en divisjon innenfor idretten navn
 void Idrettene::fjernDiv(char* navn)
 {
 	if (idrettListe->inList(navn))
 	{
-		bool fant = false;
-		for (int i = 1; i <= idrettListe->noOfElements(); i++)
-		{
-			//temp som sjekker om de matcher
-			Idrett* temp = (Idrett*)idrettListe->removeNo(i);
+		// Henter idretten navn
+		Idrett* temp = (Idrett*)idrettListe->remove(navn);
 
-			if (!strcmp(temp->hentNavn(), navn))		
-			{
-				fant = true;
-				temp->slettDiv();
-			}
-
-			idrettListe->add(temp);
-			
-		}
-		if (!fant) cout << "Fant ikke divisjonen.\n";
+		// Sletter en divisjon(hvilken blir valgt inni funksjonen
+		temp->slettDiv();
+		
+		// Legegr tilbake tmep til listen
+		idrettListe->add(temp);
 	}
 	else cout << "Finner ikke idrett.\n";
 }
@@ -261,7 +247,6 @@ void Idrettene::skrivTilFil() {
 		// Legger sport nr i tilbake i listen
 		idrettListe->add(tempIdrett);
 	}
-
 
 	ut.close();
 }
