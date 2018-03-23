@@ -18,8 +18,8 @@ public:
 	DivAvd(char*, std::ifstream&, bool);
 	~DivAvd();								// Destruktor
 	char* hentNavn();						//returnerer 'navn'
-	void lagLag();
-	void leggTilSpiller();
+	//void lagLag();
+	void redigerSpiller();
 	void display();
 	void skrivTilFil(std::ofstream&);
 };

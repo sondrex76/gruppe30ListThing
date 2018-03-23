@@ -7,6 +7,7 @@
 #include "lag.h"
 #include "conster.h"
 #include "spillere.h"
+#include "globale_funksjoner.h"
 
 using namespace std;
 
@@ -16,6 +17,10 @@ extern Spillere spillere;
 // Standard konstruktor
 Lag::Lag() {
 	cout << "Lager lag!!\n";
+	for (int i = 0; i < MAXSPILLERE; i++)
+	{
+		spillerID[i] = 0;
+	}
 }
 
 // Konstruktor for å lese fra fil
@@ -98,4 +103,75 @@ void Lag::skrivTilFil(ofstream& ut) {
 	}
 
 	ut << endl << endl;					// Linjeskift
+}
+
+char* Lag::sendNavn()
+{
+	return navn;
+}
+
+			//fjerner spiller.. ;)
+void Lag::fjernSpiller()
+{
+	char input;				//valg, fortsett/stopp
+	//en do/while som kjører så lenge brukeren vil fjerne flere.
+	do
+	{ 
+						//leser inn spillerID
+	int nr = les("Skriv inn nummer pa spiller", 1, MAXSPILLERE);
+
+	bool fant = false;			//brukes for å se om spiller finnes alt
+	
+	for (int i = 0; i < antSpillere; i++)			//for alle spillere
+	{
+
+		if (*spillerID[i] == nr)			//sjekk nr, hvis lik
+		{
+			fant = true;							//fant den!
+			cout << "Er du sikker pa at du vil fjerne? (Y / N) ";
+			char valg = les(false);		//gir siste sjanse
+			if (valg == 'Y')
+			{
+				cout << "Fjerner..\n";
+				*spillerID[i] = 0; //spiller nr0 finnes ikke,så bruker det
+				antSpillere--;			//spiller fjernes, ergo 1 mindre
+			}
+			else cout << "Beholder spiller.\n";
+		}
+	}
+	if (!fant) cout << "Fant ikke spilleren pa dette laget.\n";
+
+	cout << "Vil du fortsette? (Y / N)\n";
+	input = les(false);
+	} while (toupper(input) != 'N');
+}
+
+		//legger til spiller
+void Lag::leggTilSpiller()
+{
+	char valg;
+	//en do/while loop så lenge brukeren ønsker å fortsette
+	do
+	{
+		int nr = les("Skriv inn nummer pa spiller", 1, MAXSPILLERE);
+		bool finnesAlt = false;
+
+		for (int i = 0; i < antSpillere; i++)		//for alle spillere
+		{
+			if (*spillerID[i] == nr)			//hvis lik, fant!
+			{
+				finnesAlt = true;
+			}
+		}
+		if (!finnesAlt)				//hvis ikke fant
+		{
+			cout << "Legger til spiller.\n";			//legger til
+			spillerID[antSpillere] = new int;
+			*spillerID[antSpillere++] = nr;		//og ant blir økt med 1
+		}
+		else cout << "Denne spilleren finnes allerede pa laget.\n";
+
+		cout << "Vil du fortsette? (Y / N)";
+		valg = les(false);
+	} while (valg != 'N');
 }

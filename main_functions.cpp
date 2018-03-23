@@ -153,12 +153,14 @@ void skrivLag() {
 void redigerSpiller() {
 	//skriv inn idrett, div og lag
 	char navn[STRLEN];
+	cin.ignore();
 	les("Skriv inn navn pa idrett", navn, STRLEN);
-	if (idrettene.harIdrett(navn))
+	
+	while (!idrettene.harIdrett(navn))
 	{
-		idrettene.laglag(navn);
+		les("Finner ikke idretten. Prov pa nytt", navn, STRLEN);
 	}
-	else cout << "Finner ikke denne idretten.\n";
+	idrettene.redigerSpiller(navn);
 	//hvis idrett eksisterer
 
 }

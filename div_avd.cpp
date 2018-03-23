@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream> // DEBUG
 #include "div_avd.h"
+#include "globale_funksjoner.h"
 
 using namespace std;
 
@@ -78,9 +79,32 @@ char* DivAvd::hentNavn()
 	return text;			//returnerer navn
 }
 
-void DivAvd::lagLag()
+void DivAvd::redigerSpiller()
 {
-	lag[antLag++] = new Lag;
+	char navn[STRLEN];
+	les("Skriv inn lagets navn", navn, STRLEN);
+	for (int i = 0; i < antLag; i++)
+	{
+		if (!strcmp(lag[i]->sendNavn(), navn))
+		{
+			char valg;
+			do
+			{
+				cout << "Vil du (F)jerne eller (L)egge til spiller?";
+				valg = les(false);
+				valg = toupper(valg);
+			} while (valg != 'F' && valg != 'L');
+
+			if (valg == 'F')
+			{
+				lag[i]->fjernSpiller();
+			}
+			else 
+			{
+				lag[i]->leggTilSpiller();
+			}
+		}
+	}
 }
 
 // Skriver ut data fra I <navn>

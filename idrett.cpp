@@ -126,10 +126,11 @@ bool Idrett::harIkkeDiv(char* navn)
 	return (!divAvdListe->inList(navn));
 }
 
-void Idrett::laglag(char* navn)
+void Idrett::redigerSpiller(char* navn)
 {
 	if (divAvdListe->inList(navn))
 	{
+	  
 		for (int i = 1; i <= divAvdListe->noOfElements(); i++)
 		{
 			//temp som sjekker om de matcher
@@ -137,7 +138,7 @@ void Idrett::laglag(char* navn)
 			
 			if (!strcmp(temp->hentNavn(), navn))		//hvis ulik navn
 			{
-				temp->lagLag();
+				temp->redigerSpiller();
 			}
 			divAvdListe->add(temp);
 		}

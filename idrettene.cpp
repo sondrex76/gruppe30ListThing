@@ -139,7 +139,7 @@ bool Idrettene::harIdrett(char* navn)
 	return idrettListe->inList(navn);
 }
 
-void Idrettene::laglag(char* navn)
+void Idrettene::redigerSpiller(char* navn)
 {
 	for (int i = 1; i <= idrettListe->noOfElements(); i++)
 	{
@@ -149,7 +149,7 @@ void Idrettene::laglag(char* navn)
 		{
 			char nvn[STRLEN];
 			les("Skriv inn divisjonsnavn", nvn, STRLEN);
-			temp->laglag(nvn);
+			temp->redigerSpiller(nvn);
 		}
 
 		idrettListe->add(temp);			//legger tilbake i lista

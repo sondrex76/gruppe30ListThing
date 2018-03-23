@@ -14,6 +14,9 @@ public:
 	Lag(std::ifstream&, bool);
 	~Lag();				// Destruktor
 	void skrivTilFil(std::ofstream&);
+	char* sendNavn();
+	void fjernSpiller();
+	void leggTilSpiller();
 	void display();
 };
 
