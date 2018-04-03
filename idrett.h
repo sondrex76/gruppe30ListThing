@@ -19,6 +19,7 @@ public:
 	bool harIkkeDiv(char* navn);					//returnerer om div ikke finnes
 	bool likSom(char* navn);						//returnerer om navnene er like
 	bool harDiv(char* navn);						//returnerer om har en viss div
+	void skrivLag();
 	void redigerSpiller();
 	void display();									// Displayer I A spesifik info
 	void displayResten();							// Displayer I <navn> spesifik info

@@ -15,6 +15,7 @@ public:
 	~Lag();				// Destruktor
 	void skrivTilFil(std::ofstream&);
 	char* sendNavn();
+	void skrivLag();
 	void fjernSpiller();
 	void leggTilSpiller();
 	void display();

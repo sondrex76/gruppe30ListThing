@@ -15,6 +15,7 @@ public:
 	void fjernIdrett(char* navn);		
 	void fjernDiv(char* navn);
 	bool harIdrett(char* navn);
+	void skrivLag(char* navn);
 	void redigerSpiller(char* navn);
 	bool ikkeTom();						//returnerer om lista er tom
 	void skrivUt(char* navn, bool alle);

@@ -146,7 +146,15 @@ void lesResultat() {
 
 // (D)Data om alle spillerne i et lag
 void skrivLag() {
-
+	//brukeren skal skrive inn idrett, div og lag
+	cin.ignore();
+	char navn[STRLEN];
+	do
+	{
+		les("Hva er navnet pa idretten?", navn, STRLEN);
+	} while (!idrettene.harIdrett(navn));
+	//Når man skriver inn riktig idrett, fortsetter videre.
+	idrettene.skrivLag(navn);
 }
 
 // (E)Endre spillere på et lag(legg til/fjern)

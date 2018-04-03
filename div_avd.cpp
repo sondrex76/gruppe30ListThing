@@ -79,6 +79,22 @@ char* DivAvd::hentNavn()
 	return text;			//returnerer navn
 }
 
+void DivAvd::skrivLag()
+{
+	char div[STRLEN];
+
+	les("Skriv navnet til laget", div, STRLEN);
+
+	for (int i = 1; i <= antLag; i++)
+	{
+		if (strcmp(lag[i]->sendNavn(), div))		//sjekker om navnene er like
+		{
+			lag[i]->display();
+			lag[i]->skrivLag();
+		}						//går videre
+	}
+}
+
 void DivAvd::redigerSpiller()
 {
 	char navn[STRLEN];

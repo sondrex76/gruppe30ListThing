@@ -126,6 +126,27 @@ bool Idrett::harIkkeDiv(char* navn)
 	return (!divAvdListe->inList(navn));
 }
 
+void Idrett::skrivLag()
+{
+	char div[STRLEN];
+	do
+	{
+		les("Skriv navnet til divisjonene/avdelingen", div, STRLEN);
+		//sjekker om divisjonen eksisterer
+	} while (!divAvdListe->inList(div));
+
+	for (int i = 1; i <= divAvdListe->noOfElements(); i++)
+	{
+		DivAvd* temp = (DivAvd*)divAvdListe->removeNo(i); //lager temp
+
+		if (strcmp(temp->hentNavn(), div))		//sjekker om navnene er like
+		{
+			temp->skrivLag();
+		}						//går videre
+		divAvdListe->add(temp);					//legger tilbake til listen
+	}
+}
+
 void Idrett::redigerSpiller()
 {
 	char nvn[STRLEN];

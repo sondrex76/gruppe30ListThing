@@ -110,6 +110,11 @@ char* Lag::sendNavn()
 	return navn;
 }
 
+void Lag::skrivLag()
+{
+	spillere.skrivSpiller("", true);
+}
+
 			//fjerner spiller.. ;)
 void Lag::fjernSpiller()
 {

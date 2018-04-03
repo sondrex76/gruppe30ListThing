@@ -19,6 +19,7 @@ public:
 	~DivAvd();								// Destruktor
 	char* hentNavn();						//returnerer 'navn'
 	//void lagLag();
+	void skrivLag();
 	void redigerSpiller();
 	void display();
 	void skrivTilFil(std::ofstream&);
