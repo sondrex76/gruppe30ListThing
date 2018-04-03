@@ -131,19 +131,18 @@ void Idrett::skrivLag()
 	char div[STRLEN];
 	do
 	{
-		les("Skriv navnet til divisjonene/avdelingen", div, STRLEN);
-		//sjekker om divisjonen eksisterer
-	} while (!divAvdListe->inList(div));
+		les("Skriv inn gyldig divisjonsnavn", div, STRLEN);
+		if (!divAvdListe->inList(div)) std::cout << "Ugyldig divisjon!\n";
+		// Loopen forsetter til brukeren skriver Q eller skriver en gyldig divisjon
+	} while (!isQ(div) && !divAvdListe->inList(div));
 
-	for (int i = 1; i <= divAvdListe->noOfElements(); i++)
+	if (!isQ(div))
 	{
-		DivAvd* temp = (DivAvd*)divAvdListe->removeNo(i); //lager temp
+		DivAvd* temp = (DivAvd*)divAvdListe->remove(div);
 
-		if (strcmp(temp->hentNavn(), div))		//sjekker om navnene er like
-		{
-			temp->skrivLag();
-		}						//går videre
-		divAvdListe->add(temp);					//legger tilbake til listen
+		temp->skrivLag();
+
+		divAvdListe->add(temp);
 	}
 }
 

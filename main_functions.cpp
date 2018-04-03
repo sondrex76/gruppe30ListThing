@@ -146,15 +146,28 @@ void lesResultat() {
 
 // (D)Data om alle spillerne i et lag
 void skrivLag() {
-	//brukeren skal skrive inn idrett, div og lag
-	cin.ignore();
+	//skriv inn idrett, div og lag
 	char navn[STRLEN];
+	cin.ignore();
+
+	// Kjører minst en gang og fortsetter til resultatet er Q eller en eksisterende idrett
+	cout << "Skriv q for å avbryte\n";
+	 // fortsetter så lenge navn != Q
 	do
 	{
-		les("Hva er navnet pa idretten?", navn, STRLEN);
-	} while (!idrettene.harIdrett(navn));
-	//Når man skriver inn riktig idrett, fortsetter videre.
-	idrettene.skrivLag(navn);
+
+		les("Skriv inn navn pa gyldig idrett", navn, STRLEN);
+
+		if (!idrettene.harIdrett(navn) && !isQ(navn))
+			cout << "Idretten eksisterer ikke!\n";
+		else if (idrettene.harIdrett(navn)) break;
+
+	} while (!isQ(navn));
+	// Loopen er avbrukk gjennom break,
+	// det er unødvendig å sjekke om loopen skal fortsette på dette punktet
+
+	if (!isQ(navn)) idrettene.skrivLag(navn);
+	//hvis idrett eksisterer og idretten skrevet inn ikke er 'Q'
 }
 
 // (E)Endre spillere på et lag(legg til/fjern)

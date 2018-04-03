@@ -141,17 +141,11 @@ bool Idrettene::harIdrett(char* navn)
 
 void Idrettene::skrivLag(char* navn)
 {
-	for (int i = 1; i <= idrettListe->noOfElements(); i++)
-	{
-		Idrett* temp = (Idrett*)idrettListe->removeNo(i); //lager temp
+		Idrett* temp = (Idrett*)idrettListe->remove(navn); // Lager temp
 
-		if (strcmp(temp->hentNavn(), navn))		//sjekker om navnene er like
-		{
-			temp->skrivLag();
-		}						//går videre
+		temp->skrivLag();						// Går videre
 
-		idrettListe->add(temp);					//legger tilbake til listen
-	}
+		idrettListe->add(temp);					// Legger tilbake til listen
 }
 
 void Idrettene::redigerSpiller(char* navn)

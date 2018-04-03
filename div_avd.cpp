@@ -85,12 +85,15 @@ void DivAvd::skrivLag()
 
 	les("Skriv navnet til laget", div, STRLEN);
 
-	for (int i = 1; i <= antLag; i++)
+	for (int i = 0; i <= antLag; i++)
 	{
-		if (strcmp(lag[i]->sendNavn(), div))		//sjekker om navnene er like
+		if (!strcmp(lag[i]->sendNavn(), div))		//sjekker om navnene er like
 		{
+			cout << "\nLaget:\n";
 			lag[i]->display();
+			cout << "\nSpillere:\n";
 			lag[i]->skrivLag();
+			return;
 		}						//går videre
 	}
 }
