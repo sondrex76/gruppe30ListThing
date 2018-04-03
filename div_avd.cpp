@@ -82,27 +82,42 @@ char* DivAvd::hentNavn()
 void DivAvd::redigerSpiller()
 {
 	char navn[STRLEN];
-	les("Skriv inn lagets navn", navn, STRLEN);
-	for (int i = 0; i < antLag; i++)
-	{
-		if (!strcmp(lag[i]->sendNavn(), navn))
-		{
-			char valg;
-			do
-			{
-				cout << "Vil du (F)jerne eller (L)egge til spiller?";
-				valg = les(false);
-				valg = toupper(valg);
-			} while (valg != 'F' && valg != 'L');
+	bool navnFunnet;
+	int n; // lagrer verdien til i
 
-			if (valg == 'F')
+	do {
+		navnFunnet = false;
+
+		les("Skriv inn lagets navn", navn, STRLEN);
+		
+		for (int i = 0; i < antLag; i++)
+		{
+			if (!strcmp(lag[i]->sendNavn(), navn))
 			{
-				lag[i]->fjernSpiller();
+				navnFunnet = true;
+				n = i;
 			}
-			else 
-			{
-				lag[i]->leggTilSpiller();
-			}
+		}
+
+		if (!navnFunnet && !isQ(navn)) cout << "Ugyldig idrettsnavn!\n";
+	} while (!isQ(navn) && !navnFunnet);
+
+	if (!isQ(navn)) // Hvis E ikke har blitt avbrutt
+	{
+		char valg;
+		do
+		{
+			cout << "Vil du (F)jerne eller (L)egge til spiller?";
+			valg = les(false);
+		} while (valg != 'F' && valg != 'L' && valg != 'Q');
+
+		if (valg == 'F')		// Fjerner spiller
+		{
+			lag[n]->fjernSpiller();
+		}
+		else if (valg == 'L')	// Legger til spiller
+		{
+			lag[n]->leggTilSpiller();
 		}
 	}
 }

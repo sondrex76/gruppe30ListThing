@@ -115,35 +115,28 @@ void Lag::fjernSpiller()
 {
 	char input;				//valg, fortsett/stopp
 	//en do/while som kjører så lenge brukeren vil fjerne flere.
-	do
-	{ 
+
 						//leser inn spillerID
 	int nr = les("Skriv inn nummer pa spiller", 1, MAXSPILLERE);
 
 	bool fant = false;			//brukes for å se om spiller finnes alt
-	
+
 	for (int i = 0; i < antSpillere; i++)			//for alle spillere
 	{
 
 		if (*spillerID[i] == nr)			//sjekk nr, hvis lik
 		{
 			fant = true;							//fant den!
-			cout << "Er du sikker pa at du vil fjerne? (Y / N) ";
-			char valg = les(false);		//gir siste sjanse
-			if (valg == 'Y')
+			delete spillerID[i]; //spiller nr0 finnes ikke,så bruker det
+			antSpillere--;			//spiller fjernes, ergo 1 mindre
+
+			for (int n = antSpillere; n >= i; n--) // Oppdaterer verdier i listen til å være i rekkefølge
 			{
-				cout << "Fjerner..\n";
-				*spillerID[i] = 0; //spiller nr0 finnes ikke,så bruker det
-				antSpillere--;			//spiller fjernes, ergo 1 mindre
+				spillerID[n] = spillerID[n + 1];
 			}
-			else cout << "Beholder spiller.\n";
 		}
 	}
 	if (!fant) cout << "Fant ikke spilleren pa dette laget.\n";
-
-	cout << "Vil du fortsette? (Y / N)\n";
-	input = les(false);
-	} while (toupper(input) != 'N');
 }
 
 		//legger til spiller
@@ -171,7 +164,7 @@ void Lag::leggTilSpiller()
 		}
 		else cout << "Denne spilleren finnes allerede pa laget.\n";
 
-		cout << "Vil du fortsette? (Y / N)";
 		valg = les(false);
+
 	} while (valg != 'N');
 }

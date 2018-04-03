@@ -141,19 +141,11 @@ bool Idrettene::harIdrett(char* navn)
 
 void Idrettene::redigerSpiller(char* navn)
 {
-	for (int i = 1; i <= idrettListe->noOfElements(); i++)
-	{
-		Idrett* temp = (Idrett*)idrettListe->removeNo(i); //temp
+	Idrett* temp = (Idrett*)idrettListe->remove(navn); //temp
 
-		if (!strcmp(temp->hentNavn(), navn))		//hvis match
-		{
-			char nvn[STRLEN];
-			les("Skriv inn divisjonsnavn", nvn, STRLEN);
-			temp->redigerSpiller(nvn);
-		}
+	temp->redigerSpiller();
 
-		idrettListe->add(temp);			//legger tilbake i lista
-	}
+	idrettListe->add(temp);			//legger tilbake i lista
 }
 
 //sjekker om lista ikke er tom

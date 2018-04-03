@@ -126,28 +126,25 @@ bool Idrett::harIkkeDiv(char* navn)
 	return (!divAvdListe->inList(navn));
 }
 
-void Idrett::redigerSpiller(char* navn)
+void Idrett::redigerSpiller()
 {
-	if (divAvdListe->inList(navn))
+	char nvn[STRLEN];
+
+	do {
+		les("Skriv inn gyldig divisjonsnavn", nvn, STRLEN);
+
+		if (!divAvdListe->inList(nvn)) std::cout << "Ugyldig divisjon!\n";
+		// Loopen forsetter til brukeren skriver Q eller skriver en gyldig divisjon
+	} while (!isQ(nvn) && !divAvdListe->inList(nvn));
+
+	if (!isQ(nvn))
 	{
-	  
-		for (int i = 1; i <= divAvdListe->noOfElements(); i++)
-		{
-			//temp som sjekker om de matcher
-			DivAvd* temp = (DivAvd*)divAvdListe->removeNo(i);
-			
-			if (!strcmp(temp->hentNavn(), navn))		//hvis ulik navn
-			{
-				temp->redigerSpiller();
-			}
-			divAvdListe->add(temp);
-		}
+		DivAvd* temp = (DivAvd*)divAvdListe->remove(nvn);
+
+		temp->redigerSpiller();
+
+		divAvdListe->add(temp);
 	}
-	else if (!divAvdListe->noOfElements())
-	{
-		std::cout << "Ingen divisjoner.\n";
-	}
-	else std::cout << "Fant ikke divisjonen.\n";
 }
 
 // Skriver ut objektets verdier(eksklusivt verdier som trengs i I A)
