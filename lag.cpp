@@ -119,57 +119,70 @@ void Lag::skrivLag()
 void Lag::fjernSpiller()
 {
 	char input;				//valg, fortsett/stopp
+	int nr;
+	bool fant = false;			//brukes for å se om spiller finnes alt
 	//en do/while som kjører så lenge brukeren vil fjerne flere.
 
 						//leser inn spillerID
-	int nr = les("Skriv inn nummer pa spiller", 1, MAXSPILLERE);
+	cout << "Skriv inn 0 for å avbryte loopen\n";
 
-	bool fant = false;			//brukes for å se om spiller finnes alt
+	do {
+		nr = les("Skriv inn nummer pa spiller", 0, MAXSPILLERE);
 
-	for (int i = 0; i < antSpillere; i++)			//for alle spillere
-	{
 
-		if (*spillerID[i] == nr)			//sjekk nr, hvis lik
+		for (int i = 0; i < antSpillere; i++)			//for alle spillere
 		{
-			fant = true;							//fant den!
-			delete spillerID[i]; //spiller nr0 finnes ikke,så bruker det
-			antSpillere--;			//spiller fjernes, ergo 1 mindre
-
-			for (int n = antSpillere; n >= i; n--) // Oppdaterer verdier i listen til å være i rekkefølge
+			if (*spillerID[i] == nr)			//sjekk nr, hvis lik
 			{
-				spillerID[n] = spillerID[n + 1];
+				fant = true;							//fant den!
+				delete spillerID[i]; //spiller nr0 finnes ikke,så bruker det
+				antSpillere--;			//spiller fjernes, ergo 1 mindre
+
+				for (int n = i; n < antSpillere; n++) // Oppdaterer verdier i listen til å være i rekkefølge
+				{
+					spillerID[n] = spillerID[n + 1];
+				}
+				i--; // Oppdaterer i
 			}
 		}
-	}
-	if (!fant) cout << "Fant ikke spilleren pa dette laget.\n";
+		if (!fant) cout << "Fant ikke spilleren pa dette laget.\n";
+	} while (!fant && nr != 0);
 }
 
 		//legger til spiller
 void Lag::leggTilSpiller()
 {
-	char valg;
+	bool finnesAlt;
+	int nr;
+
 	//en do/while loop så lenge brukeren ønsker å fortsette
+	cout << "Skriv inn 0 for å avbryte loopen\n";
 	do
 	{
-		int nr = les("Skriv inn nummer pa spiller", 1, MAXSPILLERE);
-		bool finnesAlt = false;
+		finnesAlt = false;
+		nr = les("Skriv inn nummer pa spiller", 0, MAXSPILLERE);
 
-		for (int i = 0; i < antSpillere; i++)		//for alle spillere
+		if (spillere.eksisterer(nr)) // Sjekker om spilleren eksisterer
 		{
-			if (*spillerID[i] == nr)			//hvis lik, fant!
+			for (int i = 0; i < antSpillere; i++)		//for alle spillere
 			{
-				finnesAlt = true;
+				if (*spillerID[i] == nr)			//hvis lik, fant!
+				{
+					finnesAlt = true;
+				}
 			}
-		}
-		if (!finnesAlt)				//hvis ikke fant
-		{
-			cout << "Legger til spiller.\n";			//legger til
-			spillerID[antSpillere] = new int;
-			*spillerID[antSpillere++] = nr;		//og ant blir økt med 1
-		}
-		else cout << "Denne spilleren finnes allerede pa laget.\n";
 
-		valg = les(false);
+			if (!finnesAlt)							// Sjekker om spilleren allerede er del av laget
+			{
+				spillerID[antSpillere] = new int;
+				*spillerID[antSpillere++] = nr;		//og ant blir økt med 1
+			}
+			else cout << "Denne spilleren finnes allerede pa laget.\n";
+		}
+		else if (nr != 0)
+			cout << "Spiller nr " << nr << " eksisterer ikke!\n";
+		else break; // Går ut av loopen om man skriver inn 0
+	} while (finnesAlt);
 
-	} while (valg != 'N');
+	cout << "TEST!\n";
 }
