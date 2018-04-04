@@ -74,30 +74,38 @@ DivAvd::~DivAvd() {
 	}
 }
 
+// Returnerer navnet på divisjonen
 char* DivAvd::hentNavn()
 {
 	return text;			//returnerer navn
 }
 
+// Skriver ut spiller ID, navn og adresse til alle spillere på et lag
 void DivAvd::skrivLag()
 {
 	char div[STRLEN];
+	bool funnet;
 
-	les("Skriv navnet til laget", div, STRLEN);
+	do {
+		les("Skriv navnet til laget", div, STRLEN);
+		funnet = false;
 
-	for (int i = 0; i <= antLag; i++)
-	{
-		if (!strcmp(lag[i]->sendNavn(), div))		//sjekker om navnene er like
+		for (int i = 0; i < antLag; i++)
 		{
-			cout << "\nLaget:\n";
-			lag[i]->display();
-			cout << "\nSpillere:\n";
-			lag[i]->skrivLag();
-			return;
-		}						//går videre
-	}
+			if (!strcmp(lag[i]->sendNavn(), div))		//sjekker om navnene er like
+			{
+				cout << "\nLaget:\n";
+				lag[i]->display();
+				cout << "\nSpillere:\n";
+				lag[i]->skrivLag();
+				return; // Avbryter funksjonen ettersom et gyldig resultat har blitt funnet
+			}						//går videre
+		}
+		if (!funnet) cout << "Dette laget eksisterer ikke!\n";
+	} while (!isQ(div)); // kjører til div er Q
 }
 
+// Redigerer spillere på et lag, man kan enten legge til eller fjerne en spiller
 void DivAvd::redigerSpiller()
 {
 	char navn[STRLEN];

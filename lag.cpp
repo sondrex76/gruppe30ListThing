@@ -112,7 +112,13 @@ char* Lag::sendNavn()
 
 void Lag::skrivLag()
 {
-	spillere.skrivSpiller("", true);
+	char temp[STRLEN]; // verdi som lagrer char versjon av int
+
+	for (int i = 0; i < antSpillere; i++)
+	{
+		_itoa(*spillerID[i], temp, 10);
+		spillere.skrivSpiller(temp, false); // Skriver ut spiller med verdi temp
+	}
 }
 
 			//fjerner spiller.. ;)
