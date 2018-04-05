@@ -191,6 +191,7 @@ void Idrett::displayResten() {
 bool Idrett::lesResultat(bool oppdater, std::ifstream& inn) {
 	char temp[STRLEN];	// char array som inneholder midlertidige verdier
 	int numDiv;			// Antall divisjoner
+	bool tempBool;
 
 	inn >> numDiv; // Antall divisjoner for idretten som skal leses inn 
 	inn.ignore();
@@ -198,30 +199,25 @@ bool Idrett::lesResultat(bool oppdater, std::ifstream& inn) {
 	// Hver loop sjekker en divisjon
 	for (int i = 0; i < numDiv; i++)
 	{
-		inn >> temp; // Divisjon
-		inn.ignore();
+		tempBool = true;
+		inn.getline(temp, STRLEN); // Divisjon
 
 		if (divAvdListe->inList(temp))  // Divisjonen temp eksisterer
 		{
 			DivAvd* tempDiv = (DivAvd*)divAvdListe->remove(temp);
 
-			tempDiv->lesResultat(oppdater, inn); // Sjekker data innenfor divisjon og oppdaterer dem om oppdater == true
+			tempBool = tempDiv->lesResultat(oppdater, inn); // Sjekker data innenfor divisjon og oppdaterer dem om oppdater == true
 
 			divAvdListe->add(tempDiv);	// Legger divisjonen tilbake i listen
+
+			if (!tempBool) return false; // Hvis en feil var funnet, avbryt
 		}
 		else // temp eksisterer ikke
 		{
 			std::cout << "Divisjon " << temp << " eksisterer ikke!\n";
 			return false;
 		}
-
-
-
-
 	}
-
-
-
 	return true; // Hvis ingen fil er funnet vil koden komme hit og returnere true
 }
 

@@ -207,8 +207,7 @@ bool Idrettene::lesResultat(bool oppdater, ifstream& inn) {
 	// Hver loop av while sjekker/leser inn en idrett
 	while (!inn.eof()) // Mens filen ikke har sluttet
 	{
-		inn >> temp; // Henter idrettens navn
-		inn.ignore();
+		inn.getline(temp, STRLEN); // Henter idrettens navn
 
 		if (idrettListe->inList(temp)) // Idretten finnes
 		{

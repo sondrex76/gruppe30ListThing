@@ -165,8 +165,10 @@ void DivAvd::display()
 
 // Sjekker eller leser inn dataer til en divisjon
 bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
-	int antallDatoer, antallKamper;
-	char tempDato[9];
+	int antallDatoer, antallKamper, hjemme, borte;
+	char tempDato[9], lagHjemme[STRLEN], lagBorte[STRLEN];
+	bool lagHjemmeFins, lagBorteFins;
+
 
 	inn >> antallDatoer; // Henter antall datoer
 	inn.ignore();
@@ -180,9 +182,68 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 		inn >> antallKamper; // Henter antall kamper
 		inn.ignore();
 
+		// Går gjennom alle kamper og sjekker om lagene eksisterer
 		for (int i = 0; i < antallKamper; i++)
 		{
-			// SJekk om datoen for kampen mellom dem er riktig
+			lagHjemmeFins = lagBorteFins = false; // resetter begge verdier
+			inn.ignore();
+
+			inn >> lagHjemme;
+			inn.ignore();
+
+			inn >> lagBorte;
+			inn.ignore();
+
+			// Sjekker om lagene finnes
+			for (int i = 0; i < antLag; i++)
+			{
+				if (!strcmp(lagHjemme, lag[i]->sendNavn())) // sjekker om de to char arrayene er like
+				{
+					lagHjemmeFins = true;
+					hjemme = i;
+					break; // går ut av ytterste for loop
+				}
+
+				if (!strcmp(lagBorte, lag[i]->sendNavn())) // sjekker om de to char arrayene er like
+				{
+					lagBorteFins = true;
+					borte = i;
+					break; // går ut av ytterste for loop
+				}
+			}
+
+			// Sjekker om bortelaget ikke eksisterer
+			if (!lagBorteFins)
+			{
+				cout << "Laget " << lagBorte << " eksisterer ikke!\n";
+				return false;
+			}
+
+			// Sjekker om hjemmelaget ikke eksisterer
+			if (!lagHjemmeFins)
+			{
+				cout << "Laget " << lagHjemme << " eksisterer ikke!\n";
+				return false;
+			}
+
+			// Sjekk om datoen for kampen mellom dem er riktig eller skriver dataen inn
+			if (oppdater) // Oppdaterer data på kampen på datoen epesifisert mellom lagene
+			{
+
+			}
+			// Sjekker om det fins en kamp mellom de to lagene på den datoen
+			else { 
+				if (!strcmp(resultater[hjemme][borte]->returnDato(), tempDato)) // Sjekker om kampen mellom de to lagene var på den satte datoen
+				{
+					resultater[hjemme][borte]->lesResultat(inn, false); // leser inn resultatene
+				}
+				else
+				{
+					cout << "Det var ingen kamp mellom hjemmelaget " << lagHjemme << " og bortelaget " << lagBorte << " på datoen " << tempDato << "!" << endl;
+
+					return false;
+				}
+			}
 		}
 	}
 

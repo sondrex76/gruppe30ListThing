@@ -14,35 +14,7 @@ Resultat::Resultat(ifstream & inn, char d[9]) {
 
 	strcpy(dato, d); // kopierer d(ato) over til dato verdien
 
-	// Leser første linje
-	inn >> hjemmemaal;
-	inn >> bortemaal;
-	inn >> normalTid;
-	inn.ignore();
-
-	int tempInt;
-	
-	for (int i = 0; i < hjemmemaal; i++)
-	{
-		inn >> tempInt;
-
-		hjemmeSkorer[i] = new int;
-		*hjemmeSkorer[i] = tempInt;
-	}
-
-	inn.ignore();
-
-	for (int i = 0; i < bortemaal; i++)
-	{
-		inn >> tempInt;
-
-		borteSkorer[i] = new int;
-		*borteSkorer[i] = tempInt;
-	}
-
-	inn.ignore();
-
-	// cout << "Hjemme: " << Hjemmemaal << "\nBorte: " << bortemaal << "\nNormal: " << normalTid << endl; // DEBUG
+	lesResultat(inn, true); // Leser inn resten, koden er brukt av en annen funksjon og er derfor splittett inn i denne funksjonen
 }
 
 // Destruktor
@@ -54,6 +26,45 @@ Resultat::~Resultat() {
 	for (int i = 0; i < bortemaal; i++)
 		delete borteSkorer[i];
 	
+}
+
+// Returnerer dato
+char* Resultat::returnDato() {
+	return dato;
+}
+
+// leser inn resultatene til spesifik dato
+void Resultat::lesResultat(std::ifstream& inn, bool first) {
+	inn >> hjemmemaal;
+	inn >> bortemaal;
+	inn >> normalTid;
+	inn.ignore();
+
+	int tempInt;
+
+	for (int i = 0; i < hjemmemaal; i++)
+	{
+		inn >> tempInt;
+
+		if (first) hjemmeSkorer[i] = new int; // Hvis den ikke har blitt generert før
+		*hjemmeSkorer[i] = tempInt;
+
+		cout << "DEBUG: " << *hjemmeSkorer[i] << endl; // DEBUG
+	}
+
+	inn.ignore();
+
+	for (int i = 0; i < bortemaal; i++)
+	{
+		inn >> tempInt;
+
+		if (first) borteSkorer[i] = new int; // Hvis den ikke har blitt generert før
+		*borteSkorer[i] = tempInt;
+
+		cout << "DEBUG: " << *borteSkorer[i] << endl; // DEBUG
+	}
+
+	inn.ignore();
 }
 
 void Resultat::skrivTilFil(ofstream& ut) {
