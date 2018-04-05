@@ -33,7 +33,7 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn, bool start) : TextElement(avd
 			inn >> tempVerdi; // Henter den første verdien
 							  //cout << tempVerdi << endl; // DEBUG
 
-			if (strcmp(tempVerdi, "0") != 0) // Hvis dette opsettet eksisterer
+			if (strcmp(tempVerdi, "0")) // Hvis dette opsettet eksisterer
 			{
 				resultater[i][n] = new Resultat(inn, tempVerdi);
 			}
@@ -156,6 +156,7 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 	char tempDato[9];
 	bool lagHjemmeFins, lagBorteFins;
 
+	// Funksjonalitet er der, men et av de mulige errorene "de to lagene har ikke spilt mot hverandre denne dagen. " gir ingen mening i konteksten av filstrukturen
 
 	inn >> antallDatoer; // Henter antall datoer
 	inn.ignore();
@@ -226,12 +227,23 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 			// Sjekk om datoen for kampen mellom dem er riktig eller skriver dataen inn
 			if (oppdater) // Oppdaterer data på kampen på datoen epesifisert mellom lagene
 			{
-				resultater[hjemme][borte]->lesResultat(inn, false); // leser inn resultatene
+				resultater[hjemme][borte]->lesResultat(inn); // leser inn resultatene
 				// cout << "DEBUG: Suksess!\n"; // DEBUG
 			}
-			else {
+			else 
+			{
+				// Sjekker om en kamp mellom de to lagene allerede har forekommet og rapporterer denne logiske feilen hvis den er funnet
+				/*
+				if (resultater[hjemme][borte] != nullptr && resultater[borte][hjemme] != nullptr)
+				{
+					// Dato blir også spesifisert for å gjøre det enklere å identifisere stedet problemet forekom
+					cout << "Det finnes allerede en kamp mellom lagene " << lagHjemme << " og " << lagBorte << " i divisjonen " << text << "!\nDato er " << tempDato << ".\n";
+					return false;
+				}
+				*/
+
 				// Sjekker om det fins en kamp mellom de to lagene på den datoen
-				if (!strcmp(resultater[hjemme][borte]->returnDato(), tempDato)) // Sjekker om kampen mellom de to lagene er like
+				if (resultater[hjemme][borte] != nullptr && !strcmp(resultater[hjemme][borte]->returnDato(), tempDato)) // Sjekker om kampen mellom de to lagene er like
 				{
 					char t[STRLEN]; // Lagrer verdiene slik at de kan bli forkastet, inn.ignore() ignorerte bare fram itl neste element
 

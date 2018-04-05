@@ -14,7 +14,7 @@ Resultat::Resultat(ifstream & inn, char d[9]) {
 
 	strcpy(dato, d); // kopierer d(ato) over til dato verdien
 
-	lesResultat(inn, true); // Leser inn resten, koden er brukt av en annen funksjon og er derfor splittett inn i denne funksjonen
+	lesResultat(inn); // Leser inn resten, koden er brukt av en annen funksjon og er derfor splittett inn i denne funksjonen
 }
 
 // Returnerer dato
@@ -23,7 +23,7 @@ char* Resultat::returnDato() {
 }
 
 // leser inn resultatene til spesifik dato
-void Resultat::lesResultat(std::ifstream& inn, bool first) {
+void Resultat::lesResultat(std::ifstream& inn) {
 	inn >> hjemmemaal;
 	inn >> bortemaal;
 	inn >> normalTid;

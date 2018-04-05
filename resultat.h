@@ -14,7 +14,7 @@ private:
 public:
 	Resultat(std::ifstream&, char[9]);	// Konstruktor, leser fra fil
 	char* returnDato();					// Returnerer dato
-	void lesResultat(std::ifstream&, bool);
+	void lesResultat(std::ifstream&);	// Leser resultater
 	void skrivTilFil(std::ofstream&);	// Skriv til fil
 };
 
