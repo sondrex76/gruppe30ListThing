@@ -151,8 +151,9 @@ void skrivTabell() {
 // (R)Les resultatliste fra fil
 void lesResultat() {
 	if (idrettene.lesResultat(false)) // Sjekker om resultater fra RESULTAT.DTA er akseptable 
+	{
 		idrettene.lesResultat(true); // Leser inn resultater fra RESULTAT.DTA 
-
+	}
 }
 
 // (D)Data om alle spillerne i et lag
