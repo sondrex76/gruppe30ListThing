@@ -228,6 +228,8 @@ bool Idrettene::lesResultat(bool oppdater) {
 	{
 		inn.getline(temp, STRLEN); // Henter idrettens navn
 
+		// cout << "DEBUG: " << temp << endl; // DEBUG
+
 		if (idrettListe->inList(temp)) // Idretten finnes
 		{
 			Idrett* tempIdrett = (Idrett*)idrettListe->remove(temp);

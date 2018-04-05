@@ -227,7 +227,7 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 			if (oppdater) // Oppdaterer data på kampen på datoen epesifisert mellom lagene
 			{
 				resultater[hjemme][borte]->lesResultat(inn, false); // leser inn resultatene
-				cout << "DEBUG: Suksess!\n"; // DEBUG
+				// cout << "DEBUG: Suksess!\n"; // DEBUG
 			}
 			else {
 				// Sjekker om det fins en kamp mellom de to lagene på den datoen

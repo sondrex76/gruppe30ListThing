@@ -31,20 +31,12 @@ void Resultat::lesResultat(std::ifstream& inn, bool first) {
 
 	int tempInt;
 
-	cout << hjemmemaal << ": "; // DEBUG
-
 	for (int i = 0; i < hjemmemaal; i++)
 	{
 		inn >> tempInt;
 
-		// Krasjet skjer her
-
-
 		hjemmeSkorer[i] = tempInt;
-
-		cout << hjemmeSkorer[i] << ", "; // DEBUG
 	}
-	cout << endl; // DEBUG
 
 	inn.ignore();
 
