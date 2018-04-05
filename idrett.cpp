@@ -167,6 +167,34 @@ void Idrett::redigerSpiller()
 	}
 }
 
+void Idrett::sporDato(char* div)
+{
+
+	int dato = les("Skriv inn dato(aaaammdd)", 0, 99999999);
+
+	std::cout << "Skriv inn filnavn: ";
+	char filnavn[STRLEN];
+	std::cin.getline(filnavn, STRLEN);
+	char svar;
+	do
+	{
+		std::cout << "Vil du skrive til fil eller til skjerm? (F/S)";
+		svar = les(true);
+	} while (svar != 'F' && svar != 'S');
+	std::cout << svar;
+
+	if (harDiv(div))
+	{
+		//skriver alle kampene fra en viss div fra denne idretten
+		std::cout << "Har divisjon\n";
+	}
+	else
+	{
+		//skriver alle kampene fra alle divs fra denne idretten
+		std::cout << "Har ikke div\n";
+	}
+}
+
 // Skriver ut objektets verdier(eksklusivt verdier som trengs i I A)
 void Idrett::display()
 {
