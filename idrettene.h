@@ -19,7 +19,7 @@ public:
 	void redigerSpiller(char* navn);
 	bool ikkeTom();						//returnerer om lista er tom
 	void skrivUt(char* navn, bool alle);
-	bool lesResultat(bool, std::ifstream&);
+	bool lesResultat(bool);
 	void lesFraFil();
 	void skrivTilFil();
 };

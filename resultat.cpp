@@ -42,6 +42,8 @@ void Resultat::lesResultat(std::ifstream& inn, bool first) {
 
 	int tempInt;
 
+	cout << hjemmemaal << ": "; // DEBUG
+
 	for (int i = 0; i < hjemmemaal; i++)
 	{
 		inn >> tempInt;
@@ -49,8 +51,9 @@ void Resultat::lesResultat(std::ifstream& inn, bool first) {
 		if (first) hjemmeSkorer[i] = new int; // Hvis den ikke har blitt generert før
 		*hjemmeSkorer[i] = tempInt;
 
-		cout << "DEBUG: " << *hjemmeSkorer[i] << endl; // DEBUG
+		cout << *hjemmeSkorer[i] << ", "; // DEBUG
 	}
+	cout << endl; // DEBUG
 
 	inn.ignore();
 
@@ -61,7 +64,7 @@ void Resultat::lesResultat(std::ifstream& inn, bool first) {
 		if (first) borteSkorer[i] = new int; // Hvis den ikke har blitt generert før
 		*borteSkorer[i] = tempInt;
 
-		cout << "DEBUG: " << *borteSkorer[i] << endl; // DEBUG
+		// cout << "DEBUG: " << bortemaal << ": " << *borteSkorer[i] << endl; // DEBUG
 	}
 
 	inn.ignore();
