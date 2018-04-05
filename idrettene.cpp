@@ -198,6 +198,52 @@ void Idrettene::skrivUt(char* navn, bool alle)
 	}
 }
 
+// SJekker om RESULTAT.DTA er valid, eller skriver dataene basert på verdien til oppdater
+bool Idrettene::lesResultat(bool oppdater, ifstream& inn) {
+	char temp[STRLEN];
+	bool tempBool; // Holder en verdi til alt nødvendig arbeid er gjort
+
+
+	// Hver loop av while sjekker/leser inn en idrett
+	while (!inn.eof()) // Mens filen ikke har sluttet
+	{
+		inn >> temp; // Henter idrettens navn
+		inn.ignore();
+
+		if (idrettListe->inList(temp)) // Idretten finnes
+		{
+			Idrett* tempIdrett = (Idrett*)idrettListe->remove(temp);
+
+			inn.ignore();
+
+			tempBool = tempIdrett->lesResultat(oppdater, inn);
+
+			idrettListe->add(tempIdrett); // Legger tilbake idretten i listen
+
+			// Hvis indrettens data i RESULTAT.DTA hadde feil
+			if (!tempBool) return false; 
+		}
+		else // Idretten finnes ikke
+		{
+			cout << "Idretten " << temp << " eksisterer ikke!\n";
+			return false;
+		}
+	}
+
+
+	if (oppdater)
+	{
+
+	}
+	else
+	{
+
+	}
+
+	// Hvis ingenting har returnert false til nå returnerer den true
+	return true;
+}
+
 // Leser fra fil
 void Idrettene::lesFraFil() {
 	ifstream inn("IDRETTENE.DTA");

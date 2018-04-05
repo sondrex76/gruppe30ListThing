@@ -187,6 +187,44 @@ void Idrett::displayResten() {
 	divAvdListe->displayList();		// displayer alle divisjoner
 }
 
+// Sjekker om resultat er valid for spesifik idrett i RESULTAT.DTA
+bool Idrett::lesResultat(bool oppdater, std::ifstream& inn) {
+	char temp[STRLEN];	// char array som inneholder midlertidige verdier
+	int numDiv;			// Antall divisjoner
+
+	inn >> numDiv; // Antall divisjoner for idretten som skal leses inn 
+	inn.ignore();
+
+	// Hver loop sjekker en divisjon
+	for (int i = 0; i < numDiv; i++)
+	{
+		inn >> temp; // Divisjon
+		inn.ignore();
+
+		if (divAvdListe->inList(temp))  // Divisjonen temp eksisterer
+		{
+			DivAvd* tempDiv = (DivAvd*)divAvdListe->remove(temp);
+
+			tempDiv->lesResultat(oppdater, inn); // Sjekker data innenfor divisjon og oppdaterer dem om oppdater == true
+
+			divAvdListe->add(tempDiv);	// Legger divisjonen tilbake i listen
+		}
+		else // temp eksisterer ikke
+		{
+			std::cout << "Divisjon " << temp << " eksisterer ikke!\n";
+			return false;
+		}
+
+
+
+
+	}
+
+
+
+	return true; // Hvis ingen fil er funnet vil koden komme hit og returnere true
+}
+
 void Idrett::skrivTilFil(std::ofstream& ut) {
 	ut << tabellType << std::endl; // Kommer muligens ikke til å skrive riktig verdi
 

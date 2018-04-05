@@ -163,6 +163,32 @@ void DivAvd::display()
 	}
 }
 
+// Sjekker eller leser inn dataer til en divisjon
+bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
+	int antallDatoer, antallKamper;
+	char tempDato[9];
+
+	inn >> antallDatoer; // Henter antall datoer
+	inn.ignore();
+
+	// Hver loop sjekker en dato
+	for (int i = 0; i < antallDatoer; i++)
+	{
+		inn >> tempDato; // Henter en dato
+		inn.ignore();
+
+		inn >> antallKamper; // Henter antall kamper
+		inn.ignore();
+
+		for (int i = 0; i < antallKamper; i++)
+		{
+			// SJekk om datoen for kampen mellom dem er riktig
+		}
+	}
+
+	return true;
+}
+
 void DivAvd::skrivTilFil(ofstream& ut) {
 	ut << text << endl; // skriver inn divisjonsnavn
 	ut << antLag << endl << endl;

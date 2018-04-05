@@ -23,8 +23,9 @@ public:
 	void redigerSpiller();
 	void display();									// Displayer I A spesifik info
 	void displayResten();							// Displayer I <navn> spesifik info
-	void skrivTilFil(std::ofstream&);
 	char* hentNavn();								//returnerer navn
+	bool lesResultat(bool oppdater, std::ifstream&);
+	void skrivTilFil(std::ofstream&);
 };
 
 #endif

@@ -141,7 +141,14 @@ void skrivTabell() {
 
 // (R)Les resultatliste fra fil
 void lesResultat() {
+	ifstream inn("RESULTAT.DTA");
 
+
+	if (idrettene.lesResultat(false, inn)) // Sjekker om resultater fra RESULTAT.DTA er akseptable 
+		idrettene.lesResultat(true, inn); // Leser inn resultater fra RESULTAT.DTA 
+
+
+	inn.close();
 }
 
 // (D)Data om alle spillerne i et lag

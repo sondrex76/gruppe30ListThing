@@ -22,6 +22,7 @@ public:
 	void skrivLag();
 	void redigerSpiller();
 	void display();
+	bool lesResultat(bool oppdater, std::ifstream&);
 	void skrivTilFil(std::ofstream&);
 };
 
