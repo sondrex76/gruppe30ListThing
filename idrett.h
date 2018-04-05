@@ -21,6 +21,7 @@ public:
 	bool harDiv(char* navn);						//returnerer om har en viss div
 	void skrivLag();
 	void redigerSpiller();
+	void sporDato(char* div);
 	void display();									// Displayer I A spesifik info
 	void displayResten();							// Displayer I <navn> spesifik info
 	char* hentNavn();								//returnerer navn

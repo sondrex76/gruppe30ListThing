@@ -131,7 +131,16 @@ void skrivTerminListe() {
 
 // (K)skriv resultatet av alle kampene en gitt dato for ne idrett eller en divisjon til skjerm eller fil
 void skrivKampene() {
+	char navn[STRLEN];            //spør om idrettnavn
+	cin.ignore();
+	les("Skriv inn navn pa idrett", navn, STRLEN);
 
+	while (!idrettene.harIdrett(navn))
+	{
+		les("Finner ikke idretten. Prov pa nytt", navn, STRLEN);
+	}
+
+	idrettene.skrivDato(navn);
 }
 
 // (T)Skriv tabell(er) for en hel idrett eller en divisjon til fil eller skjerm

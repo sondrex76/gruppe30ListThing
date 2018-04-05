@@ -139,6 +139,24 @@ bool Idrettene::harIdrett(char* navn)
 	return idrettListe->inList(navn);
 }
 
+void Idrettene::skrivDato(char* navn)
+{
+	for (int i = 1; i <= idrettListe->noOfElements(); i++)
+	{
+		Idrett* temp = (Idrett*)idrettListe->removeNo(i); //temp
+
+		if (!strcmp(temp->hentNavn(), navn))        //hvis match
+		{
+			cout << "Skriv inn divisjonsnavn: ";
+			cin.getline(navn, STRLEN);
+
+			temp->sporDato(navn);
+		}
+
+		idrettListe->add(temp);            //legger tilbake i lista
+	}
+}
+
 void Idrettene::skrivLag(char* navn)
 {
 		Idrett* temp = (Idrett*)idrettListe->remove(navn); // Lager temp
