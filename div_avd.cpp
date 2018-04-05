@@ -11,29 +11,16 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn, bool start) : TextElement(avd
 	inn.ignore();
 	inn.ignore();
 
-	if (start) // starten av programmet
+
+	// cout << antLag << endl; // DEBUG
+
+	// Leser inn alle lag
+	for (int i = 0; i < antLag; i++)
 	{
+		lag[i] = new Lag(inn, start);
+		inn.ignore();
 
-		// cout << antLag << endl; // DEBUG
-
-		// Leser inn alle lag
-		for (int i = 0; i < antLag; i++)
-		{
-			lag[i] = new Lag(inn, start);
-			inn.ignore();
-
-			// cout << lag[i] << endl; // DEBUG
-		}
-	}
-	else { // leser inn fra en ny_div fil
-		// cout << antLag << endl; // DEBUG
-
-		// Leser inn alle lag
-		for (int i = 0; i < antLag; i++)
-		{
-			lag[i] = new Lag(inn, start);
-			inn.ignore();
-		}
+		// cout << lag[i] << endl; // DEBUG
 	}
 
 	char tempVerdi[9]; // lagrer dato
@@ -182,60 +169,64 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 		inn >> antallKamper; // Henter antall kamper
 		inn.ignore();
 
+		cout << "DEBUG: " << antallDatoer << ", " << tempDato << ", " << antallKamper << endl;
+
 		// Går gjennom alle kamper og sjekker om lagene eksisterer
 		for (int i = 0; i < antallKamper; i++)
 		{
 			lagHjemmeFins = lagBorteFins = false; // resetter begge verdier
 			inn.ignore();
 
-			inn >> lagHjemme;
-			inn.ignore();
-
-			inn >> lagBorte;
-			inn.ignore();
-
 			// Sjekker om lagene finnes
 			for (int i = 0; i < antLag; i++)
 			{
+				inn.getline(lagHjemme, STRLEN);
+				inn.getline(lagBorte, STRLEN);
+
 				if (!strcmp(lagHjemme, lag[i]->sendNavn())) // sjekker om de to char arrayene er like
 				{
 					lagHjemmeFins = true;
 					hjemme = i;
-					break; // går ut av ytterste for loop
 				}
 
 				if (!strcmp(lagBorte, lag[i]->sendNavn())) // sjekker om de to char arrayene er like
 				{
 					lagBorteFins = true;
 					borte = i;
-					break; // går ut av ytterste for loop
 				}
-			}
 
-			// Sjekker om bortelaget ikke eksisterer
-			if (!lagBorteFins)
-			{
-				cout << "Laget " << lagBorte << " eksisterer ikke!\n";
-				return false;
+				cout << "DEBUG: " << lagHjemme << ", " << lagBorte << endl; // DEBUG
+
+				// Går ut av ytterste for loop hvis begge har blitt funnet
+				if (lagBorteFins == lagHjemmeFins == true) break;
 			}
 
 			// Sjekker om hjemmelaget ikke eksisterer
 			if (!lagHjemmeFins)
 			{
-				cout << "Laget " << lagHjemme << " eksisterer ikke!\n";
+				cout << "Laget(hjemme) " << lagHjemme << " eksisterer ikke!\n";
+				return false;
+			}
+
+			// Sjekker om bortelaget ikke eksisterer
+			if (!lagBorteFins)
+			{
+				cout << "Laget(borte) " << lagBorte << " eksisterer ikke!\n";
 				return false;
 			}
 
 			// Sjekk om datoen for kampen mellom dem er riktig eller skriver dataen inn
 			if (oppdater) // Oppdaterer data på kampen på datoen epesifisert mellom lagene
 			{
-
+				resultater[hjemme][borte]->lesResultat(inn, false); // leser inn resultatene
 			}
-			// Sjekker om det fins en kamp mellom de to lagene på den datoen
-			else { 
-				if (!strcmp(resultater[hjemme][borte]->returnDato(), tempDato)) // Sjekker om kampen mellom de to lagene var på den satte datoen
+			else {
+				// Sjekker om det fins en kamp mellom de to lagene på den datoen
+				if (!strcmp(resultater[hjemme][borte]->returnDato(), tempDato)) // Sjekker om kampen mellom de to lagene er like
 				{
-					resultater[hjemme][borte]->lesResultat(inn, false); // leser inn resultatene
+					inn.ignore();
+					inn.ignore();
+					inn.ignore();
 				}
 				else
 				{

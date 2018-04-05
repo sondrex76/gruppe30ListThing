@@ -229,16 +229,6 @@ bool Idrettene::lesResultat(bool oppdater, ifstream& inn) {
 		}
 	}
 
-
-	if (oppdater)
-	{
-
-	}
-	else
-	{
-
-	}
-
 	// Hvis ingenting har returnert false til nå returnerer den true
 	return true;
 }
