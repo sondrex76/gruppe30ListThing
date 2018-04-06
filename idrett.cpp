@@ -29,7 +29,7 @@ Idrett::Idrett(char* indrettsNavn, std::ifstream& inn) : TextElement(indrettsNav
 	// Setter over til typen
 	tabellType = (TabellType)numRepetasjoner;
 
-	std::cout << "Tabell type: " << tabellType << std::endl; // DEBUG
+	// std::cout << "Tabell type: " << tabellType << std::endl; // DEBUG
 
 	inn >> numRepetasjoner; // Henter nummeret av avdelinger
 	inn.ignore();

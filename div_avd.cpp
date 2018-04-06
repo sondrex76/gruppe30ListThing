@@ -11,7 +11,6 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn, bool start) : TextElement(avd
 	inn.ignore();
 	inn.ignore();
 
-
 	// cout << antLag << endl; // DEBUG
 
 	// Leser inn alle lag
@@ -31,14 +30,15 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn, bool start) : TextElement(avd
 		for (int n = 0; n < antLag; n++)
 		{
 			inn >> tempVerdi; // Henter den første verdien
-							  //cout << tempVerdi << endl; // DEBUG
 
 			if (strcmp(tempVerdi, "0")) // Hvis dette opsettet eksisterer
 			{
+				// cout << i << ", " << n << " - 1" << endl; // DEBUG
 				resultater[i][n] = new Resultat(inn, tempVerdi);
 			}
 			else
 			{
+				// cout << i << ", " << n << " - 0" << endl; // DEBUG
 				resultater[i][n] = nullptr;
 				inn.ignore();
 			}
@@ -246,20 +246,13 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 			}
 			else 
 			{
-				// Sjekker om en kamp mellom de to lagene allerede har forekommet og rapporterer denne logiske feilen hvis den er funnet
-				/*
-				if (resultater[hjemme][borte] != nullptr && resultater[borte][hjemme] != nullptr)
-				{
-					// Dato blir også spesifisert for å gjøre det enklere å identifisere stedet problemet forekom
-					cout << "Det finnes allerede en kamp mellom lagene " << lagHjemme << " og " << lagBorte << " i divisjonen " << text << "!\nDato er " << tempDato << ".\n";
-					return false;
-				}
-				*/
-
 				// Sjekker om det fins bare en kamp mellom de to lagene på den rette datoen
 				if ((!strcmp(resultater[hjemme][borte]->returnDato(), tempDato) ||
 					!strcmp(resultater[borte][hjemme]->returnDato(), tempDato)))  // resultater[borte][hjemme] eksisterer
 				{
+					cout << "DEBUG:\n";
+					cout << (resultater[hjemme][borte] == nullptr) << ", " << (resultater[borte][hjemme] == nullptr) << endl;
+
 					// Sjekker om det allerede fins en kamp mellom de to lagene, som ville være en logisk feil
 					// Denne logiske filen kommer hvis mer enn ett resultat mellom dem eksisterer
 					// Feilen kommer også hvis det bare er et resultat, men det ikke er et tomt resultat
@@ -281,6 +274,27 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 						// cout << "DEBUG(3): " << t << endl; // DEBUG
 					}
 					else {
+						// DEBUG
+						if ((
+							resultater[hjemme][borte] != nullptr &&
+							resultater[borte][hjemme] == nullptr))
+						{
+							if
+								(resultater[hjemme][borte]->erTom()) cout << "!1\n";
+							else cout << "1 er ikke tom!\n";
+						}
+						else cout << "1 har ikke en nullptr og en ikke nullptr!\n";
+
+						if ((
+							resultater[borte][hjemme] != nullptr &&
+							resultater[hjemme][borte] == nullptr))
+						{
+							if (resultater[borte][hjemme]->erTom()) cout << "!2\n";
+							else cout << "2\n";
+						}
+						else cout << "2 har ikke en nullptr og en ikke nullptr!\n";
+
+						// Actual code
 						cout << "Det er allerede en kamp mellom " << lagHjemme << " og " << lagBorte << " registrert!" << endl;
 						return false;
 					}

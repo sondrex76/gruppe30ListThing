@@ -35,6 +35,9 @@ void Resultat::lesResultat(std::ifstream& inn) {
 	inn >> normalTid;
 	inn.ignore();
 
+	//if (!hjemmemaal) inn.ignore();
+	//if (!bortemaal) inn.ignore();
+
 	int tempInt;
 
 	for (int i = 0; i < hjemmemaal; i++)
@@ -77,6 +80,5 @@ void Resultat::skrivTilFil(ofstream& ut) {
 
 // Sjekker om resultatet er tomt
 bool Resultat::erTom() {
-	if (hjemmemaal == bortemaal == 0) return true;
-	else return false;
+	return (hjemmemaal == 0 && bortemaal == 0);
 }
