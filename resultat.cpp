@@ -33,10 +33,10 @@ void Resultat::lesResultat(std::ifstream& inn) {
 	inn >> hjemmemaal;
 	inn >> bortemaal;
 	inn >> normalTid;
-	inn.ignore();
 
-	//if (!hjemmemaal) inn.ignore();
-	//if (!bortemaal) inn.ignore();
+	cout << "hjemme: " << hjemmemaal << "\nborte: " << bortemaal << "\nTid: " << normalTid << endl;
+
+	if (hjemmemaal) inn.ignore();
 
 	int tempInt;
 
@@ -47,7 +47,7 @@ void Resultat::lesResultat(std::ifstream& inn) {
 		hjemmeSkorer[i] = tempInt;
 	}
 
-	inn.ignore();
+	if (bortemaal) inn.ignore();
 
 	for (int i = 0; i < bortemaal; i++)
 	{
@@ -69,13 +69,13 @@ void Resultat::skrivTilFil(ofstream& ut) {
 		ut << hjemmeSkorer[i] << " ";
 	}
 
-	ut << endl;
+	if (hjemmemaal) ut << endl;
 
 	for (int i = 0; i < bortemaal; i++) {
 		ut << borteSkorer[i] << " ";
 	}
 
-	ut << endl;
+	if (bortemaal) ut << endl;
 }
 
 // Sjekker om resultatet er tomt

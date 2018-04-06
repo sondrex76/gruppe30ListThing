@@ -250,7 +250,6 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 				if ((!strcmp(resultater[hjemme][borte]->returnDato(), tempDato) ||
 					!strcmp(resultater[borte][hjemme]->returnDato(), tempDato)))  // resultater[borte][hjemme] eksisterer
 				{
-					cout << "DEBUG:\n";
 					cout << (resultater[hjemme][borte] == nullptr) << ", " << (resultater[borte][hjemme] == nullptr) << endl;
 
 					// Sjekker om det allerede fins en kamp mellom de to lagene, som ville være en logisk feil
@@ -275,6 +274,8 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 					}
 					else {
 						// DEBUG
+						/*
+						cout << "DEBUG:\n";
 						if ((
 							resultater[hjemme][borte] != nullptr &&
 							resultater[borte][hjemme] == nullptr))
@@ -293,8 +294,8 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 							else cout << "2\n";
 						}
 						else cout << "2 har ikke en nullptr og en ikke nullptr!\n";
+						*/
 
-						// Actual code
 						cout << "Det er allerede en kamp mellom " << lagHjemme << " og " << lagBorte << " registrert!" << endl;
 						return false;
 					}
@@ -326,7 +327,8 @@ void DivAvd::skrivTilFil(ofstream& ut) {
 	{
 		for (int n = 0; n < antLag; n++)
 		{
-			if (i != n) // To lag skal mot hverandre
+			// Sjekker at lagene ikke er det samme og at det er et resultat å skrive ut
+			if (i != n && resultater[i][n] != nullptr) // To lag skal mot hverandre
 			{
 				resultater[i][n]->skrivTilFil(ut);
 			}
