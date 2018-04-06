@@ -261,7 +261,7 @@ bool Idrett::lesResultat(bool oppdater, std::ifstream& inn) {
 			return false;
 		}
 	}
-	return true; // Hvis ingen fil er funnet vil koden komme hit og returnere true
+	return true; // Hvis ingen feil er funnet vil koden komme hit og returnere true
 }
 
 void Idrett::skrivTilFil(std::ofstream& ut) {

@@ -17,6 +17,7 @@ public:
 	void lesResultat(std::ifstream&);	// Leser resultater
 	void skrivTilFil(std::ofstream&);	// Skriv til fil
 	void display();						//viser bare dato og mål nå
+	bool erTom();						// Sjekkeer om resultatet er tomt
 };
 
 #endif

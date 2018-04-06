@@ -74,3 +74,9 @@ void Resultat::skrivTilFil(ofstream& ut) {
 
 	ut << endl;
 }
+
+// Sjekker om resultatet er tomt
+bool Resultat::erTom() {
+	if (hjemmemaal == bortemaal == 0) return true;
+	else return false;
+}

@@ -256,21 +256,38 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 				}
 				*/
 
-				// Sjekker om det fins en kamp mellom de to lagene på den datoen
-				if (resultater[hjemme][borte] != nullptr && !strcmp(resultater[hjemme][borte]->returnDato(), tempDato)) // Sjekker om kampen mellom de to lagene er like
+				// Sjekker om det fins bare en kamp mellom de to lagene på den rette datoen
+				if ((!strcmp(resultater[hjemme][borte]->returnDato(), tempDato) ||
+					!strcmp(resultater[borte][hjemme]->returnDato(), tempDato)))  // resultater[borte][hjemme] eksisterer
 				{
-					char t[STRLEN]; // Lagrer verdiene slik at de kan bli forkastet, inn.ignore() ignorerte bare fram itl neste element
+					// Sjekker om det allerede fins en kamp mellom de to lagene, som ville være en logisk feil
+					// Denne logiske filen kommer hvis mer enn ett resultat mellom dem eksisterer
+					// Feilen kommer også hvis det bare er et resultat, men det ikke er et tomt resultat
+					if (((resultater[hjemme][borte] != nullptr &&
+						resultater[borte][hjemme] == nullptr &&
+						resultater[hjemme][borte]->erTom()) || (
+						resultater[borte][hjemme] != nullptr &&
+						resultater[hjemme][borte] == nullptr && 
+						resultater[borte][hjemme]->erTom())))
+					{
+						char t[STRLEN];
 
-					inn.getline(t, STRLEN);
-					// cout << "DEBUG(1): " << t << endl; // DEBUG
-					inn.getline(t, STRLEN);
-					// cout << "DEBUG(2): " << t << endl; // DEBUG
-					inn.getline(t, STRLEN);
-					// cout << "DEBUG(3): " << t << endl; // DEBUG
+						inn.getline(t, STRLEN);
+
+						// cout << "DEBUG(1): " << t << endl; // DEBUG
+						inn.getline(t, STRLEN);
+						// cout << "DEBUG(2): " << t << endl; // DEBUG
+						inn.getline(t, STRLEN);
+						// cout << "DEBUG(3): " << t << endl; // DEBUG
+					}
+					else {
+						cout << "Det er allerede en kamp mellom " << lagHjemme << " og " << lagBorte << " registrert!" << endl;
+						return false;
+					}
 				}
 				else
 				{
-					cout << "Det var ingen kamp mellom hjemmelaget " << lagHjemme << " og bortelaget " << lagBorte << " på datoen " << tempDato << "!" << endl;
+					cout << "Det var ingen kamp mellom " << lagHjemme << " og " << lagBorte << " på datoen " << tempDato << "!" << endl;
 
 					return false;
 				}

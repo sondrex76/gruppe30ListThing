@@ -237,7 +237,7 @@ bool Idrettene::lesResultat(bool oppdater) {
 			inn.ignore();
 
 			tempBool = tempIdrett->lesResultat(oppdater, inn);
-
+			inn.ignore();
 			idrettListe->add(tempIdrett); // Legger tilbake idretten i listen
 
 			// Hvis indrettens data i RESULTAT.DTA hadde feil returnerer den false(og lukker ifstream)
