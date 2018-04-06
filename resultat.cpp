@@ -22,6 +22,12 @@ char* Resultat::returnDato() {
 	return dato;
 }
 
+void Resultat::display()
+{
+	cout << "Dato: " << dato << ". Resultat: " << hjemmemaal
+		 << " - " << bortemaal << endl;
+}
+
 // leser inn resultatene til spesifik dato
 void Resultat::lesResultat(std::ifstream& inn) {
 	inn >> hjemmemaal;

@@ -16,6 +16,7 @@ public:
 	char* returnDato();					// Returnerer dato
 	void lesResultat(std::ifstream&);	// Leser resultater
 	void skrivTilFil(std::ofstream&);	// Skriv til fil
+	void display();						//viser bare dato og mål nå
 };
 
 #endif

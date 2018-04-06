@@ -169,29 +169,44 @@ void Idrett::redigerSpiller()
 
 void Idrett::sporDato(char* div)
 {
+	char dato[DATOLEN];
+	les("Skriv inn dato", dato, DATOLEN, true);
+	//int dato = les("Skriv inn dato(aaaammdd)", 0, 99999999);
 
-	int dato = les("Skriv inn dato(aaaammdd)", 0, 99999999);
-
-	std::cout << "Skriv inn filnavn: ";
+	/*std::cout << "Skriv inn filnavn: ";
 	char filnavn[STRLEN];
-	std::cin.getline(filnavn, STRLEN);
-	char svar;
-	do
+	std::cin.getline(filnavn, STRLEN);*/
+	//char svar;
+	/*do
 	{
 		std::cout << "Vil du skrive til fil eller til skjerm? (F/S)";
 		svar = les(true);
-	} while (svar != 'F' && svar != 'S');
-	std::cout << svar;
+	} while (svar != 'F' && svar != 'S');*/
+	
 
 	if (harDiv(div))
 	{
 		//skriver alle kampene fra en viss div fra denne idretten
 		std::cout << "Har divisjon\n";
+
 	}
 	else
 	{
 		//skriver alle kampene fra alle divs fra denne idretten
 		std::cout << "Har ikke div\n";
+		DivAvd* temp = nullptr;
+		for (int i = 0; i < divAvdListe->noOfElements(); i++)
+		{
+			temp = (DivAvd*)divAvdListe->removeNo(i);
+			for (int i = 0; i < MAXLAG; i++)
+			{
+				for (int j = 0; j < MAXLAG; j++)
+				{
+					temp->sjekkDato(dato, i, j);
+				}
+			}
+			divAvdListe->add(temp);
+		}
 	}
 }
 

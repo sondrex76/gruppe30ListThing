@@ -92,6 +92,20 @@ void DivAvd::skrivLag()
 	} while (!isQ(div)); // kjører til div er Q
 }
 
+void DivAvd::sjekkDato(char* tall, int x, int y)
+{
+	
+	if (resultater[x][y]->returnDato())
+	{
+		
+		if (!strcmp(resultater[x][y]->returnDato(), tall))
+		{
+			resultater[x][y]->display();
+			
+		}
+	}
+}
+
 // Redigerer spillere på et lag, man kan enten legge til eller fjerne en spiller
 void DivAvd::redigerSpiller()
 {

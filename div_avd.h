@@ -21,6 +21,7 @@ public:
 	//void lagLag();
 	void skrivLag();
 	void redigerSpiller();
+	void sjekkDato(char* tall, int x, int y);
 	void display();
 	bool lesResultat(bool oppdater, std::ifstream&);
 	void skrivTilFil(std::ofstream&);
