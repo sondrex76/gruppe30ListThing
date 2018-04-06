@@ -39,6 +39,7 @@ int main() {
 		case 'R': lesResultat(); break;
 		case 'D': skrivLag(); break;
 		case 'E': redigerSpiller(); break;
+		case 'Q': break;
 		default: skrivMeny();
 		}
 	} while (kommando != 'Q');

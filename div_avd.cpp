@@ -241,16 +241,19 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 			// Sjekk om datoen for kampen mellom dem er riktig eller skriver dataen inn
 			if (oppdater) // Oppdaterer data på kampen på datoen epesifisert mellom lagene
 			{
-				resultater[hjemme][borte]->lesResultat(inn); // leser inn resultatene
+				if (resultater[hjemme][borte] != nullptr)
+					resultater[hjemme][borte]->lesResultat(inn); // leser inn resultatene
+				else resultater[borte][hjemme]->lesResultat(inn);
 				// cout << "DEBUG: Suksess!\n"; // DEBUG
 			}
 			else 
 			{
 				// Sjekker om det fins bare en kamp mellom de to lagene på den rette datoen
-				if ((!strcmp(resultater[hjemme][borte]->returnDato(), tempDato) ||
-					!strcmp(resultater[borte][hjemme]->returnDato(), tempDato)))  // resultater[borte][hjemme] eksisterer
+				if ((resultater[hjemme][borte]  != nullptr && !strcmp(resultater[hjemme][borte]->returnDato(), tempDato) ||
+					resultater[borte][hjemme] != nullptr && !strcmp(resultater[borte][hjemme]->returnDato(), tempDato)))  // resultater[borte][hjemme] eksisterer
 				{
-					cout << (resultater[hjemme][borte] == nullptr) << ", " << (resultater[borte][hjemme] == nullptr) << endl;
+					// DEBUG
+					// cout << (resultater[hjemme][borte] == nullptr) << ", " << (resultater[borte][hjemme] == nullptr) << endl;
 
 					// Sjekker om det allerede fins en kamp mellom de to lagene, som ville være en logisk feil
 					// Denne logiske filen kommer hvis mer enn ett resultat mellom dem eksisterer

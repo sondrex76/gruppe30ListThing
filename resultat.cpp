@@ -34,7 +34,7 @@ void Resultat::lesResultat(std::ifstream& inn) {
 	inn >> bortemaal;
 	inn >> normalTid;
 
-	cout << "hjemme: " << hjemmemaal << "\nborte: " << bortemaal << "\nTid: " << normalTid << endl;
+	// cout << "hjemme: " << hjemmemaal << "\nborte: " << bortemaal << "\nTid: " << normalTid << endl; // DEBUG
 
 	if (hjemmemaal) inn.ignore();
 
