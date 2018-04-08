@@ -169,45 +169,75 @@ void Idrett::redigerSpiller()
 
 void Idrett::sporDato(char* div)
 {
-	char dato[DATOLEN];
-	les("Skriv inn dato", dato, DATOLEN, true);
-	//int dato = les("Skriv inn dato(aaaammdd)", 0, 99999999);
-
-	/*std::cout << "Skriv inn filnavn: ";
-	char filnavn[STRLEN];
-	std::cin.getline(filnavn, STRLEN);*/
-	//char svar;
-	/*do
-	{
-		std::cout << "Vil du skrive til fil eller til skjerm? (F/S)";
-		svar = les(true);
-	} while (svar != 'F' && svar != 'S');*/
 	
+	char filnavn[STRLEN];
+	
+	std::cout << "\tSkriv inn filnavn (inkludert ending) : ";
+	std::cin.getline(filnavn, STRLEN);
 
-	if (harDiv(div))
-	{
-		//skriver alle kampene fra en viss div fra denne idretten
-		std::cout << "Har divisjon\n";
+	char dato[DATOLEN];
+	les("Skriv inn dato (aaaammdd)", dato, DATOLEN, true);
 
-	}
-	else
+
+	if (!std::ifstream(filnavn))
 	{
-		//skriver alle kampene fra alle divs fra denne idretten
-		std::cout << "Har ikke div\n";
-		DivAvd* temp = nullptr;
+		bool enDiv = false;		//sjekker om man vil skrive ut fra en viss div
+
+		if (harDiv(div))
+		{
+			//skriver alle kampene fra en viss div fra denne idretten
+			std::cout << "Skriver ut fra divisjon " << div << std::endl;
+			enDiv = true;
+		}
+		else
+		{
+			//skriver alle kampene fra alle divs fra denne idretten
+			std::cout << "Skriver ut fra alle divisjoner.\n";
+		}
+		std::cout << std::endl;
+
+		DivAvd* temp = nullptr;				//sjekker navn og dato
 		for (int i = 0; i < divAvdListe->noOfElements(); i++)
 		{
 			temp = (DivAvd*)divAvdListe->removeNo(i);
-			for (int i = 0; i < MAXLAG; i++)
+
+			if (enDiv)	//hvis 1 div, skriver bare ut når divnavn er like
 			{
-				for (int j = 0; j < MAXLAG; j++)
+				if (!strcmp(temp->hentNavn(), div))
 				{
-					temp->sjekkDato(dato, i, j);
+					for (int i = 0; i < MAXLAG; i++)
+					{
+						for (int j = 0; j < MAXLAG; j++)
+						{
+							//alle kamper må sjekkes, så jeg bruker en
+							//2-dim. array, og dersom datoen matcher
+							//så skrives resultatet ut
+							
+							temp->sjekkDato(dato, i, j);
+						}
+					}
+				}
+			}
+			//hvis ikke skrives kamper fra alle divisjoner på gitt dato
+			else
+			{
+				for (int i = 0; i < MAXLAG; i++)
+				{
+					for (int j = 0; j < MAXLAG; j++)
+					{
+						temp->sjekkDato(dato, i, j);
+					}
 				}
 			}
 			divAvdListe->add(temp);
+
 		}
 	}
+	else
+	{
+		//skriver til fil
+	}
+	std::cout << std::endl;
 }
 
 // Skriver ut objektets verdier(eksklusivt verdier som trengs i I A)

@@ -68,10 +68,10 @@ void Idrettene::leggTilDiv(int nr)
 
 	// Finn filnavn eller skriv inn Q
 
-	cout << "Skriv inn Q for å avbryte\n";
+	cout << "Skriv inn Q for a avbryte\n";
 
 	do {
-		les("Skriv inn navn på fil(inkludert ending)", navn, STRLEN);
+		les("Skriv inn navn pa fil(inkludert ending)", navn, STRLEN);
 		
 		// Sjekker om filen eksisterer
 	} while (!ifstream(navn) && !isQ(navn));
@@ -84,7 +84,7 @@ void Idrettene::leggTilDiv(int nr)
 
 		// Loop kjører til q er skrevet, eller ett nytt avdelingsnavn er skrevet
 		do {
-			les("Skriv inn navnet på div/avd", navn, STRLEN);
+			les("Skriv inn navnet pa div/avd", navn, STRLEN);
 		} while (!temp->leggTilDiv(nyDiv, navn) && !isQ(navn));
 
 		nyDiv.close(); // Lukker filen
@@ -103,13 +103,13 @@ void Idrettene::fjernIdrett(char* navn)
 		Idrett* temp = (Idrett*)idrettListe->remove(navn);
 
 		//dobbeltsjekker at man vil slette
-		cout << "Skriv Y for å bekrefte at du ønsker å slette idretten " << navn << endl;
+		cout << "Skriv Y for a bekrefte at du onsker å slette idretten " << navn << endl;
 		
 		// Sjekekr om brukeren skrev in Y for å bekrefte sletting av idretten
 		if (les(false) != 'Y')
 		{
 			idrettListe->add(temp);
-			cout << "SLetting av idretten " << navn << " har blitt avbrutt.\n";
+			cout << "Sletting av idretten " << navn << " har blitt avbrutt.\n";
 		}
 		else
 			delete temp; // Sletter idretten
@@ -147,7 +147,7 @@ void Idrettene::skrivDato(char* navn)
 
 		if (!strcmp(temp->hentNavn(), navn))        //hvis match
 		{
-			cout << "Skriv inn divisjonsnavn: ";
+			cout << "\tSkriv inn divisjonsnavn: ";
 			cin.getline(navn, STRLEN);
 
 			temp->sporDato(navn);

@@ -85,7 +85,10 @@ void Spillere::fjernSpiller(int nr)
 	// temp->display(); // DEBUG
 
 	if (temp != nullptr)
+	{
 		delete temp; // Fjerner spiller nr
+		cout << "Fjern lagfolk";
+	}
 	else
 		cout << "Spiller nummer " << nr << " eksisterer ikke, spilleren må ikke ha blitt registrert\nDenne beskjen burde ikke aldri komme opp!\n";
 
