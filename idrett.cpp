@@ -167,27 +167,28 @@ void Idrett::redigerSpiller()
 	}
 }
 
+//Spør om dato og skriver ut til skjerm/fil om den finner match
 void Idrett::sporDato(char* div)
 {
 	
-	char filnavn[STRLEN];
+	char filnavn[STRLEN];		//for å sjekke om man vil skrive til fil
 	
 	std::cout << "\tSkriv inn filnavn (inkludert ending) : ";
 	std::cin.getline(filnavn, STRLEN);
 
-	char dato[DATOLEN];
+	char dato[DATOLEN];						//for å sjekke dato
 	les("Skriv inn dato (aaaammdd)", dato, DATOLEN, true);
 
 
 	if (!std::ifstream(filnavn))
 	{
-		bool enDiv = false;		//sjekker om man vil skrive ut fra en viss div
+		bool enDiv = false;	//sjekker om man vil skrive ut fra en viss div
 
 		if (harDiv(div))
 		{
 			//skriver alle kampene fra en viss div fra denne idretten
 			std::cout << "Skriver ut fra divisjon " << div << std::endl;
-			enDiv = true;
+			enDiv = true;	 //hvis diven finnes så skriver man fra 1 div
 		}
 		else
 		{
@@ -197,22 +198,25 @@ void Idrett::sporDato(char* div)
 		std::cout << std::endl;
 
 		DivAvd* temp = nullptr;				//sjekker navn og dato
+
+		//looper igjennom divs
 		for (int i = 0; i < divAvdListe->noOfElements(); i++)
 		{
+			//temp for sammenligning av navn
 			temp = (DivAvd*)divAvdListe->removeNo(i);
 
 			if (enDiv)	//hvis 1 div, skriver bare ut når divnavn er like
 			{
-				if (!strcmp(temp->hentNavn(), div))
+				if (!strcmp(temp->hentNavn(), div))	//sammenligner navn
 				{
-					for (int i = 0; i < MAXLAG; i++)
+					for (int i = 0; i < MAXLAG; i++)	//looper igjennom
 					{
 						for (int j = 0; j < MAXLAG; j++)
 						{
 							//alle kamper må sjekkes, så jeg bruker en
 							//2-dim. array, og dersom datoen matcher
 							//så skrives resultatet ut
-							
+							if(i!=j)
 							temp->sjekkDato(dato, i, j);
 						}
 					}
@@ -225,11 +229,13 @@ void Idrett::sporDato(char* div)
 				{
 					for (int j = 0; j < MAXLAG; j++)
 					{
+						
+						if(i!=j)
 						temp->sjekkDato(dato, i, j);
 					}
 				}
 			}
-			divAvdListe->add(temp);
+			divAvdListe->add(temp);			//legger tilbake i lista
 
 		}
 	}

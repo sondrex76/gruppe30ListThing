@@ -139,18 +139,22 @@ bool Idrettene::harIdrett(char* navn)
 	return idrettListe->inList(navn);
 }
 
-void Idrettene::skrivDato(char* navn)
+//skriver ut kamp basert på dato
+void Idrettene::skrivKamp(char* navn)
 {
+	//for alle idretter
 	for (int i = 1; i <= idrettListe->noOfElements(); i++)
 	{
 		Idrett* temp = (Idrett*)idrettListe->removeNo(i); //temp
 
 		if (!strcmp(temp->hentNavn(), navn))        //hvis match
 		{
+			char divisjon[STRLEN];
 			cout << "\tSkriv inn divisjonsnavn: ";
-			cin.getline(navn, STRLEN);
+			cin.getline(divisjon, STRLEN);
 
-			temp->sporDato(navn);
+			temp->sporDato(divisjon);	//sjekker idretten sine kamper
+										//og sender med divisjonsnavn
 		}
 
 		idrettListe->add(temp);            //legger tilbake i lista

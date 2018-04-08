@@ -140,7 +140,7 @@ void skrivKampene() {
 		les("Finner ikke idretten. Prov pa nytt", navn, STRLEN);
 	}
 
-	idrettene.skrivDato(navn);
+	idrettene.skrivKamp(navn);				//sender med idretten
 }
 
 // (T)Skriv tabell(er) for en hel idrett eller en divisjon til fil eller skjerm
