@@ -139,6 +139,15 @@ bool Idrettene::harIdrett(char* navn)
 	return idrettListe->inList(navn);
 }
 
+void Idrettene::skrivTerminListe(char* navn)
+{
+	Idrett* temp = (Idrett*)idrettListe->remove(navn); // Lager temp
+
+	temp->skrivTerminListe();						// Går videre
+
+	idrettListe->add(temp);					// Legger tilbake til listen
+}
+
 //skriver ut kamp basert på dato
 void Idrettene::skrivKamp(char* navn)
 {

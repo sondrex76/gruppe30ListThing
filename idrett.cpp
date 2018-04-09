@@ -128,6 +128,26 @@ bool Idrett::harIkkeDiv(char* navn)
 	return (!divAvdListe->inList(navn));
 }
 
+void Idrett::skrivTerminListe()
+{
+	char div[STRLEN];
+	do
+	{
+		les("Skriv inn gyldig divisjonsnavn", div, STRLEN);
+		if (!divAvdListe->inList(div)) std::cout << "Ugyldig divisjon!\n";
+		// Loopen forsetter til brukeren skriver Q eller skriver en gyldig divisjon
+	} while (!isQ(div) && !divAvdListe->inList(div));
+
+	if (!isQ(div))
+	{
+		DivAvd* temp = (DivAvd*)divAvdListe->remove(div);
+
+		temp->skrivTerminListe();
+
+		divAvdListe->add(temp);
+	}
+}
+
 void Idrett::skrivLag()
 {
 	char div[STRLEN];

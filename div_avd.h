@@ -20,6 +20,7 @@ public:
 	~DivAvd();								// Destruktor
 	char* hentNavn();						//returnerer 'navn'
 	//void lagLag();
+	void skrivTerminListe();
 	void skrivLag();
 	void redigerSpiller();
 	void sjekkDato(char* tall, int x, int y);

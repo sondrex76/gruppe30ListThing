@@ -24,7 +24,7 @@ char* Resultat::returnDato() {
 
 void Resultat::display()
 {
-	cout << "\tDato: " << dato << ". Resultat: " << hjemmemaal
+	cout << "\tDato: " << dato << "\tResultat: " << hjemmemaal
 		 << " - " << bortemaal << endl;
 }
 

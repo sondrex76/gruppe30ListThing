@@ -68,6 +68,46 @@ char* DivAvd::hentNavn()
 	return text;			//returnerer navn
 }
 
+void DivAvd::skrivTerminListe()
+{
+	char filnavn[STRLEN];
+	cout << "\tSkriv inn filnavn(klikk enter for a skrive til skjerm): ";
+	cin.getline(filnavn, STRLEN);	// Bruker ikke les funksjonen,
+									//fordi den ikke aksepterer "enter"
+	if (strlen(filnavn) == 0)		// Sjekker om brukeren svarte med "enter"
+	{
+		cout << "\n\n\tTerminliste:\n";
+		for (int i = 0; i < antLag; i++)
+		{
+			for (int n = 0; n < antLag; n++)
+			{
+				if (i != n && resultater[i][n] != nullptr) // To lag skal mot hverandre
+				{
+					resultater[i][n]->display();
+				}
+			}
+		}
+	}
+	else
+	{
+		cout << "Skrev til fil(" << filnavn << ".DTA)\n";
+		ofstream ut(filnavn);
+		for (int i = 0; i < antLag; i++)
+		{
+			for (int n = 0; n < antLag; n++)
+			{
+				// Sjekker at lagene ikke er det samme og at det er et resultat å skrive ut
+				if (i != n && resultater[i][n] != nullptr) // To lag skal mot hverandre
+				{
+					resultater[i][n]->skrivTilFil(ut);
+				}
+				else ut << 0 << endl; // Hvis lagene som skal mot hverandre er det samme
+			}
+		}
+		ut.close();
+	}
+}
+
 // Skriver ut spiller ID, navn og adresse til alle spillere på et lag
 void DivAvd::skrivLag()
 {

@@ -15,6 +15,7 @@ public:
 	void fjernIdrett(char* navn);		
 	void fjernDiv(char* navn);
 	bool harIdrett(char* navn);
+	void skrivTerminListe(char* navn);
 	void skrivKamp(char* navn);
 	void skrivLag(char* navn);
 	void redigerSpiller(char* navn);

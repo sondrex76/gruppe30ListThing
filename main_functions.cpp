@@ -126,7 +126,26 @@ void fjern() {
 
 // L Skriv terminliste for en gitt divisjon til skjerm eller fil
 void skrivTerminListe() {
+	//skriv inn idrett, div og lag
+	char navn[STRLEN];
+	cin.ignore();
 
+	// Kjører minst en gang og fortsetter til resultatet er Q eller en eksisterende idrett
+	cout << "Skriv Q for å avbryte\n";
+	// fortsetter så lenge navn != Q
+	do
+	{
+		les("Skriv inn navn pa gyldig idrett", navn, STRLEN);
+
+		if (!idrettene.harIdrett(navn) && !isQ(navn))
+			cout << "Idretten eksisterer ikke!\n";
+		else if (idrettene.harIdrett(navn)) break; // Avbryter loopen
+	} while (!isQ(navn));
+	// Loopen er avbrukk gjennom break,
+	// det er unødvendig å sjekke om loopen skal fortsette på dette punktet
+
+	if (!isQ(navn)) idrettene.skrivTerminListe(navn);
+	//hvis idrett eksisterer og idretten skrevet inn ikke er 'Q'
 }
 
 // (K)skriv resultatet av alle kampene en gitt dato for ne idrett eller en divisjon til skjerm eller fil
