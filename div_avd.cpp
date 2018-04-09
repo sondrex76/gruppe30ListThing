@@ -364,12 +364,21 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 	{
 		ofstream ut(filnavn, ios::app); // Skriver til fil utne å endre allerede eksisterende innhold
 
-		ut << "Dato" << "Hjemme/Borte" << "Overtid" << "Poeng" << setw(LENRESULTS);
-
-
 		// Skriv ut hele divisjonens tabell til fil
+		
+		ut << "" << setw(LEN_RESULTS);
+
 		for (int i = 0; i < antLag; i++)
 		{
+			ut << i << setw(LEN_RESULTS);
+		}
+
+		for (int i = 0; i < antLag; i++)
+		{
+			ut << i << ": " << lag[i]->sendNavn();
+
+
+
 
 		}
 
@@ -379,7 +388,7 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 		ut.close();
 	}
 	else {				// Skriv til skjerm
-		cout << "Dato" << "Hjemme/Borte" << "Overtid" << "Poeng" << setw(LENRESULTS);
+		cout << "Dato" << "Hjemme/Borte" << "Overtid" << "Poeng" << setw(LEN_RESULTS);
 
 		// SKriv ut hele divisjonens tabell til skjerm
 		for (int i = 0; i < antLag; i++)
