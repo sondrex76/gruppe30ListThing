@@ -6,6 +6,8 @@
 #include "globale_funksjoner.h"
 #include "div_avd.h"
 
+using namespace std;
+
 // Standard konstruktor
 Idrett::Idrett(char* indrettsNavn) : TextElement(indrettsNavn) {
 	divAvdListe = new List(Sorted);
@@ -16,7 +18,7 @@ Idrett::Idrett(char* indrettsNavn) : TextElement(indrettsNavn) {
 }
 
 // construktor for idrett når man leser fra fil
-Idrett::Idrett(char* indrettsNavn, std::ifstream& inn) : TextElement(indrettsNavn) {
+Idrett::Idrett(char* indrettsNavn, ifstream& inn) : TextElement(indrettsNavn) {
 	divAvdListe = new List(Sorted);	// Setter divAvd listetype til Sorted
 
 	char tempAvdNavn[STRLEN];
@@ -29,19 +31,19 @@ Idrett::Idrett(char* indrettsNavn, std::ifstream& inn) : TextElement(indrettsNav
 	// Setter over til typen
 	tabellType = (TabellType)numRepetasjoner;
 
-	// std::cout << "Tabell type: " << tabellType << std::endl; // DEBUG
+	// cout << "Tabell type: " << tabellType << endl; // DEBUG
 
 	inn >> numRepetasjoner; // Henter nummeret av avdelinger
 	inn.ignore();
 
-	// std::cout << "Nummer av divisjoner: " << numRepetasjoner << std::endl; // DEBUG
+	// cout << "Nummer av divisjoner: " << numRepetasjoner << endl; // DEBUG
 
 	// Hver kjøring av loopen henter en ny avdeling
 	for (int i = 1; i <= numRepetasjoner; i++)
 	{
 		inn.getline(tempAvdNavn, STRLEN);
 
-		// std::cout << "Divisjonsnavn: " << tempAvdNavn << std::endl; // DEBUG
+		// cout << "Divisjonsnavn: " << tempAvdNavn << endl; // DEBUG
 
 		DivAvd* tempDiv = new DivAvd(tempAvdNavn, inn, true);
 		divAvdListe->add(tempDiv); // legger til avdeling
@@ -58,7 +60,7 @@ char* Idrett::hentNavn() {
 	return text; // returnerer navn
 }
 									//legger til ny divisjon om mulig
-bool Idrett::leggTilDiv(std::ifstream& inn, char* navn)
+bool Idrett::leggTilDiv(ifstream& inn, char* navn)
 {
 	if (!divAvdListe->inList(navn))			// Hvis den ikke er i listen
 	{
@@ -72,7 +74,7 @@ bool Idrett::leggTilDiv(std::ifstream& inn, char* navn)
 	}
 	else
 	{
-		std::cout << "\tDette navnet finnes alt.\n";
+		cout << "\tDette navnet finnes alt.\n";
 		return false;
 	}
 }
@@ -84,7 +86,7 @@ void Idrett::slettDiv()
 	if (divAvdListe->noOfElements())
 	{
 		char divisjon[STRLEN];
-		std::cout << "\tSkriv Q for å avbryte\n";
+		cout << "\tSkriv Q for å avbryte\n";
 
 		do {
 			les("Skriv inn navn på divisjonen som skal slettes", divisjon, STRLEN);
@@ -94,7 +96,7 @@ void Idrett::slettDiv()
 
 		if (!isQ(divisjon)) // Hvis du ikke har avbrutt slettingen
 		{
-			std::cout << "Skriv J for å bekrefte at du ønsker å slette divisjonen " << divisjon << ": ";
+			cout << "Skriv J for å bekrefte at du ønsker å slette divisjonen " << divisjon << ": ";
 
 			// Sjekker om brukeren er sikker på at de ønsker å fjerne den valgte divisjonen
 			if (les(false) == 'J')
@@ -105,7 +107,7 @@ void Idrett::slettDiv()
 				// Sletter divisjonen
 				delete temp;
 			}
-			else std::cout << "Fjerning av divisjonen " << divisjon << " har blitt avbrutt!\n";
+			else cout << "Fjerning av divisjonen " << divisjon << " har blitt avbrutt!\n";
 		}
 	}
 }
@@ -132,7 +134,7 @@ void Idrett::skrivLag()
 	do
 	{
 		les("Skriv inn gyldig divisjonsnavn", div, STRLEN);
-		if (!divAvdListe->inList(div)) std::cout << "Ugyldig divisjon!\n";
+		if (!divAvdListe->inList(div)) cout << "Ugyldig divisjon!\n";
 		// Loopen forsetter til brukeren skriver Q eller skriver en gyldig divisjon
 	} while (!isQ(div) && !divAvdListe->inList(div));
 
@@ -153,7 +155,7 @@ void Idrett::redigerSpiller()
 	do {
 		les("Skriv inn gyldig divisjonsnavn", nvn, STRLEN);
 
-		if (!divAvdListe->inList(nvn)) std::cout << "Ugyldig divisjon!\n";
+		if (!divAvdListe->inList(nvn)) cout << "Ugyldig divisjon!\n";
 		// Loopen forsetter til brukeren skriver Q eller skriver en gyldig divisjon
 	} while (!isQ(nvn) && !divAvdListe->inList(nvn));
 
@@ -173,29 +175,29 @@ void Idrett::sporDato(char* div)
 	
 	char filnavn[STRLEN];		//for å sjekke om man vil skrive til fil
 	
-	std::cout << "\tSkriv inn filnavn (inkludert ending) : ";
-	std::cin.getline(filnavn, STRLEN);
+	cout << "\tSkriv inn filnavn (inkludert ending) : ";
+	cin.getline(filnavn, STRLEN);
 
 	char dato[DATOLEN];						//for å sjekke dato
 	les("Skriv inn dato (aaaammdd)", dato, DATOLEN, true);
 
 
-	if (!std::ifstream(filnavn))
+	if (!ifstream(filnavn))
 	{
 		bool enDiv = false;	//sjekker om man vil skrive ut fra en viss div
 
 		if (harDiv(div))
 		{
 			//skriver alle kampene fra en viss div fra denne idretten
-			std::cout << "Skriver ut fra divisjon " << div << std::endl;
+			cout << "Skriver ut fra divisjon " << div << endl;
 			enDiv = true;	 //hvis diven finnes så skriver man fra 1 div
 		}
 		else
 		{
 			//skriver alle kampene fra alle divs fra denne idretten
-			std::cout << "Skriver ut fra alle divisjoner.\n";
+			cout << "Skriver ut fra alle divisjoner.\n";
 		}
-		std::cout << std::endl;
+		cout << endl;
 
 		DivAvd* temp = nullptr;				//sjekker navn og dato
 
@@ -243,22 +245,22 @@ void Idrett::sporDato(char* div)
 	{
 		//skriver til fil
 	}
-	std::cout << std::endl;
+	cout << endl;
 }
 
 // Skriver ut objektets verdier(eksklusivt verdier som trengs i I A)
 void Idrett::display()
 {
-	std::cout << "Navn: " << text << std::endl
-		<< "Tabelltype: " << tabellType << std::endl;
+	cout << "Navn: " << text << endl
+		<< "Tabelltype: " << tabellType << endl;
 
 	if (divAvdListe->noOfElements())
 	{
-		std::cout << "Divisjoner: " << divAvdListe->noOfElements() << std::endl;
-		std::cout << std::endl;
+		cout << "Divisjoner: " << divAvdListe->noOfElements() << endl;
+		cout << endl;
 	}
 	else
-		std::cout << "Ingen divisjoner tilgjengelig.\n";
+		cout << "Ingen divisjoner tilgjengelig.\n";
 }
 
 // Displayer data som skal skrives i I <navn>
@@ -267,7 +269,7 @@ void Idrett::displayResten() {
 }
 
 // Sjekker om resultat er valid for spesifik idrett i RESULTAT.DTA
-bool Idrett::lesResultat(bool oppdater, std::ifstream& inn) {
+bool Idrett::lesResultat(bool oppdater, ifstream& inn) {
 	char temp[STRLEN];	// char array som inneholder midlertidige verdier
 	int numDiv;			// Antall divisjoner
 	bool tempBool;
@@ -293,19 +295,68 @@ bool Idrett::lesResultat(bool oppdater, std::ifstream& inn) {
 		}
 		else // temp eksisterer ikke
 		{
-			std::cout << "Divisjon " << temp << " eksisterer ikke!\n";
+			cout << "Divisjon " << temp << " eksisterer ikke!\n";
 			return false;
 		}
 	}
 	return true; // Hvis ingen feil er funnet vil koden komme hit og returnere true
 }
 
-void Idrett::skrivTilFil(std::ofstream& ut) {
-	ut << tabellType << std::endl; // Kommer muligens ikke til å skrive riktig verdi
+void Idrett::skrivTabell() {
+	char div[STRLEN], filnavn[STRLEN];
+	bool temp;
+
+	cout << "Skriv blankt for å skrive ut hele idretten, ikke bare en divisjon.\n";
+
+	do {
+		les("Skriv inn navn på divisjon", div, STRLEN, true, false);
+
+		cout << div << endl; // DEBUG
+
+		temp = divAvdListe->inList(div); // sjekker om div er en divisjon
+
+		// Looper til du avbryter med å skrive q, har skrevet tomt eller det du skrev er en divisjon
+	} while (!isQ(div) && !temp && strlen(div));
+
+	// Leser inn filnavn(eller tom tekst)
+	do {
+		les("Skriv inn filnavn(tomt for å skrive til skjerm)", filnavn, STRLEN, true, false);
+	} while (!eksistererFil(filnavn) && strlen(filnavn) && !isQ(filnavn));
+	
+	// Hvis prosessen ikke har blitt avbrutt(Q)
+	if (!isQ(div) && !isQ(filnavn))
+	{
+		DivAvd* tempDiv;
+
+		if (!strlen(div))	// Skriv ut tabellene til idretten
+		{
+			int numDivs = divAvdListe->noOfElements();
+
+			for (int i = 1; i <= numDivs; i++)
+			{
+				tempDiv = (DivAvd*)divAvdListe->removeNo(i);
+
+				tempDiv->skrivTabell(tabellType);
+
+				divAvdListe->add(tempDiv); // Legger divisjonen tilbake i listen
+			}
+		}
+		else {				// Skriv ut tabellen til divisjonen
+			tempDiv = (DivAvd*)divAvdListe->remove(div);
+
+			tempDiv->skrivTabell(tabellType);
+
+			divAvdListe->add(tempDiv);
+		}
+	}
+}
+
+void Idrett::skrivTilFil(ofstream& ut) {
+	ut << tabellType << endl; // Kommer muligens ikke til å skrive riktig verdi
 
 	// henter nummer av divisjoner
 	int numDiv = divAvdListe->noOfElements();
-	ut << numDiv << std::endl;
+	ut << numDiv << endl;
 
 	DivAvd* tempDiv = nullptr;
 

@@ -260,6 +260,21 @@ bool Idrettene::lesResultat(bool oppdater) {
 	return true;
 }
 
+// Skriver ut tabell av idrett eller div til fil eller skjerm
+void Idrettene::skrivTabell(char* navn) {
+	bool temp;
+	Idrett* tempIdrett;
+
+
+
+	// Henter idretten
+	tempIdrett = (Idrett*)idrettListe->remove(navn);
+
+	tempIdrett->skrivTabell();
+
+	idrettListe->add(tempIdrett); // Legger idretten tilbake i listen
+}
+
 // Leser fra fil
 void Idrettene::lesFraFil() {
 	ifstream inn("IDRETTENE.DTA");

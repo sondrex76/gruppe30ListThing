@@ -2,6 +2,7 @@
 #include <iostream> // DEBUG
 #include "div_avd.h"
 #include "globale_funksjoner.h"
+#include "enumer.h"
 
 using namespace std;
 
@@ -314,6 +315,11 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 	}
 
 	return true;
+}
+
+// Skriver ut tabell av divisjon
+void DivAvd::skrivTabell(TabellType type) {
+
 }
 
 void DivAvd::skrivTilFil(ofstream& ut) {

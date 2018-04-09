@@ -87,10 +87,9 @@ void Spillere::fjernSpiller(int nr)
 	if (temp != nullptr)
 	{
 		delete temp; // Fjerner spiller nr
-		cout << "Fjern lagfolk";
 	}
 	else
-		cout << "Spiller nummer " << nr << " eksisterer ikke, spilleren må ikke ha blitt registrert\nDenne beskjen burde ikke aldri komme opp!\n";
+		cout << "Spiller nummer " << nr << " eksisterer ikke, spilleren må ikke ha blitt registrert\nDenne beskjen burde aldri komme opp!\n";
 
 	sisteNummer--; // Oppdaterer siste nummer
 

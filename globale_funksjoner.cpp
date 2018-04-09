@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "globale_funksjoner.h"
+#include <fstream>
 
 using namespace std;
 //
@@ -36,13 +37,17 @@ char les(bool ignorerAndre)
 	return toupper(ch);
 }
 
-// Returnerer en ikke tom string skrevet av brukeren
-void les(char* info, char* txt, int MAXLEN, bool skrivUt)
+// Returnerer en string skrevet av brukeren
+// skrivUt avgjør om charen blir skrevet ut
+// ignorerEnter avgjør om man kan skrive inn en tom tekst
+void les(char* info, char* txt, int MAXLEN, bool skrivUt, bool ignoreEnter)
 {
 	do {
 		if (skrivUt) cout << '\t' << info << ": ";
 		cin.getline(txt, MAXLEN);	// Henter en linje fra brukeren og kopierer den over til txt
-	} while (strlen(txt) == 0);	// Forsikrer at brukeren ikke bare skrev inn enter
+
+	// Forsikrer at brukeren ikke bare skrev inn enter med mindre det er lov
+	} while (false && ignoreEnter && !strlen(txt));
 }
 
 // Returnerer en bool basert på om den sendte char arrayen er q eller Q, eller noe annet
@@ -122,4 +127,11 @@ bool erDel(const char* string, const char* sjekkErDel) {
 
 	// Returnerer false hvis funksjonene kommer hit
 	return false;
+}
+
+// Sjekker om filen eksisterer
+bool eksistererFil(const char* fileNavn)
+{
+	ifstream fil(fileNavn);
+	return fil.good();
 }

@@ -121,7 +121,7 @@ void fjern() {
 		}
 		else cout << "Det finnes ingen idretter, ergo ingen divisjoner.\n";
 	}
-	else cout << "Ugyldig kommando";
+	else cout << "Ugyldig kommando\n";
 }
 
 // L Skriv terminliste for en gitt divisjon til skjerm eller fil
@@ -145,7 +145,20 @@ void skrivKampene() {
 
 // (T)Skriv tabell(er) for en hel idrett eller en divisjon til fil eller skjerm
 void skrivTabell() {
+	char navn[STRLEN];
+	bool temp;
 
+	cout << "Skriv Q for å avbryte: \n";
+
+	do {
+		// Leser inn en tekst
+		cin.ignore();
+		les("Skriv inn idrett", navn, STRLEN);
+
+		temp = idrettene.harIdrett(navn);
+	} while (!isQ(navn) && !temp);
+
+	if (!isQ(navn)) idrettene.skrivTabell(navn);
 }
 
 // (R)Les resultatliste fra fil
@@ -158,6 +171,7 @@ void lesResultat() {
 void skrivLag() {
 	//skriv inn idrett, div og lag
 	char navn[STRLEN];
+	bool temp;	// Midlertidig bool som lar .harIdrett bli kjørt bare en gang hver loop av do loopen
 	cin.ignore();
 
 	// Kjører minst en gang og fortsetter til resultatet er Q eller en eksisterende idrett
@@ -167,12 +181,11 @@ void skrivLag() {
 	{
 		les("Skriv inn navn pa gyldig idrett", navn, STRLEN);
 
-		if (!idrettene.harIdrett(navn) && !isQ(navn))
+		temp = idrettene.harIdrett(navn);
+
+		if (!temp && !isQ(navn))
 			cout << "Idretten eksisterer ikke!\n";
-		else if (idrettene.harIdrett(navn)) break; // Avbryter loopen
-	} while (!isQ(navn));
-	// Loopen er avbrukk gjennom break,
-	// det er unødvendig å sjekke om loopen skal fortsette på dette punktet
+	} while (!isQ(navn) && !temp);
 
 	if (!isQ(navn)) idrettene.skrivLag(navn);
 	//hvis idrett eksisterer og idretten skrevet inn ikke er 'Q'
@@ -182,20 +195,21 @@ void skrivLag() {
 void redigerSpiller() {
 	//skriv inn idrett, div og lag
 	char navn[STRLEN] = "";
+	bool temp;	// Midlertidig bool som lar .harIdrett bli kjørt bare en gang hver loop av do loopen
 	cin.ignore();
 	
 	// Kjører minst en gang og fortsetter til resultatet er Q eller en eksisterende idrett
 	cout << "Skriv q for å avbryte\n";
-	while (!isQ(navn)) // fortsetter så lenge navn != Q
+	do  // fortsetter så lenge navn != Q
 	{
-
 		les("Skriv inn navn pa gyldig idrett", navn, STRLEN);
 
-		if (!idrettene.harIdrett(navn) && !isQ(navn))
+		temp = idrettene.harIdrett(navn);
+
+		if (!temp && !isQ(navn))
 			cout << "Idretten eksisterer ikke!\n";
-		else if (idrettene.harIdrett(navn)) break;
 		
-	} // Loopen er avbrukk gjennom break, det er unødvendig å sjekke om loopen skal fortsette på dette punktet
+	} while (!isQ(navn) && !temp); // Loopen er avbrukk gjennom break, det er unødvendig å sjekke om loopen skal fortsette på dette punktet
 
 	if (!isQ(navn)) idrettene.redigerSpiller(navn);
 	//hvis idrett eksisterer og idretten skrevet inn ikke er 'Q'

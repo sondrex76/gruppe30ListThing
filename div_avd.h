@@ -6,6 +6,7 @@
 #include "lag.h"
 #include "resultat.h"
 #include "conster.h"
+#include "enumer.h"
 
 // Er en divisjon/avdeling av en sport
 // Sortert etter navn av divisjon/avderling
@@ -24,6 +25,7 @@ public:
 	void sjekkDato(char* tall, int x, int y);
 	void display();
 	bool lesResultat(bool oppdater, std::ifstream&);
+	void skrivTabell(TabellType);
 	void skrivTilFil(std::ofstream&);
 };
 
