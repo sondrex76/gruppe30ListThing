@@ -94,8 +94,9 @@ void fjern() {
 		//fjerner spiller
 		if (spillere.faaSiste())
 		{
-			int nr = les("Skriv inn spillerens nummer", 1, spillere.faaSiste());
-			spillere.fjernSpiller(nr);
+			cout << "Skriv inn 0 for å avbryte\n";
+			int nr = les("Skriv inn spillerens nummer", 0, spillere.faaSiste());
+			if (nr != 0) spillere.fjernSpiller(nr);
 		}
 		else cout << "Det finnes ingen spillere.\n";
 	}
@@ -105,8 +106,12 @@ void fjern() {
 		if (idrettene.ikkeTom())
 		{
 			char navn[STRLEN];
-			les("Skriv inn navn pa idrett du vil fjerne", navn, STRLEN);
-			idrettene.fjernIdrett(navn);
+
+			do {
+				les("Skriv inn navn pa idretten du vil fjerne", navn, STRLEN);
+			} while (!idrettene.harIdrett(navn) && !isQ(navn));
+			
+			if (!isQ(navn)) idrettene.fjernIdrett(navn);
 		}
 		else cout << "Det finnes ingen idretter.\n";
 	}
@@ -115,9 +120,8 @@ void fjern() {
 		//fjerner divisjon. må vite idrett
 		if (idrettene.ikkeTom())
 		{
-			char navn[STRLEN];
-			les("Skriv inn navn pa divisjonens idrett", navn, STRLEN);
-			idrettene.fjernDiv(navn);
+			cout << "Skriv Q for å avbryte\n";
+			idrettene.fjernDiv();
 		}
 		else cout << "Det finnes ingen idretter, ergo ingen divisjoner.\n";
 	}

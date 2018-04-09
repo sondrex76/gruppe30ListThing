@@ -86,13 +86,18 @@ void Idrett::slettDiv()
 	if (divAvdListe->noOfElements())
 	{
 		char divisjon[STRLEN];
+		bool temp;
+
 		cout << "\tSkriv Q for å avbryte\n";
 
 		do {
 			les("Skriv inn navn på divisjonen som skal slettes", divisjon, STRLEN);
+			temp = divAvdListe->inList(divisjon);
+
+			if (!isQ(divisjon) && !temp) cout << "Divisjonen " << divisjon << " var ikke funnet!\n";
 
 			// Loop fortsetter til divisjonen du skrev fins, eller du avbrøt med å skrive q
-		} while (!divAvdListe->inList(divisjon) && !isQ(divisjon));
+		} while (!temp && !isQ(divisjon));
 
 		if (!isQ(divisjon)) // Hvis du ikke har avbrutt slettingen
 		{

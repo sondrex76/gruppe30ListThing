@@ -13,7 +13,7 @@ public:
 	int faaNr(char* nvn);				//returnerer nr i lista. evt 0
 	void leggTilDiv(int nr);			//legger til ny divisjon
 	void fjernIdrett(char* navn);		
-	void fjernDiv(char* navn);
+	void fjernDiv();
 	bool harIdrett(char* navn);
 	void skrivKamp(char* navn);
 	void skrivLag(char* navn);
