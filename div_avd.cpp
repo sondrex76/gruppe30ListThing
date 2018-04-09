@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream> // DEBUG
+#include <iomanip>
 #include "div_avd.h"
 #include "globale_funksjoner.h"
 #include "enumer.h"
@@ -357,8 +358,36 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 	return true;
 }
 
-// Skriver ut tabell av divisjon
-void DivAvd::skrivTabell(TabellType type) {
+// Skriver ut tabell av divisjon enten til fil eller skjerm
+void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
+	if (skrivTilFil)	// Skriv til fil
+	{
+		ofstream ut(filnavn, ios::app); // Skriver til fil utne å endre allerede eksisterende innhold
+
+		ut << "Dato" << "Hjemme/Borte" << "Overtid" << "Poeng" << setw(LENRESULTS);
+
+
+		// Skriv ut hele divisjonens tabell til fil
+		for (int i = 0; i < antLag; i++)
+		{
+
+		}
+
+
+
+
+		ut.close();
+	}
+	else {				// Skriv til skjerm
+		cout << "Dato" << "Hjemme/Borte" << "Overtid" << "Poeng" << setw(LENRESULTS);
+
+		// SKriv ut hele divisjonens tabell til skjerm
+		for (int i = 0; i < antLag; i++)
+		{
+
+		}
+	}
+
 
 }
 

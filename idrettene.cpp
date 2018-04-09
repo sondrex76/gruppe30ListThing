@@ -283,8 +283,6 @@ void Idrettene::skrivTabell(char* navn) {
 	bool temp;
 	Idrett* tempIdrett;
 
-
-
 	// Henter idretten
 	tempIdrett = (Idrett*)idrettListe->remove(navn);
 

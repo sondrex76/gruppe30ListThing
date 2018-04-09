@@ -329,7 +329,7 @@ bool Idrett::lesResultat(bool oppdater, ifstream& inn) {
 
 void Idrett::skrivTabell() {
 	char div[STRLEN], filnavn[STRLEN];
-	bool temp;
+	bool temp, tilFil;
 
 	cout << "Skriv blankt for å skrive ut hele idretten, ikke bare en divisjon.\n";
 
@@ -345,13 +345,19 @@ void Idrett::skrivTabell() {
 
 	// Leser inn filnavn(eller tom tekst)
 	do {
+
 		les("Skriv inn filnavn(tomt for å skrive til skjerm)", filnavn, STRLEN, true, false);
-	} while (!eksistererFil(filnavn) && strlen(filnavn) && !isQ(filnavn));
+
+		// Aksepterer et filnavn som ikke allerede er tatt, Q og enter men looper til et av disse er funnet
+	} while (strcmp(filnavn, "RESULTAT.DTA") && strcmp(filnavn, "SPILLERE.DTA") && strlen(filnavn) && !isQ(filnavn));
 	
 	// Hvis prosessen ikke har blitt avbrutt(Q)
 	if (!isQ(div) && !isQ(filnavn))
 	{
 		DivAvd* tempDiv;
+
+		// Hvis tilFils lengde ikke er 0 blir tilFil satt til sann, ellers usann
+		tilFil = strlen(filnavn);
 
 		if (!strlen(div))	// Skriv ut tabellene til idretten
 		{
@@ -361,7 +367,7 @@ void Idrett::skrivTabell() {
 			{
 				tempDiv = (DivAvd*)divAvdListe->removeNo(i);
 
-				tempDiv->skrivTabell(tabellType);
+				tempDiv->skrivTabell(tabellType, tilFil, filnavn);
 
 				divAvdListe->add(tempDiv); // Legger divisjonen tilbake i listen
 			}
@@ -369,10 +375,12 @@ void Idrett::skrivTabell() {
 		else {				// Skriv ut tabellen til divisjonen
 			tempDiv = (DivAvd*)divAvdListe->remove(div);
 
-			tempDiv->skrivTabell(tabellType);
+			tempDiv->skrivTabell(tabellType, tilFil, filnavn);
 
 			divAvdListe->add(tempDiv);
 		}
+
+
 	}
 }
 

@@ -26,7 +26,7 @@ public:
 	void sjekkDato(char* tall, int x, int y);
 	void display();
 	bool lesResultat(bool oppdater, std::ifstream&);
-	void skrivTabell(TabellType);
+	void skrivTabell(TabellType, bool, char*);
 	void skrivTilFil(std::ofstream&);
 };
 
