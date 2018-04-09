@@ -118,11 +118,21 @@ void Idrettene::fjernIdrett(char* navn)
 }
 
 // Fjerner en divisjon innenfor idretten navn
-void Idrettene::fjernDiv(char* navn)
+void Idrettene::fjernDiv()
 {
-	if (idrettListe->inList(navn))
+	char navn[STRLEN];
+	bool temp;
+
+	do {
+		les("Skriv inn navn pa divisjonens idrett", navn, STRLEN);
+		temp = idrettListe->inList(navn);
+
+		if (!temp && !isQ(navn)) cout << "Idretten " << navn << " var ikke funnet!\n";
+	} while (!temp && !isQ(navn));
+
+	if (!isQ(navn))
 	{
-		// Henter idretten navn
+		// Henter idrettens navn
 		Idrett* temp = (Idrett*)idrettListe->remove(navn);
 
 		// Sletter en divisjon(hvilken blir valgt inni funksjonen
@@ -131,7 +141,6 @@ void Idrettene::fjernDiv(char* navn)
 		// Legegr tilbake tmep til listen
 		idrettListe->add(temp);
 	}
-	else cout << "Finner ikke idrett.\n";
 }
 
 bool Idrettene::harIdrett(char* navn)
