@@ -72,37 +72,65 @@ char* DivAvd::hentNavn()
 void DivAvd::skrivTerminListe()
 {
 	char filnavn[STRLEN];
-	cout << "\tSkriv inn filnavn(klikk enter for a skrive til skjerm): ";
+	cout << "\tSkriv inn filnavn(klikk enter for aa skrive til skjerm): ";
 	cin.getline(filnavn, STRLEN);	// Bruker ikke les funksjonen,
 									//fordi den ikke aksepterer "enter"
 	if (strlen(filnavn) == 0)		// Sjekker om brukeren svarte med "enter"
 	{
 		cout << "\n\n\tTerminliste:\n";
+		cout << "\tDato\t\tH-maal\tB-maal\tOvertid\tH-lag\t\tB-lag\n";
 		for (int i = 0; i < antLag; i++)
 		{
 			for (int n = 0; n < antLag; n++)
 			{
 				if (i != n && resultater[i][n] != nullptr) // To lag skal mot hverandre
 				{
-					resultater[i][n]->display();
+
+					resultater[i][n]->displayTabell();
+					cout << "\t" << lag[i]->sendNavn();
+					if (strlen(lag[i]->sendNavn()) < 8)
+					{
+						cout << "\t";
+					}
+					cout << "\t" << lag[n]->sendNavn() << "\n";
 				}
 			}
 		}
+		cout << endl;
 	}
 	else
 	{
-		cout << "Skrev til fil(" << filnavn << ".DTA)\n";
+		strcat_s(filnavn, ".DTA");
+		cout << "Skriver til fil(" << filnavn << ")\n";
 		ofstream ut(filnavn);
+		ut << "\n\n\tTerminliste:\n";
+		ut << "\tDato\t\tH-maal\tB-maal\tOvertid\t\tH-lag\t\t\t\tB-lag\n";
 		for (int i = 0; i < antLag; i++)
 		{
 			for (int n = 0; n < antLag; n++)
 			{
-				// Sjekker at lagene ikke er det samme og at det er et resultat å skrive ut
-				if (i != n && resultater[i][n] != nullptr) // To lag skal mot hverandre
+				if (i != n && resultater[i][n] != nullptr)	// To lag skal mot hverandre
 				{
-					resultater[i][n]->skrivTilFil(ut);
+
+					resultater[i][n]->skrivTabell(ut);		// Skriver ut dato,resultat, etc.
+					ut << "\t\t\t" << lag[i]->sendNavn();	// Skriver ut Lag 1 (navn)
+					int y = 0;
+					for (int x = 5; x > 0; x--)				// Sjekker hvor mange \t trengs
+															//og skriver dem ut
+					{
+						if (y <= strlen(lag[i]->sendNavn()) && strlen(lag[i]->sendNavn()) < y + 4)
+						{
+
+							for (int z = 0; z < x; z++)
+							{
+								ut << "\t";
+							}
+						}
+						y += 4;
+					}
+
+					ut << lag[n]->sendNavn() << "\n";		// Skriver ut Lag 2
 				}
-				else ut << 0 << endl; // Hvis lagene som skal mot hverandre er det samme
 			}
 		}
 		ut.close();

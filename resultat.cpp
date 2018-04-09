@@ -28,6 +28,24 @@ void Resultat::display()
 		 << " - " << bortemaal << endl;
 }
 
+void Resultat::displayTabell()
+{
+	cout << "\t" << dato << "\t" << hjemmemaal << "\t" << bortemaal << "\t";
+	if (!normalTid)
+	{
+		cout << "    X";
+	}
+}
+
+
+void Resultat::skrivTabell(ofstream& ut)
+{
+	ut << "\t" << dato << "\t" << hjemmemaal << "\t\t" << bortemaal << "\t\t";
+	if (!normalTid)
+	{
+		ut << "  X";
+	}
+}
 // leser inn resultatene til spesifik dato
 void Resultat::lesResultat(std::ifstream& inn) {
 	inn >> hjemmemaal;
