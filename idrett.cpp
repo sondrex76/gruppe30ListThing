@@ -200,14 +200,14 @@ void Idrett::sporDato(char* div)
 	
 	char filnavn[STRLEN];		//for å sjekke om man vil skrive til fil
 	
-	cout << "\tSkriv inn filnavn (inkludert ending) : ";
+	cout << "\tSkriv inn filnavn (uten ending): ";
 	cin.getline(filnavn, STRLEN);
 
 	char dato[DATOLEN];						//for å sjekke dato
 	les("Skriv inn dato (aaaammdd)", dato, DATOLEN, true);
 
 
-	if (!ifstream(filnavn))
+	if (!strcmp(filnavn, ""))
 	{
 		bool enDiv = false;	//sjekker om man vil skrive ut fra en viss div
 
@@ -256,7 +256,6 @@ void Idrett::sporDato(char* div)
 				{
 					for (int j = 0; j < MAXLAG; j++)
 					{
-						
 						if(i!=j)
 						temp->sjekkDato(dato, i, j);
 					}
@@ -266,9 +265,15 @@ void Idrett::sporDato(char* div)
 
 		}
 	}
+	else if(!strcmp(filnavn, "IDRETTENE") || !strcmp(filnavn, "NY_DIV") ||
+			!strcmp(filnavn, "RESULTAT") || !strcmp(filnavn, "SPILLERE"))
+	{
+		//ikke lov å bruke
+		cout << "Vennligst ikke bruk dette navnet.\n";
+	}
 	else
 	{
-		//skriver til fil
+		cout << "KAKEEE";
 	}
 	cout << endl;
 }
