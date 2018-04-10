@@ -202,24 +202,48 @@ void Idrett::sporDato(char* div)
 	
 	cout << "\tSkriv inn filnavn (uten ending): ";
 	cin.getline(filnavn, STRLEN);
+	if (strlen(filnavn))			//dersom ikke enter, legg til .DTA
+	{
+		strcat_s(filnavn, ".DTA");
+	}
+	ofstream utFil(filnavn);	
+
+	bool tilFil = false;    //brukes for å sjekke om man vil skrive til fil
+
+	if (utFil) tilFil = true;		//hvis ikke enter vil denne bli true
 
 	char dato[DATOLEN];						//for å sjekke dato
 	les("Skriv inn dato (aaaammdd)", dato, DATOLEN, true);
 
+	//passer på at de essensielle filene ikke blir rørt
+	if (!strcmp(filnavn, "IDRETTENE") || !strcmp(filnavn, "NY_DIV") ||
+		!strcmp(filnavn, "RESULTAT") || !strcmp(filnavn, "SPILLERE"))
+	{
+		//ikke lov å bruke
+		cout << "Vennligst ikke bruk dette navnet.\n";
+	}
 
-	if (!strcmp(filnavn, ""))
+	else
 	{
 		bool enDiv = false;	//sjekker om man vil skrive ut fra en viss div
 
 		if (harDiv(div))
 		{
 			//skriver alle kampene fra en viss div fra denne idretten
+			if (tilFil)
+				cout << "Skriver fra div " << div << " til " 
+				     << filnavn << endl;
+			else
 			cout << "Skriver ut fra divisjon " << div << endl;
 			enDiv = true;	 //hvis diven finnes så skriver man fra 1 div
 		}
 		else
 		{
 			//skriver alle kampene fra alle divs fra denne idretten
+			if (tilFil)
+			cout << "Skriver fra alle divisjoner til " << filnavn << endl;
+
+			else
 			cout << "Skriver ut fra alle divisjoner.\n";
 		}
 		cout << endl;
@@ -243,8 +267,13 @@ void Idrett::sporDato(char* div)
 							//alle kamper må sjekkes, så jeg bruker en
 							//2-dim. array, og dersom datoen matcher
 							//så skrives resultatet ut
-							if(x!=y)
-							temp->sjekkDato(dato, x, y);
+							if (x != y)
+							{
+								if (tilFil)
+									temp->sjekkDatoFil(dato, x, y, utFil);
+								else
+									temp->sjekkDato(dato, x, y);
+							}
 						}
 					}
 				}
@@ -256,8 +285,14 @@ void Idrett::sporDato(char* div)
 				{
 					for (int y = 0; y < MAXLAG; y++)
 					{
-						if(x!=y)
-						temp->sjekkDato(dato, x, y);
+						if (x != y)
+						{
+							if (tilFil)
+								temp->sjekkDatoFil(dato, x, y, utFil);
+							else
+							temp->sjekkDato(dato, x, y);
+						}
+						
 					}
 				}
 			}
@@ -265,16 +300,7 @@ void Idrett::sporDato(char* div)
 			divAvdListe->add(temp);			//legger tilbake i lista
 		}
 	}
-	else if(!strcmp(filnavn, "IDRETTENE") || !strcmp(filnavn, "NY_DIV") ||
-			!strcmp(filnavn, "RESULTAT") || !strcmp(filnavn, "SPILLERE"))
-	{
-		//ikke lov å bruke
-		cout << "Vennligst ikke bruk dette navnet.\n";
-	}
-	else
-	{
-		cout << "KAKEEE";
-	}
+	
 	cout << endl;
 }
 

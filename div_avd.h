@@ -24,6 +24,7 @@ public:
 	void skrivLag();
 	void redigerSpiller();
 	void sjekkDato(char* tall, int x, int y);
+	void sjekkDatoFil(char* tall, int x, int y, std::ofstream& ut);
 	void display();
 	bool lesResultat(bool oppdater, std::ifstream&);
 	void skrivTabell(TabellType, bool, char*);

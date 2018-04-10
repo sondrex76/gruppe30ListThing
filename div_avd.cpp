@@ -164,15 +164,25 @@ void DivAvd::skrivLag()
 
 void DivAvd::sjekkDato(char* tall, int x, int y)
 {
+
+	if (resultater[x][y]->returnDato())
+	{
+		if (!strcmp(resultater[x][y]->returnDato(), tall))
+		{
+			resultater[x][y]->display();
+		}
+	}
+}
+
+//sammenligner dato. hvis like displayes kampen
+void DivAvd::sjekkDatoFil(char* tall, int x, int y, ofstream& ut)
+{
 	
 	if (resultater[x][y]->returnDato())
 	{
-		
 		if (!strcmp(resultater[x][y]->returnDato(), tall))
 		{
-			cout << hentNavn() << endl;
-			resultater[x][y]->display();
-			
+			resultater[x][y]->skrivTilFil(ut);
 		}
 	}
 }
