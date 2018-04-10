@@ -395,19 +395,34 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 
 		// Skriv ut hele divisjonens tabell til fil
 		
+		// Tomt hjørne, første kolonne av første rad
 		ut << "" << setw(LEN_RESULTS);
 
-		for (int i = 0; i < antLag; i++)
+		// Resten av første rad
+		for (int i = 1; i <= antLag; i++)
 		{
-			ut << i << setw(LEN_RESULTS);
+			// Skriver ut hver kvadrant
+			ut << i << setw(LEN_ROW_RESULTS);
 		}
 
-		for (int i = 0; i < antLag; i++)
+		ut << endl;
+			
+		for (int i = 1; i <= antLag; i++)
 		{
-			ut << i << ": " << lag[i]->sendNavn();
+			// Første kolonne
+			ut << "[" << i << "] " << lag[i]->sendNavn() << setw(LEN_RESULTS);
 
-
-
+			// Resultater for alle kamper, alle andre kolonner
+			for (int n = 1; n <= antLag; n++)
+			{
+				// Skriver ut poengene lag i - 1 fikk når de gikk opp mot lag n - 1(- 1 på grunn av at de har nummer 0-29 i strukturen)
+				if (resultater[n][i] != nullptr) 
+					ut << resultater[n][i]->poengResultat(type, true) << setw(LEN_ROW_RESULTS);
+				else if (resultater[i][n] != nullptr)
+					ut << resultater[i][n]->poengResultat(type, false) << setw(LEN_ROW_RESULTS);
+				else
+					ut << "X" << setw(LEN_ROW_RESULTS);
+			}
 
 		}
 

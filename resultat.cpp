@@ -87,13 +87,63 @@ void Resultat::skrivTilFil(ofstream& ut) {
 		ut << hjemmeSkorer[i] << " ";
 	}
 
-	if (hjemmemaal) ut << endl;
+	if (hjemmemaal >= 0) ut << endl;
 
 	for (int i = 0; i < bortemaal; i++) {
 		ut << borteSkorer[i] << " ";
 	}
 
-	if (bortemaal) ut << endl;
+	if (bortemaal >= 0) ut << endl;
+}
+
+// Gir resultat til lag1 i kamp mellom lag1 og lag2 
+int Resultat::poengResultat(TabellType type, bool hjemme) {
+	int lag1, lag2;
+
+	if (hjemme)
+	{
+		lag1 = hjemmemaal;
+		lag2 = bortemaal;
+	}
+	else
+	{
+		lag1 = bortemaal;
+		lag2 = hjemmemaal;
+	}
+	// ToEnNull		= 2 poeng for seier, 1 for uavgjort og 0 for tap
+	// TreEnNull	= 3 poeng for seier, 1 for uavgjort og 0 for tap
+	// TreToEnNull	= 3 poeng for seier, 2 poeng for seier på overtid / straffer, 1 for uavgjort ved fulltid og 0 for tap
+
+	if (type == ToEnNull)
+	{
+		if (lag1 > lag2) // vinn
+			return 2;
+		else if (lag1 == lag2)
+			return 1;
+		else
+			return 0;
+	}
+	else if (type == TreEnNull)
+	{
+		if (lag1 > lag2) // vinn
+			return 3;
+		else if (lag1 == lag2)
+			return 1;
+		else
+			return 0;
+	}
+	else // TreToEnNull
+	{
+		if (lag1 > lag2) // vinn
+			if (normalTid) 
+				return 3;
+			else 
+				return 2;
+		else if (lag1 == lag2 && normalTid)
+			return 1;
+		else
+			return 0;
+	}
 }
 
 // Sjekker om resultatet er tomt
