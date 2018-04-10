@@ -98,5 +98,5 @@ void Resultat::skrivTilFil(ofstream& ut) {
 
 // Sjekker om resultatet er tomt
 bool Resultat::erTom() {
-	return (hjemmemaal == 0 && bortemaal == 0);
+	return (hjemmemaal == -1 && bortemaal == -1);
 }

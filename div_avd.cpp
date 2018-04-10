@@ -337,6 +337,7 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 					{
 						char t[STRLEN];
 
+						// Ignorerer tre linjer, inn.ignore() ignorerer bare neste ikke-space, ikke hele linjen
 						inn.getline(t, STRLEN);
 
 						// cout << "DEBUG(1): " << t << endl; // DEBUG
