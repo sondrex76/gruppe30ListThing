@@ -170,6 +170,7 @@ void DivAvd::sjekkDato(char* tall, int x, int y)
 		
 		if (!strcmp(resultater[x][y]->returnDato(), tall))
 		{
+			cout << hentNavn() << endl;
 			resultater[x][y]->display();
 			
 		}

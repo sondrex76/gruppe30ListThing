@@ -227,7 +227,7 @@ void Idrett::sporDato(char* div)
 		DivAvd* temp = nullptr;				//sjekker navn og dato
 
 		//looper igjennom divs
-		for (int i = 0; i < divAvdListe->noOfElements(); i++)
+		for (int i = 1; i <= divAvdListe->noOfElements(); i++)
 		{
 			//temp for sammenligning av navn
 			temp = (DivAvd*)divAvdListe->removeNo(i);
@@ -236,15 +236,15 @@ void Idrett::sporDato(char* div)
 			{
 				if (!strcmp(temp->hentNavn(), div))	//sammenligner navn
 				{
-					for (int i = 0; i < MAXLAG; i++)	//looper igjennom
+					for (int x = 0; x < MAXLAG; x++)	//looper igjennom
 					{
-						for (int j = 0; j < MAXLAG; j++)
+						for (int y = 0; y < MAXLAG; y++)
 						{
 							//alle kamper må sjekkes, så jeg bruker en
 							//2-dim. array, og dersom datoen matcher
 							//så skrives resultatet ut
-							if(i!=j)
-							temp->sjekkDato(dato, i, j);
+							if(x!=y)
+							temp->sjekkDato(dato, x, y);
 						}
 					}
 				}
@@ -252,17 +252,17 @@ void Idrett::sporDato(char* div)
 			//hvis ikke skrives kamper fra alle divisjoner på gitt dato
 			else
 			{
-				for (int i = 0; i < MAXLAG; i++)
+				for (int x = 0; x < MAXLAG; x++)
 				{
-					for (int j = 0; j < MAXLAG; j++)
+					for (int y = 0; y < MAXLAG; y++)
 					{
-						if(i!=j)
-						temp->sjekkDato(dato, i, j);
+						if(x!=y)
+						temp->sjekkDato(dato, x, y);
 					}
 				}
 			}
+			
 			divAvdListe->add(temp);			//legger tilbake i lista
-
 		}
 	}
 	else if(!strcmp(filnavn, "IDRETTENE") || !strcmp(filnavn, "NY_DIV") ||
