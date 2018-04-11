@@ -161,6 +161,7 @@ void Idrettene::skrivTerminListe(char* navn)
 void Idrettene::skrivKamp(char* navn)
 {
 	//for alle idretter
+
 	for (int i = 1; i <= idrettListe->noOfElements(); i++)
 	{
 		Idrett* temp = (Idrett*)idrettListe->removeNo(i); //temp
