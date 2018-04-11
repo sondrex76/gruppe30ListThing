@@ -371,15 +371,18 @@ void Idrett::skrivTabell() {
 
 		temp = divAvdListe->inList(div); // sjekker om div er en divisjon
 
+		if (!temp && !isQ(div) && strlen(div)) cout << "Divisjonen " << div << " finnes ikke!\n";
+
 		// Looper til du avbryter med å skrive q, har skrevet tomt eller det du skrev er en divisjon
 	} while (!isQ(div) && !temp && strlen(div));
 
-	// Leser inn filnavn(eller tom tekst)
-	do {
-		les("Skriv inn filnavn(tomt for å skrive til skjerm)", filnavn, STRLEN, true, false);
+	// Leser inn filnavn(eller tom tekst) hvis programmet ikke har blitt avbrutt(bruker svarer q)
+	if (!isQ(div))
+		do {
+			les("Skriv inn filnavn(tomt for å skrive til skjerm)", filnavn, STRLEN, true, false);
 
-		// Aksepterer et filnavn som ikke allerede er tatt, Q og enter men looper til et av disse er funnet
-	} while (!strcmp(filnavn, "RESULTAT.DTA") || !strcmp(filnavn, "SPILLERE.DTA"));
+			// Aksepterer et filnavn som ikke allerede er tatt, Q og enter men looper til et av disse er funnet
+		} while (!strcmp(filnavn, "RESULTAT.DTA") || !strcmp(filnavn, "SPILLERE.DTA"));
 	
 	// Hvis prosessen ikke har blitt avbrutt(!Q)
 	if (!isQ(div) && !isQ(filnavn))

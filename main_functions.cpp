@@ -180,6 +180,7 @@ void skrivTabell() {
 		les("Skriv inn idrett", navn, STRLEN);
 
 		temp = idrettene.harIdrett(navn);
+		if (!isQ(navn) && !temp) cout << "Idretten " << navn << " eksisterer ikke!\n";
 	} while (!isQ(navn) && !temp);
 
 	if (!isQ(navn)) idrettene.skrivTabell(navn);
