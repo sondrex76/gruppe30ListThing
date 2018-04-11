@@ -1,3 +1,7 @@
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif 
+
 #include <fstream>
 #include <iostream> // DEBUG
 #include <iomanip>
@@ -440,34 +444,48 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 		ut.close();
 	}
 	else {
-		char temp[STRLEN + 4] = "";
+		const char filler = ' ';
+		char temp[STRLEN + 4] = "", temp2[3];
 
 		// Skriver ut divisjonsnavn
 		cout << text << endl;
-		cout << setw(LEN_RESULTS);
+		cout << left << setw(LEN_RESULTS) << setfill(filler) << "Lag";
 
 		// Resten av første rad
 		for (int i = 1; i <= antLag; i++)
 		{
 			// Skriver cout hver kvadrant
-			cout << i << setw(LEN_ROW_RESULTS);
+			cout << left << setw(LEN_ROW_RESULTS) << setfill(filler) << i;
 		}
 
-		cout << setw(1) << endl;
+		cout << endl << endl;
 
 		for (int i = 0; i < antLag; i++)
 		{
+			// lager en enkelt char array fra dataen
+			// "[" << (i + 1) << "] " << lag[i]->sendNavn()
+			strcpy(temp, "");
+			strcat(temp, "[");
+			
+			_itoa(i + 1, temp2, 10);
+			strcat(temp, temp2);
+			
+			strcat(temp, "]");
+			strcat(temp, lag[i]->sendNavn());
+
+			
 			// Første kolonne
-			cout << "[" << (i + 1) << "] " << lag[i]->sendNavn() << setw(LEN_RESULTS);
+			cout << setw(LEN_RESULTS) << setfill(filler) << temp;
 
 			// Resultater for alle kamper, alle andre kolonner
 			for (int n = 0; n < antLag; n++)
 			{
 				// Skriver cout poengene lag i - 1 fikk når de gikk opp mot lag n - 1(- 1 på grunn av at de har nummer 0-29 i strukturen)
+				// Ettersom bare en kamp kan eksistere mellom to lag i en avdeling er denne sjekken her for å sjekke den ene kampen som er der
 				if (resultater[n][i] != nullptr)
-					cout << setw(LEN_ROW_RESULTS) << resultater[n][i]->poengResultat(type, true);
+					cout << setw(LEN_ROW_RESULTS) << setfill(filler) << resultater[n][i]->poengResultat(type, true);
 				else if (resultater[i][n] != nullptr)
-					cout << setw(LEN_ROW_RESULTS) << resultater[i][n]->poengResultat(type, false);
+					cout << setw(LEN_ROW_RESULTS) << setfill(filler) << resultater[i][n]->poengResultat(type, false);
 				else
 					cout << setw(LEN_ROW_RESULTS) << "X";
 			}
