@@ -174,9 +174,9 @@ void skrivTabell() {
 
 	cout << "Skriv Q for å avbryte: \n";
 
+	cin.ignore();
 	do {
 		// Leser inn en tekst
-		cin.ignore();
 		les("Skriv inn idrett", navn, STRLEN);
 
 		temp = idrettene.harIdrett(navn);

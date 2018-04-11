@@ -407,7 +407,8 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 		// Skriv ut hele divisjonens tabell til fil
 		
 		// Tomt hjørne, første kolonne av første rad
-		ut << "" << setw(LEN_RESULTS);
+
+		ut << setw(LEN_RESULTS) << text;
 
 		// Resten av første rad
 		for (int i = 1; i <= antLag; i++)
@@ -416,7 +417,7 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 			ut << i << setw(LEN_ROW_RESULTS);
 		}
 
-		ut << endl;
+		ut << setw(LEN_RESULTS) << endl;
 			
 		for (int i = 0; i < antLag; i++)
 		{
@@ -428,17 +429,22 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 			{
 				// Skriver ut poengene lag i - 1 fikk når de gikk opp mot lag n - 1(- 1 på grunn av at de har nummer 0-29 i strukturen)
 				if (resultater[n][i] != nullptr) 
-					ut << resultater[n][i]->poengResultat(type, true) << setw(LEN_ROW_RESULTS);
+					ut << setw(LEN_ROW_RESULTS) << resultater[n][i]->poengResultat(type, true);
 				else if (resultater[i][n] != nullptr)
-					ut << resultater[i][n]->poengResultat(type, false) << setw(LEN_ROW_RESULTS);
+					ut << setw(LEN_ROW_RESULTS) << resultater[i][n]->poengResultat(type, false);
 				else
-					ut << "X" << setw(LEN_ROW_RESULTS);
+					ut << setw(LEN_ROW_RESULTS) << "X";
 			}
+			ut << endl;
 		}
 		ut.close();
 	}
 	else {
-		cout << "" << setw(LEN_RESULTS);
+		char temp[STRLEN + 4] = "";
+
+		// Skriver ut divisjonsnavn
+		cout << text << endl;
+		cout << setw(LEN_RESULTS);
 
 		// Resten av første rad
 		for (int i = 1; i <= antLag; i++)
@@ -447,7 +453,7 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 			cout << i << setw(LEN_ROW_RESULTS);
 		}
 
-		cout << endl;
+		cout << setw(1) << endl;
 
 		for (int i = 0; i < antLag; i++)
 		{
@@ -459,11 +465,11 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 			{
 				// Skriver cout poengene lag i - 1 fikk når de gikk opp mot lag n - 1(- 1 på grunn av at de har nummer 0-29 i strukturen)
 				if (resultater[n][i] != nullptr)
-					cout << resultater[n][i]->poengResultat(type, true) << setw(LEN_ROW_RESULTS);
+					cout << setw(LEN_ROW_RESULTS) << resultater[n][i]->poengResultat(type, true);
 				else if (resultater[i][n] != nullptr)
-					cout << resultater[i][n]->poengResultat(type, false) << setw(LEN_ROW_RESULTS);
+					cout << setw(LEN_ROW_RESULTS) << resultater[i][n]->poengResultat(type, false);
 				else
-					cout << "X" << setw(LEN_ROW_RESULTS);
+					cout << setw(LEN_ROW_RESULTS) << "X";
 			}
 			cout << endl;
 		}

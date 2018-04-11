@@ -376,7 +376,6 @@ void Idrett::skrivTabell() {
 
 	// Leser inn filnavn(eller tom tekst)
 	do {
-
 		les("Skriv inn filnavn(tomt for å skrive til skjerm)", filnavn, STRLEN, true, false);
 
 		// Aksepterer et filnavn som ikke allerede er tatt, Q og enter men looper til et av disse er funnet
@@ -389,6 +388,16 @@ void Idrett::skrivTabell() {
 
 		// Hvis tilFils lengde ikke er 0 blir tilFil satt til sann, ellers usann
 		tilFil = strlen(filnavn);
+
+		if (tilFil) {
+			ofstream ut(filnavn);
+
+			ut << text << endl;
+
+			ut.close();
+		}
+		else
+			cout << text << endl;
 
 		if (!strlen(div))	// Skriv ut tabellene til idretten
 		{
@@ -410,8 +419,6 @@ void Idrett::skrivTabell() {
 
 			divAvdListe->add(tempDiv);
 		}
-
-
 	}
 }
 
