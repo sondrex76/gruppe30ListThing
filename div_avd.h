@@ -27,7 +27,8 @@ public:
 	void sjekkDatoFil(char* tall, int x, int y, std::ofstream& ut);
 	void display();
 	bool lesResultat(bool oppdater, std::ifstream&);
-	void skrivTabell(TabellType, bool, char*);
+	void skrivTabell(TabellType, char*);
+	void skrivTabellFil(TabellType, char*, std::ofstream&);
 	void skrivTilFil(std::ofstream&);
 };
 

@@ -378,12 +378,6 @@ void Idrett::skrivTabell() {
 	do {
 		les("Skriv inn filnavn(tomt for å skrive til skjerm)", filnavn, STRLEN, true, false);
 
-		cout << "Res: " << strcmp(filnavn, "RESULTAT.DTA") << endl;
-		cout << "Spi: " << strcmp(filnavn, "SPILLERE.DTA") << endl;
-		cout << "Len: " << (bool)strlen(filnavn) << endl;
-		cout << "Q: " << !isQ(filnavn) << endl;
-
-
 		// Aksepterer et filnavn som ikke allerede er tatt, Q og enter men looper til et av disse er funnet
 	} while (!strcmp(filnavn, "RESULTAT.DTA") || !strcmp(filnavn, "SPILLERE.DTA"));
 	
@@ -395,36 +389,59 @@ void Idrett::skrivTabell() {
 		// Hvis tilFils lengde ikke er 0 blir tilFil satt til sann, ellers usann
 		tilFil = strlen(filnavn);
 
-		// Skriver ut navnet på idretten
+		// Skriver ut navnet på idretten enten til fil eller skjerm
 		if (tilFil) {
 			ofstream ut(filnavn);
 
 			ut << text << endl;
 
+			if (!strlen(div))	// Skriv ut tabellene til idretten
+			{
+				int numDivs = divAvdListe->noOfElements();
+
+				for (int i = 1; i <= numDivs; i++)
+				{
+					tempDiv = (DivAvd*)divAvdListe->removeNo(i);
+					tempDiv->skrivTabellFil(tabellType, filnavn, ut);
+					divAvdListe->add(tempDiv); // Legger divisjonen tilbake i listen
+
+					ut << endl;
+				}
+			}
+			else {				// Skriv ut tabellen til divisjonen
+				tempDiv = (DivAvd*)divAvdListe->remove(div);
+				tempDiv->skrivTabellFil(tabellType, filnavn, ut);
+				divAvdListe->add(tempDiv);
+
+				ut << endl;
+			}
+
 			ut.close();
 		}
 		else
+		{
 			cout << text << endl;
 
-		if (!strlen(div))	// Skriv ut tabellene til idretten
-		{
-			int numDivs = divAvdListe->noOfElements();
-
-			for (int i = 1; i <= numDivs; i++)
+			if (!strlen(div))	// Skriv ut tabellene til idretten
 			{
-				tempDiv = (DivAvd*)divAvdListe->removeNo(i);
+				int numDivs = divAvdListe->noOfElements();
 
-				tempDiv->skrivTabell(tabellType, tilFil, filnavn);
+				for (int i = 1; i <= numDivs; i++)
+				{
+					tempDiv = (DivAvd*)divAvdListe->removeNo(i);
+					tempDiv->skrivTabell(tabellType, filnavn);
+					divAvdListe->add(tempDiv); // Legger divisjonen tilbake i listen
 
-				divAvdListe->add(tempDiv); // Legger divisjonen tilbake i listen
+					cout << endl;
+				}
 			}
-		}
-		else {				// Skriv ut tabellen til divisjonen
-			tempDiv = (DivAvd*)divAvdListe->remove(div);
+			else {				// Skriv ut tabellen til divisjonen
+				tempDiv = (DivAvd*)divAvdListe->remove(div);
+				tempDiv->skrivTabell(tabellType, filnavn);
+				divAvdListe->add(tempDiv);
 
-			tempDiv->skrivTabell(tabellType, tilFil, filnavn);
-
-			divAvdListe->add(tempDiv);
+				cout << endl;
+			}
 		}
 	}
 }
