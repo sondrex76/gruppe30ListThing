@@ -431,13 +431,35 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 
 		ut.close();
 	}
-	else {				// Skriv til skjerm
-		cout << "Dato" << "Hjemme/Borte" << "Overtid" << "Poeng" << setw(LEN_RESULTS);
+	else {
+		cout << "" << setw(LEN_RESULTS);
 
-		// SKriv ut hele divisjonens tabell til skjerm
-		for (int i = 0; i < antLag; i++)
+		// Resten av første rad
+		for (int i = 1; i <= antLag; i++)
 		{
+			// Skriver cout hver kvadrant
+			cout << i << setw(LEN_ROW_RESULTS);
+		}
 
+		cout << endl;
+
+		for (int i = 1; i <= antLag; i++)
+		{
+			// Første kolonne
+			cout << "[" << i << "] " << lag[i]->sendNavn() << setw(LEN_RESULTS);
+
+			// Resultater for alle kamper, alle andre kolonner
+			for (int n = 1; n <= antLag; n++)
+			{
+				// Skriver cout poengene lag i - 1 fikk når de gikk opp mot lag n - 1(- 1 på grunn av at de har nummer 0-29 i strukturen)
+				if (resultater[n][i] != nullptr)
+					cout << resultater[n][i]->poengResultat(type, true) << setw(LEN_ROW_RESULTS);
+				else if (resultater[i][n] != nullptr)
+					cout << resultater[i][n]->poengResultat(type, false) << setw(LEN_ROW_RESULTS);
+				else
+					cout << "X" << setw(LEN_ROW_RESULTS);
+			}
+			cout << endl;
 		}
 	}
 
