@@ -418,13 +418,13 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 
 		ut << endl;
 			
-		for (int i = 1; i <= antLag; i++)
+		for (int i = 0; i < antLag; i++)
 		{
 			// Første kolonne
-			ut << "[" << i << "] " << lag[i]->sendNavn() << setw(LEN_RESULTS);
+			ut << "[" << (i + 1) << "] " << lag[i]->sendNavn() << setw(LEN_RESULTS);
 
 			// Resultater for alle kamper, alle andre kolonner
-			for (int n = 1; n <= antLag; n++)
+			for (int n = 0; n < antLag; n++)
 			{
 				// Skriver ut poengene lag i - 1 fikk når de gikk opp mot lag n - 1(- 1 på grunn av at de har nummer 0-29 i strukturen)
 				if (resultater[n][i] != nullptr) 
@@ -434,12 +434,7 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 				else
 					ut << "X" << setw(LEN_ROW_RESULTS);
 			}
-
 		}
-
-
-
-
 		ut.close();
 	}
 	else {
@@ -454,13 +449,13 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 
 		cout << endl;
 
-		for (int i = 1; i <= antLag; i++)
+		for (int i = 0; i < antLag; i++)
 		{
 			// Første kolonne
-			cout << "[" << i << "] " << lag[i]->sendNavn() << setw(LEN_RESULTS);
+			cout << "[" << (i + 1) << "] " << lag[i]->sendNavn() << setw(LEN_RESULTS);
 
 			// Resultater for alle kamper, alle andre kolonner
-			for (int n = 1; n <= antLag; n++)
+			for (int n = 0; n < antLag; n++)
 			{
 				// Skriver cout poengene lag i - 1 fikk når de gikk opp mot lag n - 1(- 1 på grunn av at de har nummer 0-29 i strukturen)
 				if (resultater[n][i] != nullptr)
@@ -473,8 +468,6 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 			cout << endl;
 		}
 	}
-
-
 }
 
 void DivAvd::skrivTilFil(ofstream& ut) {
