@@ -9,4 +9,5 @@ void les(char* info, char* txt, int MAXLEN, bool skrivUt = true, bool ignoreEnte
 bool isQ(char*, char = 'Q');							// Sjekker om den sendte char arrayen er lik q eller Q
 bool erDel(const char*, const char*);
 bool eksistererFil(const char*);
+char* datoFormat(const char*);
 #endif

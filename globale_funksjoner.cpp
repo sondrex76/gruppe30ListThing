@@ -135,3 +135,16 @@ bool eksistererFil(const char* fileNavn)
 	ifstream fil(fileNavn);
 	return fil.good();
 }
+
+// Sender tilbake en char som har formaten dd/mm
+char* datoFormat(const char* dato) {
+	char d[6] = "";
+	d[0] = dato[6];
+	d[1] = dato[7];
+	d[2] = '/';
+	d[3] = dato[4];
+	d[4] = dato[5];
+	d[5] = '\0';
+
+	return d;
+}

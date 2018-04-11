@@ -73,6 +73,7 @@ char* DivAvd::hentNavn()
 	return text;			//returnerer navn
 }
 
+// Skriver ut termninlisten
 void DivAvd::skrivTerminListe()
 {
 	char filnavn[STRLEN];

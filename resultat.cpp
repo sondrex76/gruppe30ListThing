@@ -6,6 +6,7 @@
 #include <iostream>
 #include "resultat.h"
 #include "conster.h"
+#include "globale_funksjoner.h"
 
 using namespace std;
 
@@ -30,10 +31,17 @@ void Resultat::display()
 
 void Resultat::displayTabell()
 {
-	cout << "\t" << dato << "\t" << hjemmemaal << "\t" << bortemaal << "\t";
-	if (!normalTid)
+	char d[6];
+	strcpy(d, datoFormat(dato));
+
+	cout << "\t" << d << "\t\t" << hjemmemaal << "\t" << bortemaal << "\t";
+	if (normalTid)
 	{
-		cout << "    X";
+		cout << "  Nei";
+	}
+	else
+	{
+		cout << "   ja";
 	}
 }
 

@@ -128,7 +128,7 @@ void fjern() {
 	else cout << "Ugyldig kommando\n";
 }
 
-// L Skriv terminliste for en gitt divisjon til skjerm eller fil
+// (L)Skriv terminliste for en gitt divisjon til skjerm eller fil
 void skrivTerminListe() {
 	//skriv inn idrett, div og lag
 	char navn[STRLEN];
