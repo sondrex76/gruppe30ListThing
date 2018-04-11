@@ -36,13 +36,9 @@ void Resultat::displayTabell()
 
 	cout << "\t" << d << "\t\t" << hjemmemaal << "\t" << bortemaal << "\t";
 	if (normalTid)
-	{
 		cout << "  Nei";
-	}
 	else
-	{
 		cout << "   ja";
-	}
 }
 
 

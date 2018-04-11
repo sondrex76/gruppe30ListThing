@@ -33,17 +33,7 @@ void skrivSpiller() {
 // I A <navn> - skriv Alle idrettene eller idretten <nav
 void skrivIdrett() {
 	//sjekker om man vil ha alle eller navn
-	char input[STRLEN];
-	les("", input, STRLEN, false);
-
-	bool alle = false;
-
-	if (isQ(input, 'A'))
-	{
-		alle = true;
-	}
-
-	idrettene.skrivUt(input, alle);
+	idrettene.skrivUt();
 }
 
 // N S | I  D - Ny spiller, idrett eller divisjon

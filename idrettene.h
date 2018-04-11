@@ -20,7 +20,7 @@ public:
 	void skrivLag(char* navn);
 	void redigerSpiller(char* navn);
 	bool ikkeTom();						//returnerer om lista er tom
-	void skrivUt(char* navn, bool alle);
+	void skrivUt();
 	bool lesResultat(bool);
 	void skrivTabell(char*);						// Skriver ut tabell av idrett eller div til fil eller skjerm
 	void lesFraFil();

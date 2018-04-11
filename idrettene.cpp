@@ -204,38 +204,59 @@ bool Idrettene::ikkeTom()
 	return idrettListe->noOfElements();
 }
 
-void Idrettene::skrivUt(char* navn, bool alle)
+void Idrettene::skrivUt()
 {
+	char input[STRLEN];
+	bool alle, temp;
 
-	if (alle)	// Skriver ut alle idretter, nummer av divisjoner og tabelltype
+	cout << "Skriv Q for å avbryte!\n";
+
+	// Henter idrettsnavn, verdien Q eller verdien A
+	do {
+		les("", input, STRLEN, false);
+
+		if (isQ(input, 'A'))
+			alle = true;
+		else 
+			alle = false;
+
+		removeSpaces(input);					// Fjerner eventuelle spacer fra starten
+
+		temp = idrettListe->inList(input);
+
+		if (!temp && !isQ(input) && !isQ(input, 'A')) cout << "Idretten " << input << " eksisterer ikke!\n";
+
+	} while (!isQ(input) && !isQ(input, 'A') && !temp);
+
+	if (!isQ(input))
 	{
-		if (idrettListe->noOfElements())			//sjekker at ikke tom
+		if (alle)	// Skriver ut alle idretter, nummer av divisjoner og tabelltype
 		{
-			idrettListe->displayList();
+			if (idrettListe->noOfElements())			//sjekker at ikke tom
+			{
+				idrettListe->displayList();
 
-
-			cout << endl;
+				cout << endl;
+			}
+			else cout << "Det finnes ingen idretter.\n";
 		}
-		else cout << "Det finnes ingen idretter.\n";
-	}
-	else		// Skriver ut idretten <navn>s nummer av divisjoner, tabelltype og divisjonsnavn i tilleg til antall lag i hver divisjon, navnene og adressene til disse lagene og antall spillere i hvert lag
-	{
-		removeSpaces(navn);					// Fjerner eventuelle spacer fra starten
-		
-				// Displayer elementet om det eksisterer og skriver ut en beskje om det ikke eksisterer
-		if (idrettListe->displayElement(navn))
+		else		// Skriver ut idretten <navn>s nummer av divisjoner, tabelltype og divisjonsnavn i tilleg til antall lag i hver divisjon, navnene og adressene til disse lagene og antall spillere i hvert lag
 		{
-			// Henter idrett <navn>
-			Idrett* temp = (Idrett*)idrettListe->remove(navn); 
+					// Displayer elementet om det eksisterer og skriver ut en beskje om det ikke eksisterer
+			if (idrettListe->displayElement(input))
+			{
+				// Henter idrett <navn>
+				Idrett* temp = (Idrett*)idrettListe->remove(input);
 
-			// Skriver ut I <navn> spesifik info
-			temp->displayResten();
+				// Skriver ut I <navn> spesifik info
+				temp->displayResten();
 
-			// Legger adressen tilbake i listen
-			idrettListe->add(temp);
+				// Legger adressen tilbake i listen
+				idrettListe->add(temp);
+			}
+			else	// Skriver ut reseten av den nødvendige infoen
+				cout << "idretten " << input << " ble ikke funnet!\n";
 		}
-		else	// Skriver ut reseten av den nødvendige infoen
-			cout << "idretten " << navn << " ble ikke funnet!\n";
 	}
 }
 
