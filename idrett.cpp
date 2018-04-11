@@ -367,7 +367,7 @@ void Idrett::skrivTabell() {
 	do {
 		les("Skriv inn navn på divisjon", div, STRLEN, true, false);
 
-		cout << div << endl; // DEBUG
+		// cout << div << endl; // DEBUG
 
 		temp = divAvdListe->inList(div); // sjekker om div er en divisjon
 
@@ -378,10 +378,16 @@ void Idrett::skrivTabell() {
 	do {
 		les("Skriv inn filnavn(tomt for å skrive til skjerm)", filnavn, STRLEN, true, false);
 
+		cout << "Res: " << strcmp(filnavn, "RESULTAT.DTA") << endl;
+		cout << "Spi: " << strcmp(filnavn, "SPILLERE.DTA") << endl;
+		cout << "Len: " << (bool)strlen(filnavn) << endl;
+		cout << "Q: " << !isQ(filnavn) << endl;
+
+
 		// Aksepterer et filnavn som ikke allerede er tatt, Q og enter men looper til et av disse er funnet
-	} while (strcmp(filnavn, "RESULTAT.DTA") && strcmp(filnavn, "SPILLERE.DTA") && strlen(filnavn) && !isQ(filnavn));
+	} while (!strcmp(filnavn, "RESULTAT.DTA") || !strcmp(filnavn, "SPILLERE.DTA"));
 	
-	// Hvis prosessen ikke har blitt avbrutt(Q)
+	// Hvis prosessen ikke har blitt avbrutt(!Q)
 	if (!isQ(div) && !isQ(filnavn))
 	{
 		DivAvd* tempDiv;
@@ -389,6 +395,7 @@ void Idrett::skrivTabell() {
 		// Hvis tilFils lengde ikke er 0 blir tilFil satt til sann, ellers usann
 		tilFil = strlen(filnavn);
 
+		// Skriver ut navnet på idretten
 		if (tilFil) {
 			ofstream ut(filnavn);
 

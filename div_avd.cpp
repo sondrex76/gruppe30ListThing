@@ -409,33 +409,48 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 		ofstream ut(filnavn, ios::app); // Skriver til fil utne å endre allerede eksisterende innhold
 
 		// Skriv ut hele divisjonens tabell til fil
-		
-		// Tomt hjørne, første kolonne av første rad
 
-		ut << setw(LEN_RESULTS) << text;
+		const char filler = ' ';
+		char temp[STRLEN + 4] = "", temp2[3];
+
+		// Skriver ut divisjonsnavn
+		ut << text << endl;
+		ut << left << setw(LEN_RESULTS) << setfill(filler) << "Lag";
 
 		// Resten av første rad
 		for (int i = 1; i <= antLag; i++)
 		{
 			// Skriver ut hver kvadrant
-			ut << i << setw(LEN_ROW_RESULTS);
+			ut << left << setw(LEN_ROW_RESULTS) << setfill(filler) << i;
 		}
 
-		ut << setw(LEN_RESULTS) << endl;
-			
+		ut << endl << endl;
+
 		for (int i = 0; i < antLag; i++)
 		{
+			// lager en enkelt char array fra dataen
+			// "[" << (i + 1) << "] " << lag[i]->sendNavn()
+			strcpy(temp, "[");
+
+			_itoa(i + 1, temp2, 10);
+			strcat(temp, temp2);
+
+			strcat(temp, "]");
+			strcat(temp, lag[i]->sendNavn());
+
+
 			// Første kolonne
-			ut << "[" << (i + 1) << "] " << lag[i]->sendNavn() << setw(LEN_RESULTS);
+			ut << setw(LEN_RESULTS) << setfill(filler) << temp;
 
 			// Resultater for alle kamper, alle andre kolonner
 			for (int n = 0; n < antLag; n++)
 			{
 				// Skriver ut poengene lag i - 1 fikk når de gikk opp mot lag n - 1(- 1 på grunn av at de har nummer 0-29 i strukturen)
-				if (resultater[n][i] != nullptr) 
-					ut << setw(LEN_ROW_RESULTS) << resultater[n][i]->poengResultat(type, true);
+				// Ettersom bare en kamp kan eksistere mellom to lag i en avdeling er denne sjekken her for å sjekke den ene kampen som er der
+				if (resultater[n][i] != nullptr)
+					ut << setw(LEN_ROW_RESULTS) << setfill(filler) << resultater[n][i]->poengResultat(type, true);
 				else if (resultater[i][n] != nullptr)
-					ut << setw(LEN_ROW_RESULTS) << resultater[i][n]->poengResultat(type, false);
+					ut << setw(LEN_ROW_RESULTS) << setfill(filler) << resultater[i][n]->poengResultat(type, false);
 				else
 					ut << setw(LEN_ROW_RESULTS) << "X";
 			}
@@ -464,8 +479,7 @@ void DivAvd::skrivTabell(TabellType type, bool skrivTilFil, char* filnavn) {
 		{
 			// lager en enkelt char array fra dataen
 			// "[" << (i + 1) << "] " << lag[i]->sendNavn()
-			strcpy(temp, "");
-			strcat(temp, "[");
+			strcpy(temp, "[");
 			
 			_itoa(i + 1, temp2, 10);
 			strcat(temp, temp2);
