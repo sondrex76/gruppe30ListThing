@@ -4,6 +4,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <iomanip>
 #include "resultat.h"
 #include "conster.h"
 #include "globale_funksjoner.h"
@@ -23,10 +24,41 @@ char* Resultat::returnDato() {
 	return dato;
 }
 
-void Resultat::display()
-{
-	cout << "\tDato: " << dato << "\tResultat: " << hjemmemaal
-		 << " - " << bortemaal << endl;
+// Viser dato, resultat og navn på lagene
+void Resultat::display(char* hjemme, char* borte) {
+	char temp[STRLEN] = "", temp2[STRLEN];
+
+	cout << left << setw(LEN_RESULTS) << dato; // dato
+
+	strcpy(temp, hjemme);
+
+	cout << left << setw(LEN_RESULTS) << temp; // hjemme lag
+
+	strcpy(temp, borte);
+
+	cout << left << setw(LEN_RESULTS) << temp; // Borte lag
+
+	cout << left << setw(LEN_ROW_RESULTS) << hjemmemaal; // Resultater
+	cout << left << setw(LEN_ROW_RESULTS) << bortemaal; // Resultater
+	cout << endl;
+}
+
+void Resultat::display(char* hjemme, char* borte, ofstream& ut) {
+	char temp[STRLEN] = "", temp2[STRLEN];
+
+	ut << left << setw(LEN_RESULTS) << dato; // dato
+
+	strcpy(temp, hjemme);
+
+	ut << left << setw(LEN_RESULTS) << temp; // hjemme lag
+
+	strcpy(temp, borte);
+
+	ut << left << setw(LEN_RESULTS) << temp; // Borte lag
+
+	ut << left << setw(LEN_ROW_RESULTS) << hjemmemaal; // Resultater
+	ut << left << setw(LEN_ROW_RESULTS) << bortemaal; // Resultater
+	ut << endl;
 }
 
 void Resultat::displayTabell()

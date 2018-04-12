@@ -47,7 +47,7 @@ void les(char* info, char* txt, int MAXLEN, bool skrivUt, bool ignoreEnter)
 		cin.getline(txt, MAXLEN);	// Henter en linje fra brukeren og kopierer den over til txt
 
 	// Forsikrer at brukeren ikke bare skrev inn enter med mindre det er lov
-	} while (false && ignoreEnter && !strlen(txt));
+	} while (ignoreEnter && !strlen(txt));
 }
 
 // Returnerer en bool basert på om den sendte char arrayen er q eller Q, eller noe annet

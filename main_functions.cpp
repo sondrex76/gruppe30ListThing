@@ -146,14 +146,15 @@ void skrivKampene() {
 	
 	char navn[STRLEN];            //spør om idrettnavn
 	cin.ignore();
+	
 	les("Skriv inn navn pa idrett", navn, STRLEN);
 
-	while (!idrettene.harIdrett(navn))
+	while (!idrettene.harIdrett(navn) && !isQ(navn))
 	{
 		les("Finner ikke idretten. Prov pa nytt", navn, STRLEN);
 	}
 
-	idrettene.skrivKamp(navn);				//sender med idretten
+	if (!isQ(navn)) idrettene.skrivKamp(navn);				//sender med idretten
 }
 
 // (T)Skriv tabell(er) for en hel idrett eller en divisjon til fil eller skjerm

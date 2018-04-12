@@ -1,5 +1,10 @@
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif 
+
 #include <fstream>
-#include <iostream> // DEBUG(så langt)
+#include <iostream> 
+#include <iomanip>
 #include "idrett.h"
 #include "ListTool2B.h"
 #include "conster.h"
@@ -195,113 +200,163 @@ void Idrett::redigerSpiller()
 }
 
 //Spør om dato og skriver ut til skjerm/fil om den finner match
-void Idrett::sporDato(char* div)
+void Idrett::skrivKamp()
 {
-	
-	char filnavn[STRLEN];		//for å sjekke om man vil skrive til fil
-	
-	cout << "\tSkriv inn filnavn (uten ending): ";
-	cin.getline(filnavn, STRLEN);
-	if (strlen(filnavn))			//dersom ikke enter, legg til .DTA
+	char div[STRLEN], filnavn[STRLEN], dato[DATOLEN];		//for å sjekke om man vil skrive til fil
+	bool temp, tilFil = false;    //brukes for å sjekke om man vil skrive til fil
+
+	do {
+		les("Skriv divisjon", div, STRLEN, true, false);
+		temp = divAvdListe->inList(div);
+
+		if (!isQ(div) && !temp && strlen(div)) cout << "Divisjonen " << div << " eksisterer ikke!\n";
+
+		// Looper til div er Q, en gyldig divisjon eller tom
+	} while (!isQ(div) && !temp && strlen(div));
+
+	if (!isQ(div))
 	{
-		strcat_s(filnavn, ".DTA");
-	}
-	ofstream utFil(filnavn);	
+		do {
+			les("Skriv inn filnavn (uten ending)", filnavn, STRLEN, true, false);
 
-	bool tilFil = false;    //brukes for å sjekke om man vil skrive til fil
+			//passer på at de essensielle filene ikke blir rørt
+			if (!strcmp(filnavn, "IDRETTENE") || !strcmp(filnavn, "SPILLERE"))
+				cout << "Vennligst ikke bruk dette filnavnet.\n";
+		} while (!strcmp(filnavn, "IDRETTENE") || !strcmp(filnavn, "SPILLERE"));
 
-	if (utFil) tilFil = true;		//hvis ikke enter vil denne bli true
+		if (strlen(filnavn))			//dersom ikke enter, legg til .DTA
+			strcat(filnavn, ".DTA");
 
-	char dato[DATOLEN];						//for å sjekke dato
-	les("Skriv inn dato (aaaammdd)", dato, DATOLEN, true);
+		ofstream ut(filnavn);
 
-	//passer på at de essensielle filene ikke blir rørt
-	if (!strcmp(filnavn, "IDRETTENE") || !strcmp(filnavn, "NY_DIV") ||
-		!strcmp(filnavn, "RESULTAT") || !strcmp(filnavn, "SPILLERE"))
-	{
-		//ikke lov å bruke
-		cout << "Vennligst ikke bruk dette navnet.\n";
-	}
+		if (ut) tilFil = true;		//hvis ikke enter vil denne bli true
+					//for å sjekke dato
+		do {
+			les("Skriv inn dato (aaaammdd)", dato, DATOLEN, true);
+		} while (strlen(dato) != 8); // Sørger for at du skrev inn en dato av riktig lengde
 
-	else
-	{
 		bool enDiv = false;	//sjekker om man vil skrive ut fra en viss div
 
-		if (harDiv(div))
+		if (divAvdListe->inList(div))
 		{
 			//skriver alle kampene fra en viss div fra denne idretten
 			if (tilFil)
-				cout << "Skriver fra div " << div << " til " 
-				     << filnavn << endl;
+				cout << "Skriver fra div " << div << " til "
+				<< filnavn << endl;
 			else
-			cout << "Skriver ut fra divisjon " << div << endl;
+				cout << "Skriver ut fra divisjon " << div << endl;
 			enDiv = true;	 //hvis diven finnes så skriver man fra 1 div
 		}
 		else
 		{
 			//skriver alle kampene fra alle divs fra denne idretten
 			if (tilFil)
-			cout << "Skriver fra alle divisjoner til " << filnavn << endl;
-
+				cout << "Skriver fra alle divisjoner til " << filnavn << endl;
 			else
-			cout << "Skriver ut fra alle divisjoner.\n";
+				cout << "Skriver ut fra alle divisjoner.\n";
 		}
 		cout << endl;
 
 		DivAvd* temp = nullptr;				//sjekker navn og dato
 
 		//looper igjennom divs
-		for (int i = 1; i <= divAvdListe->noOfElements(); i++)
 		{
 			//temp for sammenligning av navn
-			temp = (DivAvd*)divAvdListe->removeNo(i);
 
 			if (enDiv)	//hvis 1 div, skriver bare ut når divnavn er like
 			{
-				if (!strcmp(temp->hentNavn(), div))	//sammenligner navn
+				temp = (DivAvd*)divAvdListe->remove(div);
+
+				// SKriver ut øverste rad
+				if (tilFil)
 				{
-					for (int x = 0; x < MAXLAG; x++)	//looper igjennom
+					ut << left << setw(LEN_RESULTS) << "Dato";
+					ut << left << setw(LEN_RESULTS) << "Hjemmelag";
+					ut << left << setw(LEN_RESULTS) << "Bortelag";
+					ut << left << setw(LEN_ROW_RESULTS) << "H";
+					ut << left << setw(LEN_ROW_RESULTS) << "B";
+					ut << endl << endl;
+				}
+				else
+				{
+					cout << left << setw(LEN_RESULTS) << "Dato";
+					cout << left << setw(LEN_RESULTS) << "Hjemmelag";
+					cout << left << setw(LEN_RESULTS) << "Bortelag";
+					cout << left << setw(LEN_ROW_RESULTS) << "H";
+					cout << left << setw(LEN_ROW_RESULTS) << "B";
+					cout << endl << endl;
+				}
+
+				for (int x = 0; x < MAXLAG; x++)	//looper igjennom
+				{
+					for (int y = 0; y < MAXLAG; y++)
+					{
+						//alle kamper må sjekkes, så jeg bruker en
+						//2-dim. array, og dersom datoen matcher
+						//så skrives resultatet ut
+						if (x != y)
+						{
+							if (tilFil)
+								temp->sjekkDatoFil(dato, x, y, ut);
+							else
+								temp->sjekkDato(dato, x, y);
+						}
+					}
+				}
+
+				divAvdListe->add(temp);			//legger tilbake i lista
+			}
+			//hvis ikke skrives kamper fra alle divisjoner på gitt dato
+			else
+			{
+				for (int i = 0; i < divAvdListe->noOfElements(); i++)
+				{
+					temp = (DivAvd*)divAvdListe->removeNo(i);
+
+					// SKriver ut øverste rad
+					if (tilFil)
+					{
+						ut << left << setw(LEN_RESULTS) << "Dato";
+						ut << left << setw(LEN_RESULTS) << "Hjemmelag";
+						ut << left << setw(LEN_RESULTS) << "Bortelag";
+						ut << left << setw(LEN_ROW_RESULTS) << "H";
+						ut << left << setw(LEN_ROW_RESULTS) << "B";
+						ut << endl << endl;
+					}
+					else
+					{
+						cout << left << setw(LEN_RESULTS) << "Dato";
+						cout << left << setw(LEN_RESULTS) << "Hjemmelag";
+						cout << left << setw(LEN_RESULTS) << "Bortelag";
+						cout << left << setw(LEN_ROW_RESULTS) << "H";
+						cout << left << setw(LEN_ROW_RESULTS) << "B";
+						cout << endl << endl;
+					}
+
+					for (int x = 0; x < MAXLAG; x++)
 					{
 						for (int y = 0; y < MAXLAG; y++)
 						{
-							//alle kamper må sjekkes, så jeg bruker en
-							//2-dim. array, og dersom datoen matcher
-							//så skrives resultatet ut
 							if (x != y)
 							{
 								if (tilFil)
-									temp->sjekkDatoFil(dato, x, y, utFil);
+									temp->sjekkDatoFil(dato, x, y, ut);
 								else
 									temp->sjekkDato(dato, x, y);
 							}
 						}
 					}
+
+					divAvdListe->add(temp);			//legger tilbake i lista
 				}
 			}
-			//hvis ikke skrives kamper fra alle divisjoner på gitt dato
-			else
-			{
-				for (int x = 0; x < MAXLAG; x++)
-				{
-					for (int y = 0; y < MAXLAG; y++)
-					{
-						if (x != y)
-						{
-							if (tilFil)
-								temp->sjekkDatoFil(dato, x, y, utFil);
-							else
-							temp->sjekkDato(dato, x, y);
-						}
-						
-					}
-				}
-			}
-			
-			divAvdListe->add(temp);			//legger tilbake i lista
 		}
+
+
+		cout << endl;
+
+		ut.close();
 	}
-	
-	cout << endl;
 }
 
 // Skriver ut objektets verdier(eksklusivt verdier som trengs i I A)

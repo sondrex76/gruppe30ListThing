@@ -169,12 +169,11 @@ void DivAvd::skrivLag()
 
 void DivAvd::sjekkDato(char* tall, int x, int y)
 {
-
 	if (resultater[x][y]->returnDato())
 	{
 		if (!strcmp(resultater[x][y]->returnDato(), tall))
 		{
-			resultater[x][y]->display();
+			resultater[x][y]->display(lag[x]->sendNavn(), lag[y]->sendNavn());
 		}
 	}
 }
@@ -182,12 +181,11 @@ void DivAvd::sjekkDato(char* tall, int x, int y)
 //sammenligner dato. hvis like displayes kampen
 void DivAvd::sjekkDatoFil(char* tall, int x, int y, ofstream& ut)
 {
-	
 	if (resultater[x][y]->returnDato())
 	{
 		if (!strcmp(resultater[x][y]->returnDato(), tall))
 		{
-			resultater[x][y]->skrivTilFil(ut);
+			resultater[x][y]->display(lag[x]->sendNavn(), lag[y]->sendNavn(), ut);
 		}
 	}
 }

@@ -160,24 +160,11 @@ void Idrettene::skrivTerminListe(char* navn)
 //skriver ut kamp basert på dato
 void Idrettene::skrivKamp(char* navn)
 {
-	//for alle idretter
+	Idrett* temp = (Idrett*)idrettListe->remove(navn); //temp
 
-	for (int i = 1; i <= idrettListe->noOfElements(); i++)
-	{
-		Idrett* temp = (Idrett*)idrettListe->removeNo(i); //temp
+	temp->skrivKamp();	// Leser inn divisjon, filnavn og dato og skriver ut eller til fil
 
-		if (!strcmp(temp->hentNavn(), navn))        //hvis match
-		{
-			char divisjon[STRLEN];
-			cout << "\tSkriv inn divisjonsnavn: ";
-			cin.getline(divisjon, STRLEN);
-
-			temp->sporDato(divisjon);	//sjekker idretten sine kamper
-										//og sender med divisjonsnavn
-		}
-
-		idrettListe->add(temp);            //legger tilbake i lista
-	}
+	idrettListe->add(temp);            //legger tilbake i lista
 }
 
 void Idrettene::skrivLag(char* navn)

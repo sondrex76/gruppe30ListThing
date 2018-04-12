@@ -22,7 +22,7 @@ public:
 	void skrivTerminListe();
 	void skrivLag();
 	void redigerSpiller();
-	void sporDato(char* div);
+	void skrivKamp();
 	void display();									// Displayer I A spesifik info
 	void displayResten();							// Displayer I <navn> spesifik info
 	void skrivTabell();								// Skriver ut tabell av divisjon eller helt lag
