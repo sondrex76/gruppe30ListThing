@@ -284,7 +284,6 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 
 			// cout << "DEBUG: " << lagHjemme << ", " << lagBorte << endl;
 
-
 			// Sjekker om lagene finnes
 			for (int i = 0; i < antLag; i++)
 			{
@@ -293,6 +292,7 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 				{
 					lagHjemmeFins = true;
 					hjemme = i;
+					// cout << "DEBUG: " << lag[i]->sendNavn() << ", " << i << endl; // DEBUG
 				}
 
 				if (!strcmp(lagBorte, lag[i]->sendNavn())) // sjekker om de to char arrayene er like

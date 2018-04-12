@@ -73,7 +73,6 @@ void Resultat::displayTabell()
 		cout << "   ja";
 }
 
-
 void Resultat::skrivTabell(ofstream& ut)
 {
 	ut << "\t" << dato << "\t" << hjemmemaal << "\t\t" << bortemaal << "\t\t";
@@ -82,6 +81,7 @@ void Resultat::skrivTabell(ofstream& ut)
 		ut << "  X";
 	}
 }
+
 // leser inn resultatene til spesifik dato
 void Resultat::lesResultat(std::ifstream& inn) {
 	inn >> hjemmemaal;
