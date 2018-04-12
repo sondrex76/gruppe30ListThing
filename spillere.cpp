@@ -25,6 +25,8 @@ bool Spillere::eksisterer(int spillerID) {
 // Skriver ut alle spillere eller spillere med <navn> som del av navnet sitt basert på boolen alle
 void Spillere::skrivSpiller(char* navn, bool alle)
 {
+	cout << navn << endl; // DEBUG
+
 	if (alle)
 	{
 		if (spillerListe->noOfElements())

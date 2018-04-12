@@ -27,7 +27,6 @@ void skrivSpiller() {
 		alle = true;
 	
 	spillere.skrivSpiller(valg, alle);			// Skriver spiller
-		
 }
 
 // I A <navn> - skriv Alle idrettene eller idretten <nav

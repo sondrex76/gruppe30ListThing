@@ -207,29 +207,21 @@ bool Idrettene::ikkeTom()
 void Idrettene::skrivUt()
 {
 	char input[STRLEN];
-	bool alle, temp;
-
-	cout << "Skriv Q for å avbryte!\n";
+	bool alle;
 
 	// Henter idrettsnavn, verdien Q eller verdien A
-	do {
-		les("", input, STRLEN, false);
+	les("", input, STRLEN, false);
 
-		if (isQ(input, 'A'))
-			alle = true;
-		else 
-			alle = false;
+	if (isQ(input, 'A'))
+		alle = true;
+	else
+		alle = false;
 
-		removeSpaces(input);					// Fjerner eventuelle spacer fra starten
+	removeSpaces(input);					// Fjerner eventuelle spacer fra starten
 
-		temp = idrettListe->inList(input);
-
-		if (!temp && !isQ(input) && !isQ(input, 'A')) cout << "Idretten " << input << " eksisterer ikke!\n";
-
-	} while (!isQ(input) && !isQ(input, 'A') && !temp);
-
-	if (!isQ(input))
-	{
+	if (!idrettListe->inList(input) && !isQ(input) && !isQ(input, 'A')) 
+		cout << "Idretten " << input << " eksisterer ikke!\n";
+	else {
 		if (alle)	// Skriver ut alle idretter, nummer av divisjoner og tabelltype
 		{
 			if (idrettListe->noOfElements())			//sjekker at ikke tom
@@ -242,7 +234,7 @@ void Idrettene::skrivUt()
 		}
 		else		// Skriver ut idretten <navn>s nummer av divisjoner, tabelltype og divisjonsnavn i tilleg til antall lag i hver divisjon, navnene og adressene til disse lagene og antall spillere i hvert lag
 		{
-					// Displayer elementet om det eksisterer og skriver ut en beskje om det ikke eksisterer
+			// Displayer elementet om det eksisterer og skriver ut en beskje om det ikke eksisterer
 			if (idrettListe->displayElement(input))
 			{
 				// Henter idrett <navn>
