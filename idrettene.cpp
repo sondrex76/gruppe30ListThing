@@ -305,6 +305,30 @@ void Idrettene::skrivTabell(char* navn) {
 	idrettListe->add(tempIdrett); // Legger idretten tilbake i listen
 }
 
+// Fjerner spiller nr fra alle divisjoner den er del av, og oppdaterer id-ene over i lagene den eksisterer
+void Idrettene::fjernSpiller(int nr) {
+	// Henter antall elementer o listen
+	int antallIdretter = idrettListe->noOfElements();
+	Idrett* temp;
+
+	// Går gjennom alle idretter
+	for (int i = 0; i < antallIdretter; i++) {
+		temp = (Idrett*)idrettListe->removeNo(i);
+
+		// Fjerner spiller nummer nr og oppdaterer relevante spiller ider
+		temp->fjernSpiller(nr);
+
+		// Legger idretten tilbake i listen
+		idrettListe->add(temp);
+	}
+
+
+
+
+
+
+}
+
 // Leser fra fil
 void Idrettene::lesFraFil() {
 	ifstream inn("IDRETTENE.DTA");

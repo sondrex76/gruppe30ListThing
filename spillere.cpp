@@ -4,8 +4,11 @@
 #include "spiller.h"
 #include "ListTool2B.h"
 #include "globale_funksjoner.h"
+#include "idrettene.h"
 
 using namespace std;
+
+extern Idrettene idrettene;
 
 // Konstruktor for Spillere
 Spillere::Spillere() {
@@ -84,6 +87,9 @@ void Spillere::fjernSpiller(int nr)
 	Spiller* temp = (Spiller*)spillerListe->removeNo(nr);
 	Spiller* temp2 = nullptr;
 	
+	// Fjerner spilleren fra lag og oppdaterer spiller nummer
+	idrettene.fjernSpiller(nr);
+
 	// temp->display(); // DEBUG
 
 	if (temp != nullptr)

@@ -100,6 +100,25 @@ void Resultat::skrivTilFil(ofstream& ut) {
 	if (bortemaal >= 0) ut << endl;
 }
 
+// Fjerner spiller fra resultater og oppdaterer data
+void Resultat::fjernSpiller(int nr) {
+	for (int i = 0; i < hjemmemaal; i++)
+	{
+		if (hjemmeSkorer[i] > nr)		// Sjekker om verdi må oppdateres
+			hjemmeSkorer[i]--;			// Oppdaterer verdi
+		else if (hjemmeSkorer[i] == nr) // Sjekker om spilleren fremdeles eksisterer
+			hjemmeSkorer[i] = 0;		// Setter verdien til 0 for å vise at spilleren ikke er registrert
+	}
+
+	for (int i = 0; i < bortemaal; i++)
+	{
+		if (borteSkorer[i] > nr)		// Sjekker om verdi må oppdateres
+			borteSkorer[i]--;			// Oppdaterer verdi
+		else if (borteSkorer[i] == nr)	// Sjekker om spilleren fremdeles eksisterer
+			borteSkorer[i] = 0;			// Setter verdien til 0 for å vise at spilleren ikke er registrert
+	}
+}
+
 // Gir resultat til lag1 i kamp mellom lag1 og lag2 
 int Resultat::poengResultat(TabellType type, bool hjemme) {
 	int lag1, lag2;

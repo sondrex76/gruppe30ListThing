@@ -72,8 +72,7 @@ char* Spiller::hentNavn()
 
 void Spiller::display()
 {
-	cout << "Spillernr: " << number << endl
-		 << "Navn: " << navn << endl
+	cout << "Navn: " << navn << endl
 		 << "Adresse: " << adresse << endl;
 }
 

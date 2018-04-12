@@ -27,6 +27,7 @@ public:
 	void sjekkDatoFil(char* tall, int x, int y, std::ofstream& ut);
 	void display();
 	bool lesResultat(bool oppdater, std::ifstream&);
+	void fjernSpiller(int);								// Fjerner spiller fra divisjon og lag og oppdaterer andre data
 	void skrivTabell(TabellType, char*);
 	void skrivTabellFil(TabellType, char*, std::ofstream&);
 	void skrivTilFil(std::ofstream&);

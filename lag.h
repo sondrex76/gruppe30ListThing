@@ -17,6 +17,7 @@ public:
 	char* sendNavn();
 	void skrivLag();
 	void fjernSpiller();
+	void fjernSpiller(int);		// Fjerner spiller fra lag og returnerer true hvis en er fjernet
 	void leggTilSpiller();
 	void display();
 };

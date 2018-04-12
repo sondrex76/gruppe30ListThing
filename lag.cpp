@@ -155,6 +155,36 @@ void Lag::fjernSpiller()
 	} while (!fant && nr != 0);
 }
 
+// Fjerner spiller nr fra laget
+void Lag::fjernSpiller(int nr) {
+	bool spillerFunnet = false;
+
+	for (int i = 0; i < antSpillere; i++)
+	{
+		if (spillerFunnet)
+		{
+			// Oppdaterer arrayen ettersom det er ett mindre element enn før
+			spillerID[i] = spillerID[i + 1];
+
+			if (*spillerID[i] > nr)	// Hvis nr er større enn nr
+				(*spillerID[i])--;
+		}
+		else {
+			if (*spillerID[i] == nr)		// Hvis spillerID er nr
+			{
+				spillerFunnet = true;
+				delete spillerID[i];	// fjerner spillerID[i]
+				spillerID[i] = nullptr;
+
+				antSpillere--;			// oppdaterer antall spillere nummeret
+				i--;					// Oppdaterer i
+			}
+			else if (*spillerID[i] > nr)	// Hvis nr er større enn nr
+				(*spillerID[i])--;
+		}
+	}
+}
+
 		//legger til spiller
 void Lag::leggTilSpiller()
 {

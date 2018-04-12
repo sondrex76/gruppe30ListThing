@@ -26,6 +26,7 @@ public:
 	void display();									// Displayer I A spesifik info
 	void displayResten();							// Displayer I <navn> spesifik info
 	void skrivTabell();								// Skriver ut tabell av divisjon eller helt lag
+	void fjernSpiller(int);							// Fjerner en spiller fra alle divisjoner i alle idretter og oppdaterer andre data
 	char* hentNavn();								//returnerer navn
 	bool lesResultat(bool oppdater, std::ifstream&);
 	void skrivTilFil(std::ofstream&);

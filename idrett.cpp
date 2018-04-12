@@ -324,6 +324,26 @@ void Idrett::displayResten() {
 	divAvdListe->displayList();		// displayer alle divisjoner
 }
 
+
+// Fjerner spiller nr fra alle divisjoner den er del av, og oppdaterer id-ene over i lagene den eksisterer
+void Idrett::fjernSpiller(int nr) {
+	// Henter nummeret av divisjoner
+	int numDiv = divAvdListe->noOfElements();
+	
+	DivAvd* temp;
+
+	for (int i = 0; i < numDiv; i++)
+	{
+		temp = (DivAvd*)divAvdListe->removeNo(i);
+
+		temp->fjernSpiller(nr);
+
+		// Legger divisjonen tilbake i listen
+		divAvdListe->add(temp);
+	}
+
+}
+
 // Sjekker om resultat er valid for spesifik idrett i RESULTAT.DTA
 bool Idrett::lesResultat(bool oppdater, ifstream& inn) {
 	char temp[STRLEN];	// char array som inneholder midlertidige verdier

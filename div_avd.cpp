@@ -363,28 +363,6 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 						// cout << "DEBUG(3): " << t << endl; // DEBUG
 					}
 					else {
-						// DEBUG
-						/*
-						cout << "DEBUG:\n";
-						if ((
-							resultater[hjemme][borte] != nullptr &&
-							resultater[borte][hjemme] == nullptr))
-						{
-							if
-								(resultater[hjemme][borte]->erTom()) cout << "!1\n";
-							else cout << "1 er ikke tom!\n";
-						}
-						else cout << "1 har ikke en nullptr og en ikke nullptr!\n";
-
-						if ((
-							resultater[borte][hjemme] != nullptr &&
-							resultater[hjemme][borte] == nullptr))
-						{
-							if (resultater[borte][hjemme]->erTom()) cout << "!2\n";
-							else cout << "2\n";
-						}
-						else cout << "2 har ikke en nullptr og en ikke nullptr!\n";
-						*/
 
 						cout << "Det er allerede en kamp mellom " << lagHjemme << " og " << lagBorte << " registrert!" << endl;
 						return false;
@@ -403,7 +381,24 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 	return true;
 }
 
-// Skriver ut tabell av divisjon enten til skjerm
+// Fjerner spiller nr fra alle lag og resultater, og oppdaterer spiller id-er
+void DivAvd::fjernSpiller(int nr) {
+	for (int i = 0; i < antLag; i++)
+	{
+		// Fjerner spilleren, opdaterer arrayen av spillere om spilleren var der og oppdaterer verdier over spillerens nr
+		lag[i]->fjernSpiller(nr);
+
+
+		// Resultater
+		for (int n = 0; n < antLag; n++)
+		{
+			if (resultater[i][n] != nullptr) resultater[i][n]->fjernSpiller(nr);
+
+		}
+	}
+}
+
+// Skriver ut tabell av divisjon til skjerm
 void DivAvd::skrivTabell(TabellType type, char* filnavn) {
 	const char filler = ' ';
 	char temp[STRLEN + 4] = "", temp2[3];

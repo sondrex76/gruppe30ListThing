@@ -20,6 +20,7 @@ public:
 	void skrivTabell(std::ofstream&);		// Skriver en leselig tabell
 	void displayTabell();					// Display, tabellform
 	void display();							// Viser bare dato og mål nå
+	void fjernSpiller(int);					// Fjerner spiller fra resultater og oppdaterer data
 	int poengResultat(TabellType, bool);	// Gir resultat fra kampen(hjemme hvis boolen er sann)
 	bool erTom();							// Sjekkeer om resultatet er tomt
 };
