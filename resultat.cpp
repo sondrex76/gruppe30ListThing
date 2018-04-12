@@ -90,7 +90,7 @@ void Resultat::lesResultat(std::ifstream& inn) {
 
 	// cout << "hjemme: " << hjemmemaal << "\nborte: " << bortemaal << "\nTid: " << normalTid << endl; // DEBUG
 
-	if (hjemmemaal) inn.ignore();
+	if (hjemmemaal > 0) inn.ignore();
 
 	int tempInt;
 
@@ -101,7 +101,7 @@ void Resultat::lesResultat(std::ifstream& inn) {
 		hjemmeSkorer[i] = tempInt;
 	}
 
-	if (bortemaal) inn.ignore();
+	if (bortemaal > 0) inn.ignore();
 
 	for (int i = 0; i < bortemaal; i++)
 	{

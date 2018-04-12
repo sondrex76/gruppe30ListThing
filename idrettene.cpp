@@ -308,12 +308,6 @@ void Idrettene::fjernSpiller(int nr) {
 		// Legger idretten tilbake i listen
 		idrettListe->add(temp);
 	}
-
-
-
-
-
-
 }
 
 // Leser fra fil

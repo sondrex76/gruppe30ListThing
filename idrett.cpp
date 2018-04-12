@@ -52,7 +52,7 @@ Idrett::Idrett(char* indrettsNavn, ifstream& inn) : TextElement(indrettsNavn) {
 
 		DivAvd* tempDiv = new DivAvd(tempAvdNavn, inn, true);
 		divAvdListe->add(tempDiv); // legger til avdeling
-		inn.ignore(); // Ignorerer en linje
+		if (i != numRepetasjoner) inn.ignore(); // Ignorerer en linje
 	}
 }
 
