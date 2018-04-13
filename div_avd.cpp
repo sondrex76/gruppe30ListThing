@@ -516,6 +516,6 @@ void DivAvd::skrivTilFil(ofstream& ut) {
 			else ut << 0 << endl; // Hvis lagene som skal mot hverandre er det samme
 		}
 
-		ut << endl;
+		/*if (i != antLag - 1)*/ ut << endl;
 	}
 }

@@ -329,7 +329,10 @@ void Idrettene::lesFraFil() {
 		//cout << i << endl; // DEBUG
 		// cout << tempNavn << endl; // DEBUG
 		// Henter sports navn
-		inn.getline(tempNavn, STRLEN); // Henter sportsnavnet
+		// Loop for å forsikre at det er riktig linje
+		do {
+			inn.getline(tempNavn, STRLEN); // Henter sportsnavnet
+		} while (!strlen(tempNavn));
 
 		tempIdrett = new Idrett(tempNavn, inn);
 		idrettListe->add(tempIdrett);				// Legger til idretten
