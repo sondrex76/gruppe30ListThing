@@ -65,20 +65,36 @@ void Resultat::displayTabell()
 {
 	char d[6];
 	strcpy(d, datoFormat(dato));
-
-	cout << "\t" << d << "\t\t" << hjemmemaal << "\t" << bortemaal << "\t";
-	if (normalTid)
-		cout << "  Nei";
+	if(hjemmemaal==-1||bortemaal==-1)
+	{
+		cout << "\t" << d << "\t\tx\tx\t    x";
+	}
 	else
-		cout << "   ja";
+	{
+		cout << "\t" << d << "\t\t" << hjemmemaal << "\t" << bortemaal << "\t";
+		if (!normalTid)
+			cout << "  Nei";
+		else
+			cout << "   Ja";
+	}
 }
 
 void Resultat::skrivTabell(ofstream& ut)
 {
-	ut << "\t" << dato << "\t" << hjemmemaal << "\t\t" << bortemaal << "\t\t";
-	if (!normalTid)
+	char d[6];
+	strcpy(d, datoFormat(dato));
+
+	if (hjemmemaal == -1 || bortemaal == -1)
 	{
-		ut << "  X";
+		ut << "\t" << d << "\t\tx\t\tx\t\t    x";
+	}
+	else
+	{
+		ut << "\t" << d << "\t\t" << hjemmemaal << "\t\t" << bortemaal << "\t\t";
+		if (!normalTid)
+			ut << "  Nei";
+		else
+			ut << "   Ja";
 	}
 }
 
