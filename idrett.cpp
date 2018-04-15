@@ -16,10 +16,17 @@ using namespace std;
 // Standard konstruktor
 Idrett::Idrett(char* indrettsNavn) : TextElement(indrettsNavn) {
 	divAvdListe = new List(Sorted);
-											//leser inn tall for enum
-	int nr = les("Velg tabelltype, 1=(210), 2=(310), 3=(3210)\n", 1, 3);
+	int nr;								//leser inn tall for enum
+	do
+	{
+		nr = les("Velg tabelltype(210, 310, 3210)", 210, 3210);
+	} while (nr != 210 && nr != 310 && nr != 3210);
 
-	tabellType = (TabellType)nr;
+	//velger riktig enum.
+	if (nr == 210) tabellType = ToEnNull;
+	if (nr == 310) tabellType = TreEnNull;
+	if (nr == 3210) tabellType = TreToEnNull;
+	
 }
 
 // construktor for idrett når man leser fra fil
@@ -93,10 +100,10 @@ void Idrett::slettDiv()
 		char divisjon[STRLEN];
 		bool temp;
 
-		cout << "\tSkriv Q for å avbryte\n";
+		cout << "\tSkriv Q for a avbryte\n";
 
 		do {
-			les("Skriv inn navn på divisjonen som skal slettes", divisjon, STRLEN);
+			les("Skriv inn navn pa divisjonen som skal slettes", divisjon, STRLEN);
 			temp = divAvdListe->inList(divisjon);
 
 			if (!isQ(divisjon) && !temp) cout << "Divisjonen " << divisjon << " var ikke funnet!\n";
@@ -106,7 +113,7 @@ void Idrett::slettDiv()
 
 		if (!isQ(divisjon)) // Hvis du ikke har avbrutt slettingen
 		{
-			cout << "Skriv J for å bekrefte at du ønsker å slette divisjonen " << divisjon << ": ";
+			cout << "Skriv J for a bekrefte at du ønsker a slette divisjonen " << divisjon << ": ";
 
 			// Sjekker om brukeren er sikker på at de ønsker å fjerne den valgte divisjonen
 			if (les(false) == 'J')
@@ -363,7 +370,11 @@ void Idrett::skrivKamp()
 void Idrett::display()
 {
 	cout << "Navn: " << text << endl
-		<< "Tabelltype: " << tabellType << endl;
+		<< "Tabelltype: ";
+	if (tabellType == ToEnNull) cout << "2/1/0";
+	if (tabellType == TreEnNull) cout << "3/1/0";
+	if (tabellType == TreToEnNull) cout << "3/2/1/0";
+	cout << endl;
 
 	if (divAvdListe->noOfElements())
 	{
@@ -437,10 +448,10 @@ void Idrett::skrivTabell() {
 	char div[STRLEN], filnavn[STRLEN];
 	bool temp, tilFil;
 
-	cout << "Skriv blankt for å skrive ut hele idretten, ikke bare en divisjon.\n";
+	cout << "Skriv blankt for a skrive ut hele idretten, ikke bare en divisjon.\n";
 
 	do {
-		les("Skriv inn navn på divisjon", div, STRLEN, true, false);
+		les("Skriv inn navn pa divisjon", div, STRLEN, true, false);
 
 		// cout << div << endl; // DEBUG
 
@@ -454,7 +465,7 @@ void Idrett::skrivTabell() {
 	// Leser inn filnavn(eller tom tekst) hvis programmet ikke har blitt avbrutt(bruker svarer q)
 	if (!isQ(div))
 		do {
-			les("Skriv inn filnavn(tomt for å skrive til skjerm)", filnavn, STRLEN, true, false);
+			les("Skriv inn filnavn(tomt for a skrive til skjerm)", filnavn, STRLEN, true, false);
 
 			// Aksepterer et filnavn som ikke allerede er tatt, Q og enter men looper til et av disse er funnet
 		} while (!strcmp(filnavn, "RESULTAT.DTA") || !strcmp(filnavn, "SPILLERE.DTA"));

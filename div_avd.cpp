@@ -368,7 +368,7 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 				}
 				else
 				{
-					cout << "Det var ingen kamp mellom " << lagHjemme << " og " << lagBorte << " på datoen " << tempDato << "!" << endl;
+					cout << "Det var ingen kamp mellom " << lagHjemme << " og " << lagBorte << " pa datoen " << tempDato << "!" << endl;
 
 					return false;
 				}

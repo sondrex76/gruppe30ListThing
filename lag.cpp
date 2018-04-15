@@ -130,7 +130,7 @@ void Lag::fjernSpiller()
 	//en do/while som kjører så lenge brukeren vil fjerne flere.
 
 						//leser inn spillerID
-	cout << "Skriv inn 0 for å avbryte loopen\n";
+	cout << "Skriv inn 0 for a avbryte loopen\n";
 
 	do {
 		nr = les("Skriv inn nummer pa spiller", 0, MAXSPILLERE);
@@ -192,7 +192,7 @@ void Lag::leggTilSpiller()
 	int nr;
 
 	//en do/while loop så lenge brukeren ønsker å fortsette
-	cout << "Skriv inn 0 for å avbryte loopen\n";
+	cout << "Skriv inn 0 for a avbryte loopen\n";
 	do
 	{
 		finnesAlt = false;

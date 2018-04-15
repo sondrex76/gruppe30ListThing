@@ -103,7 +103,7 @@ void Idrettene::fjernIdrett(char* navn)
 		Idrett* temp = (Idrett*)idrettListe->remove(navn);
 
 		//dobbeltsjekker at man vil slette
-		cout << "Skriv Y for a bekrefte at du onsker å slette idretten " << navn << endl;
+		cout << "Skriv Y for a bekrefte at du onsker a slette idretten " << navn << endl;
 		
 		// Sjekekr om brukeren skrev in Y for å bekrefte sletting av idretten
 		if (les(false) != 'Y')

@@ -70,6 +70,7 @@ char* Spiller::hentNavn()
 	return navn;
 }
 
+
 void Spiller::display()
 {
 	cout << "Navn: " << navn << endl

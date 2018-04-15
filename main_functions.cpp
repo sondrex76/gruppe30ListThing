@@ -77,13 +77,13 @@ void lagNy() {
 // F S | I | D - Fjern spiller, idrett eller divisjon
 void fjern() {
 	char valg = les(true);
-
+	
 	if (valg == 'S')
 	{
 		//fjerner spiller
 		if (spillere.faaSiste())
 		{
-			cout << "Skriv inn 0 for å avbryte\n";
+			cout << "Skriv inn 0 for a avbryte\n";
 			int nr = les("Skriv inn spillerens nummer", 0, spillere.faaSiste());
 			if (nr != 0) spillere.fjernSpiller(nr);
 		}
@@ -95,7 +95,7 @@ void fjern() {
 		if (idrettene.ikkeTom())
 		{
 			char navn[STRLEN];
-
+			skrivQ();
 			do {
 				les("Skriv inn navn pa idretten du vil fjerne", navn, STRLEN);
 			} while (!idrettene.harIdrett(navn) && !isQ(navn));
@@ -109,7 +109,7 @@ void fjern() {
 		//fjerner divisjon. må vite idrett
 		if (idrettene.ikkeTom())
 		{
-			cout << "Skriv Q for å avbryte\n";
+			skrivQ();
 			idrettene.fjernDiv();
 		}
 		else cout << "Det finnes ingen idretter, ergo ingen divisjoner.\n";
@@ -124,7 +124,7 @@ void skrivTerminListe() {
 	cin.ignore();
 
 	// Kjører minst en gang og fortsetter til resultatet er Q eller en eksisterende idrett
-	cout << "Skriv Q for å avbryte\n";
+	skrivQ();
 	// fortsetter så lenge navn != Q
 	do
 	{
@@ -146,7 +146,7 @@ void skrivKampene() {
 	
 	char navn[STRLEN];            //spør om idrettnavn
 	cin.ignore();
-	
+	skrivQ();
 	les("Skriv inn navn pa idrett", navn, STRLEN);
 
 	while (!idrettene.harIdrett(navn) && !isQ(navn))
@@ -162,7 +162,7 @@ void skrivTabell() {
 	char navn[STRLEN];
 	bool temp;
 
-	cout << "Skriv Q for å avbryte: \n";
+	skrivQ();
 
 	cin.ignore();
 	do {
@@ -190,7 +190,7 @@ void skrivLag() {
 	cin.ignore();
 
 	// Kjører minst en gang og fortsetter til resultatet er Q eller en eksisterende idrett
-	cout << "Skriv Q for å avbryte\n";
+	skrivQ();
 	 // fortsetter så lenge navn != Q
 	do
 	{
@@ -214,7 +214,7 @@ void redigerSpiller() {
 	cin.ignore();
 	
 	// Kjører minst en gang og fortsetter til resultatet er Q eller en eksisterende idrett
-	cout << "Skriv q for å avbryte\n";
+	skrivQ();
 	do  // fortsetter så lenge navn != Q
 	{
 		les("Skriv inn navn pa gyldig idrett", navn, STRLEN);

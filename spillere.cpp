@@ -52,9 +52,9 @@ void Spillere::skrivSpiller(char* navn, bool alle)
 				spillerListe->add(temp);
 			}
 			else
-			{
-				cout << "Spiller med dette nummeret finnes ei.\n";
-			}
+				cout << "Ingen data om spilleren.\n";
+
+			
 		}
 		else // På dette punktet er navn en tekst, navnet i dette tilfellet
 		{
@@ -97,7 +97,7 @@ void Spillere::fjernSpiller(int nr)
 		delete temp; // Fjerner spiller nr
 	}
 	else
-		cout << "Spiller nummer " << nr << " eksisterer ikke, spilleren må ikke ha blitt registrert\nDenne beskjen burde aldri komme opp!\n";
+		cout << "Spiller nummer " << nr << " eksisterer ikke, spilleren ma ikke ha blitt registrert\nDenne beskjen burde aldri komme opp!\n";
 
 	sisteNummer--; // Oppdaterer siste nummer
 

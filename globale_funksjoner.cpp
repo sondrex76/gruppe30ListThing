@@ -73,6 +73,12 @@ bool isQ(char* navn, char Q) {
 	else return false;
 }
 
+
+void skrivQ()
+{
+	cout << "Skriv Q for a avslutte:\n";
+}
+
 int removeSpaces(char* tekst, int verdi) {
 	// Hvis verdi er 0 blir den satt tol lengden av tekst
 	if (verdi == 0) verdi = strlen(tekst);
