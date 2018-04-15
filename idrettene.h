@@ -10,15 +10,15 @@ private:
 public:
 	Idrettene();
 	void opprett();
-	int faaNr(char* nvn);				//returnerer nr i lista. evt 0
-	void leggTilDiv(int nr);			//legger til ny divisjon
-	void fjernIdrett(char* navn);		// Fjerner en idrett
+	int faaNr(char*);				//returnerer nr i lista. evt 0
+	void leggTilDiv(int);			//legger til ny divisjon
+	void fjernIdrett(char*);		// Fjerner en idrett
 	void fjernDiv();					// Fjerner en divisjon
-	bool harIdrett(char* navn);			// Sjekekr om idretten finnes
-	void skrivTerminListe(char* navn);	// Skriver teminliste
-	void skrivKamp(char* navn);			// Skriver ut kamp
-	void skrivLag(char* navn);			// Skriver lag
-	void redigerSpiller(char* navn);	// Redigerer spiller
+	bool harIdrett(char*);			// Sjekekr om idretten finnes
+	void skrivTerminListe(char*);	// Skriver teminliste
+	void skrivKamp(char*);			// Skriver ut kamp
+	void skrivLag(char*);			// Skriver lag
+	void redigerSpiller(char*);	// Redigerer spiller
 	bool ikkeTom();						//returnerer om lista er tom
 	void skrivUt();						// Skriver ut data
 	bool lesResultat(bool);				// Leser inn fra RESULTAT.DTA eller sjekker om den er gyldig

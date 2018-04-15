@@ -15,7 +15,6 @@ Idrettene::Idrettene() {
 // Opretter ny idrett
 void Idrettene::opprett()
 {
-					
 	char navn[STRLEN];						// Navnetemp
 	bool erIListen;							// Midlertidig verdi for å lagre om idretten allerede eksisterer
 
@@ -35,8 +34,6 @@ void Idrettene::opprett()
 		Idrett* temp = new Idrett(navn);
 		idrettListe->add(temp);
 	}
-	// idrettListe->displayList();			// DEBUG
-	
 }
 
 						//returner nummeret til idretten i lista. evt 0
@@ -321,13 +318,10 @@ void Idrettene::lesFraFil() {
 	inn >> numSport;
 	inn.ignore();
 
-	// cout << numSport << endl; // DEBUG
 
 	// Hver loop henter en idrett
 	for (int i = 0; i < numSport; i++) // leser fra fil så lenge den ikke slutter
 	{
-		//cout << i << endl; // DEBUG
-		// cout << tempNavn << endl; // DEBUG
 		// Henter sports navn
 		// Loop for å forsikre at det er riktig linje
 		do {
@@ -363,6 +357,5 @@ void Idrettene::skrivTilFil() {
 		// Legger sport nr i tilbake i listen
 		idrettListe->add(tempIdrett);
 	}
-
 	ut.close();
 }

@@ -14,11 +14,9 @@ public:
 	Idrett(char*);									// Standard konstruktor
 	Idrett(char*, std::ifstream&);					// Konstruktor som leser data fra fil
 	~Idrett();										// Destruktor
-	bool leggTilDiv(std::ifstream&, char* navn);	// Legger til ny div fra fil
+	bool leggTilDiv(std::ifstream&, char*);	// Legger til ny div fra fil
 	void slettDiv();
-	bool harIkkeDiv(char* navn);					//returnerer om div ikke finnes
-	bool likSom(char* navn);						//returnerer om navnene er like
-	bool harDiv(char* navn);						//returnerer om har en viss div
+	bool likSom(char*);						//returnerer om navnene er like
 	void skrivTerminListe();
 	void skrivLag();
 	void redigerSpiller();
@@ -28,7 +26,7 @@ public:
 	void skrivTabell();								// Skriver ut tabell av divisjon eller helt lag
 	void fjernSpiller(int);							// Fjerner en spiller fra alle divisjoner i alle idretter og oppdaterer andre data
 	char* hentNavn();								//returnerer navn
-	bool lesResultat(bool oppdater, std::ifstream&);
+	bool lesResultat(bool, std::ifstream&);
 	void skrivTilFil(std::ofstream&);
 };
 

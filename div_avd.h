@@ -19,15 +19,14 @@ public:
 	DivAvd(char*, std::ifstream&, bool);
 	~DivAvd();								// Destruktor
 	char* hentNavn();						//returnerer 'navn'
-	//void lagLag();
 	void skrivTerminListe();
 	void skrivLag();
 	void redigerSpiller();
-	void sjekkDato(char* tall, int x, int y);
-	void sjekkDatoFil(char* tall, int x, int y, std::ofstream& ut);
+	void sjekkDato(char*, int, int);
+	void sjekkDatoFil(char*, int, int, std::ofstream&);
 	void display();
-	bool lesResultat(bool oppdater, std::ifstream&);
-	void fjernSpiller(int);								// Fjerner spiller fra divisjon og lag og oppdaterer andre data
+	bool lesResultat(bool, std::ifstream&);
+	void fjernSpiller(int);	// Fjerner spiller fra divisjon og lag og oppdaterer andre data
 	void skrivTabell(TabellType, char*);
 	void skrivTabellFil(TabellType, char*, std::ofstream&);
 	void skrivTilFil(std::ofstream&);

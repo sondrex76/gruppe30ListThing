@@ -41,15 +41,12 @@ Lag::Lag(ifstream& inn, bool start) {	// Start ser om det er på starten av progr
 	// Kjører på starten, leser aldri inn navn og adresse av spillere
 	if (start)
 	{
-		// cout << "Navn: " << navn << "\nAdresse: " << adresse << "\nantSpillere: " << antSpillere << std::endl; // DEBUG
 
 		for (int i = 0; i < antSpillere; i++)
 		{
 			spillerID[i] = new int;
 			inn >> *(spillerID[i]); // endrer verdien til spillerID[i]
-			// cout << *spillerID[i] << ", "; // DEBUG
 		}
-		// cout << std::endl; // DEBUG
 		inn.ignore();
 	}
 	else {	// Leser ny divisjon

@@ -26,7 +26,6 @@ Idrett::Idrett(char* indrettsNavn) : TextElement(indrettsNavn) {
 	if (nr == 210) tabellType = ToEnNull;
 	if (nr == 310) tabellType = TreEnNull;
 	if (nr == 3210) tabellType = TreToEnNull;
-	
 }
 
 // construktor for idrett når man leser fra fil
@@ -43,19 +42,13 @@ Idrett::Idrett(char* indrettsNavn, ifstream& inn) : TextElement(indrettsNavn) {
 	// Setter over til typen
 	tabellType = (TabellType)numRepetasjoner;
 
-	// cout << "Tabell type: " << tabellType << endl; // DEBUG
-
 	inn >> numRepetasjoner; // Henter nummeret av avdelinger
 	inn.ignore();
-
-	// cout << "Nummer av divisjoner: " << numRepetasjoner << endl; // DEBUG
 
 	// Hver kjøring av loopen henter en ny avdeling
 	for (int i = 1; i <= numRepetasjoner; i++)
 	{
 		inn.getline(tempAvdNavn, STRLEN);
-
-		// cout << "Divisjonsnavn: " << tempAvdNavn << endl; // DEBUG
 
 		DivAvd* tempDiv = new DivAvd(tempAvdNavn, inn, true);
 		divAvdListe->add(tempDiv); // legger til avdeling
@@ -134,17 +127,7 @@ bool Idrett::likSom(char* navn)
 {
 	return (!strcmp(navn, text));
 }
-
-bool Idrett::harDiv(char* navn)
-{
-	return divAvdListe->inList(navn);
-}
-			   //liten bool for å sjekke om div med visst navn finnes alt
-bool Idrett::harIkkeDiv(char* navn)
-{
-	return (!divAvdListe->inList(navn));
-}
-
+  
 void Idrett::skrivTerminListe()
 {
 	char div[STRLEN];
@@ -199,9 +182,7 @@ void Idrett::redigerSpiller()
 	if (!isQ(nvn))
 	{
 		DivAvd* temp = (DivAvd*)divAvdListe->remove(nvn);
-
 		temp->redigerSpiller();
-
 		divAvdListe->add(temp);
 	}
 }
@@ -353,15 +334,11 @@ void Idrett::skrivKamp()
 							}
 						}
 					}
-
 					divAvdListe->add(temp);			//legger tilbake i lista
 				}
 			}
 		}
-
-
 		cout << endl;
-
 		ut.close();
 	}
 }
@@ -390,7 +367,6 @@ void Idrett::displayResten() {
 	divAvdListe->displayList();		// displayer alle divisjoner
 }
 
-
 // Fjerner spiller nr fra alle divisjoner den er del av, og oppdaterer id-ene over i lagene den eksisterer
 void Idrett::fjernSpiller(int nr) {
 	// Henter nummeret av divisjoner
@@ -401,13 +377,11 @@ void Idrett::fjernSpiller(int nr) {
 	for (int i = 0; i < numDiv; i++)
 	{
 		temp = (DivAvd*)divAvdListe->removeNo(i);
-
 		temp->fjernSpiller(nr);
 
 		// Legger divisjonen tilbake i listen
 		divAvdListe->add(temp);
 	}
-
 }
 
 // Sjekker om resultat er valid for spesifik idrett i RESULTAT.DTA
@@ -453,7 +427,6 @@ void Idrett::skrivTabell() {
 	do {
 		les("Skriv inn navn pa divisjon", div, STRLEN, true, false);
 
-		// cout << div << endl; // DEBUG
 
 		temp = divAvdListe->inList(div); // sjekker om div er en divisjon
 

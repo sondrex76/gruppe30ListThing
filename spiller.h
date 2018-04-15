@@ -11,7 +11,7 @@ private:
 	char* adresse;	// Peker til adresse
 public:
 	Spiller(int);
-	Spiller(int value, std::ifstream&);
+	Spiller(int, std::ifstream&);
 	Spiller(int, Spiller*);		// Konstruktor når man bytter ID
 	~Spiller();						// Destruktor
 	void display();					// Skriver spillerens navn og adresse

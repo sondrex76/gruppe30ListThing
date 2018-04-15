@@ -13,8 +13,8 @@ public:
 	Spillere();			// Konstruktor
 	int faaSiste();							//returnerer 'sisteNummer'
 	bool eksisterer(int);		// Funksjon som sjekker om spiller med id int eksisterer
-	void skrivSpiller(char* navn, bool alle);		//skriver ut
-	void fjernSpiller(int nr);
+	void skrivSpiller(char*, bool);		//skriver ut
+	void fjernSpiller(int);
 	void lagSpiller();
 	void lesSpillerFraFil(int, std::ifstream&);
 	void lesFraFil();			// Leser spiller data fra fil

@@ -3,7 +3,7 @@
 #endif 
 
 #include <fstream>
-#include <iostream> // DEBUG
+#include <iostream>
 #include <iomanip>
 #include "div_avd.h"
 #include "globale_funksjoner.h"
@@ -17,15 +17,11 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn, bool start) : TextElement(avd
 	inn.ignore();
 	inn.ignore();
 
-	// cout << antLag << endl; // DEBUG
-
 	// Leser inn alle lag
 	for (int i = 0; i < antLag; i++)
 	{
 		lag[i] = new Lag(inn, start);
 		inn.ignore();
-
-		// cout << lag[i] << endl; // DEBUG
 	}
 
 	char tempVerdi[9]; // lagrer dato
@@ -39,12 +35,10 @@ DivAvd::DivAvd(char* avdelingsNavn, ifstream& inn, bool start) : TextElement(avd
 
 			if (strcmp(tempVerdi, "0")) // Hvis dette opsettet eksisterer
 			{
-				// cout << i << ", " << n << " - 1" << endl; // DEBUG
 				resultater[i][n] = new Resultat(inn, tempVerdi);
 			}
 			else
 			{
-				// cout << i << ", " << n << " - 0" << endl; // DEBUG
 				resultater[i][n] = nullptr;
 				inn.ignore();
 			}
@@ -116,7 +110,6 @@ void DivAvd::skrivTerminListe()
 			{
 				if (i != n && resultater[i][n] != nullptr)	// To lag skal mot hverandre
 				{
-
 					resultater[i][n]->skrivTabell(ut);		// Skriver ut dato,resultat, etc.
 					ut << "\t\t\t" << lag[i]->sendNavn();	// Skriver ut Lag 1 (navn)
 					int y = 0;
@@ -125,7 +118,6 @@ void DivAvd::skrivTerminListe()
 					{
 						if (y <= strlen(lag[i]->sendNavn()) && strlen(lag[i]->sendNavn()) < y + 4)
 						{
-
 							for (int z = 0; z < x; z++)
 							{
 								ut << "\t";
@@ -133,7 +125,6 @@ void DivAvd::skrivTerminListe()
 						}
 						y += 4;
 					}
-
 					ut << lag[n]->sendNavn() << "\n";		// Skriver ut Lag 2
 				}
 			}
@@ -267,9 +258,6 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 
 		inn >> antallKamper; // Henter antall kamper
 		inn.ignore();
-
-		// cout << "DEBUG: " << antallDatoer << ", " << tempDato << ", " << antallKamper << endl;
-
 		inn.ignore();
 
 		// Går gjennom alle kamper og sjekker om lagene eksisterer
@@ -282,8 +270,6 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 			inn.getline(lagHjemme, STRLEN);
 			inn.getline(lagBorte, STRLEN);
 
-			// cout << "DEBUG: " << lagHjemme << ", " << lagBorte << endl;
-
 			// Sjekker om lagene finnes
 			for (int i = 0; i < antLag; i++)
 			{
@@ -292,7 +278,6 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 				{
 					lagHjemmeFins = true;
 					hjemme = i;
-					// cout << "DEBUG: " << lag[i]->sendNavn() << ", " << i << endl; // DEBUG
 				}
 
 				if (!strcmp(lagBorte, lag[i]->sendNavn())) // sjekker om de to char arrayene er like
@@ -300,10 +285,6 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 					lagBorteFins = true;
 					borte = i;
 				}
-
-				// cout << "DEBUG: Et lag som er funnet - " << lag[i]->sendNavn() << endl;
-
-				// cout << "DEBUG: " << lagHjemme << ", " << lagBorte << endl; // DEBUG
 
 				// Går ut av ytterste for loop hvis begge har blitt funnet
 			}
@@ -328,7 +309,6 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 				if (resultater[hjemme][borte] != nullptr)
 					resultater[hjemme][borte]->lesResultat(inn); // leser inn resultatene
 				else resultater[borte][hjemme]->lesResultat(inn);
-				// cout << "DEBUG: Suksess!\n"; // DEBUG
 			}
 			else 
 			{
@@ -336,9 +316,6 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 				if ((resultater[hjemme][borte]  != nullptr && !strcmp(resultater[hjemme][borte]->returnDato(), tempDato) ||
 					resultater[borte][hjemme] != nullptr && !strcmp(resultater[borte][hjemme]->returnDato(), tempDato)))  // resultater[borte][hjemme] eksisterer
 				{
-					// DEBUG
-					// cout << (resultater[hjemme][borte] == nullptr) << ", " << (resultater[borte][hjemme] == nullptr) << endl;
-
 					// Sjekker om det allerede fins en kamp mellom de to lagene, som ville være en logisk feil
 					// Denne logiske filen kommer hvis mer enn ett resultat mellom dem eksisterer
 					// Feilen kommer også hvis det bare er et resultat, men det ikke er et tomt resultat
@@ -353,23 +330,19 @@ bool DivAvd::lesResultat(bool oppdater, std::ifstream& inn) {
 
 						// Ignorerer tre linjer, inn.ignore() ignorerer bare neste ikke-space, ikke hele linjen
 						inn.getline(t, STRLEN);
-
-						// cout << "DEBUG(1): " << t << endl; // DEBUG
 						inn.getline(t, STRLEN);
-						// cout << "DEBUG(2): " << t << endl; // DEBUG
 						inn.getline(t, STRLEN);
-						// cout << "DEBUG(3): " << t << endl; // DEBUG
 					}
 					else {
-
 						cout << "Det er allerede en kamp mellom " << lagHjemme << " og " << lagBorte << " registrert!" << endl;
 						return false;
 					}
 				}
 				else
 				{
-					cout << "Det var ingen kamp mellom " << lagHjemme << " og " << lagBorte << " pa datoen " << tempDato << "!" << endl;
-
+					cout << "Det var ingen kamp mellom " << lagHjemme 
+						 << " og " << lagBorte << " pa datoen " 
+						 << tempDato << "!" << endl;
 					return false;
 				}
 			}
@@ -386,12 +359,10 @@ void DivAvd::fjernSpiller(int nr) {
 		// Fjerner spilleren, opdaterer arrayen av spillere om spilleren var der og oppdaterer verdier over spillerens nr
 		lag[i]->fjernSpiller(nr);
 
-
 		// Resultater
 		for (int n = 0; n < antLag; n++)
 		{
 			if (resultater[i][n] != nullptr) resultater[i][n]->fjernSpiller(nr);
-
 		}
 	}
 }
@@ -515,7 +486,6 @@ void DivAvd::skrivTilFil(ofstream& ut) {
 			}
 			else ut << 0 << endl; // Hvis lagene som skal mot hverandre er det samme
 		}
-
-		/*if (i != antLag - 1)*/ ut << endl;
+	 ut << endl;
 	}
 }

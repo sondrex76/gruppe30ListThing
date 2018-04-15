@@ -12,8 +12,6 @@
 using namespace std;
 
 Resultat::Resultat(ifstream & inn, char d[9]) {
-	// cout << d << endl; // DEBUG
-
 	strcpy(dato, d); // kopierer d(ato) over til dato verdien
 
 	lesResultat(inn); // Leser inn resten, koden er brukt av en annen funksjon og er derfor splittett inn i denne funksjonen
@@ -104,8 +102,6 @@ void Resultat::lesResultat(std::ifstream& inn) {
 	inn >> bortemaal;
 	inn >> normalTid;
 
-	// cout << "hjemme: " << hjemmemaal << "\nborte: " << bortemaal << "\nTid: " << normalTid << endl; // DEBUG
-
 	if (hjemmemaal > 0) inn.ignore();
 
 	int tempInt;
@@ -124,8 +120,6 @@ void Resultat::lesResultat(std::ifstream& inn) {
 		inn >> tempInt;
 
 		borteSkorer[i] = tempInt;
-
-		// cout << "DEBUG: " << bortemaal << ": " << *borteSkorer[i] << endl; // DEBUG
 	}
 
 	inn.ignore();

@@ -1,5 +1,5 @@
 #include <fstream>
-#include <iostream> // DEBUG
+#include <iostream> 
 #include "spillere.h"
 #include "spiller.h"
 #include "ListTool2B.h"
@@ -28,7 +28,6 @@ bool Spillere::eksisterer(int spillerID) {
 // Skriver ut alle spillere eller spillere med <navn> som del av navnet sitt basert på boolen alle
 void Spillere::skrivSpiller(char* navn, bool alle)
 {
-	cout << navn << endl; // DEBUG
 
 	if (alle)
 	{
@@ -90,8 +89,6 @@ void Spillere::fjernSpiller(int nr)
 	// Fjerner spilleren fra lag og oppdaterer spiller nummer
 	idrettene.fjernSpiller(nr);
 
-	// temp->display(); // DEBUG
-
 	if (temp != nullptr)
 	{
 		delete temp; // Fjerner spiller nr
@@ -101,16 +98,11 @@ void Spillere::fjernSpiller(int nr)
 
 	sisteNummer--; // Oppdaterer siste nummer
 
-	// cout << sisteNummer << endl; // DEBUG
-
 	// Flytter alle spilleres ID over den fjernet en ned
 	for (int i = nr; i <= sisteNummer; i++)
 	{
 		// Henter spiller nummer i + 1
 		temp = (Spiller*)spillerListe->remove(i + 1);
-		// cout << i + 1; // DEBUG
-
-		// temp->display(); // DEBUG
 
 		// setter temp2 som en ny Spiller med id i, og verdiene til temp
 		temp2 = new Spiller(i, temp);

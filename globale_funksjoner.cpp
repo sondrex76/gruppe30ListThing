@@ -7,9 +7,7 @@
 #include <fstream>
 
 using namespace std;
-//
-//	les() funksjoner
-//
+
 
 // Returnerer en int mellom min og max
 int les(char* info, int min, int max)
